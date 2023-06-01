@@ -1,0 +1,34 @@
+@import "common/_reset";
+@import "common/_fonts";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Grotesk Remix", sans-serif;
+}
+
+#__next,
+html,
+body {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-family: "Grotesk Remix", "-apple-system", "BlinkMacSystemFont", system-ui,
+    "Roboto", "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", sans-serif;
+  font-weight: 400;
+}
+
+.visually-hidden {
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  white-space: nowrap;
+}
