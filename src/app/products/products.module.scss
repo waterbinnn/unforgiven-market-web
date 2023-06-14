@@ -1,0 +1,57 @@
+.list-container {
+    margin: 150px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.product {
+    &-item {
+        cursor: pointer;
+    }
+
+    &-image {
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        margin-bottom: 6px;
+    }
+
+}
+
+.info-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.data-wrap {
+    display: flex;
+    border-bottom: 1px solid $pink;
+    padding: 2px;
+}
+
+.store-name-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+    border-bottom: 1px solid $pink;
+}
+
+.store-name {
+    color: $gray;
+    font-size: 12px;
+
+}
+
+.data-title {
+    width: 10%;
+    margin-right: 10px;
+}
+
+.data-info {
+    &.name {
+        margin-left: 45px;
+    }
+}
