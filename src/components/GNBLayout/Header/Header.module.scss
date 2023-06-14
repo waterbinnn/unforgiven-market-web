@@ -1,0 +1,164 @@
+.header {
+  padding: 30px 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  border-bottom: 1px solid $black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media screen and (max-width: $mobile-size) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-title {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      background-image: url('/assets/icon.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 0;
+      right: -40px;
+      z-index: 10;
+      animation: iconMoving 2s alternate infinite;
+    }
+  }
+
+}
+
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @media screen and (max-width: $mobile-size) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.input-wrap {
+  position: relative;
+
+  .search {
+    width: 330px;
+    font-family: $font-basic;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    border-radius: 2px;
+    border: 1px solid $black;
+    color: $blue;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      font-family: $font-primary;
+      color: $gray;
+    }
+
+    @media screen and (max-width: $tablet-size) {
+      .search {
+        width: 150px;
+      }
+    }
+
+    @media screen and (max-width: $mobile-size) {
+      .search {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.btn-search {
+  position: absolute;
+  right: -8px;
+  top: 3px;
+  background-color: $blue;
+  width: 15px;
+  height: 15px;
+  padding: 2px 2px 2px 3px;
+  border-radius: 50%;
+  margin-left: -10px;
+
+  &:hover {
+    background-color: $pink;
+  }
+}
+
+.header-title {
+  font-size: 60px;
+  font-weight: bold;
+
+  @media screen and (max-width: $mobile-size) {
+    font-size: 40px;
+  }
+}
+
+.btn-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 200px;
+
+  button {
+    width: 122px;
+    padding: 2px 30px;
+  }
+
+  .btn-right {
+    margin-left: 46px;
+  }
+
+  @media screen and (max-width: $tablet-size) {
+    width: fit-content;
+
+    .btn-right {
+      margin-left: 20px;
+    }
+
+    button {
+      width: 90px;
+      padding: 0;
+    }
+  }
+
+  @media screen and (max-width: $mobile-size) {
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .btn-right {
+      margin-left: 0;
+    }
+  }
+}
+
+@keyframes iconMoving {
+  from {
+    margin-bottom: 150%;
+    height: 100%;
+    transform: scale(1.0);
+  }
+
+  to {
+    margin-bottom: 0%;
+    transform: scale(1.05);
+  }
+}

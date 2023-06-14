@@ -1,0 +1,52 @@
+.button {
+  &.s {
+    border-radius: 20px;
+    font-family: $font-basic;
+    font-size: 14px;
+    font-weight: bold;
+    color: $black;
+    text-align: center;
+  }
+
+  &.m {
+    padding: 8px 36px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: $font-basic;
+    font-weight: bold;
+    color: $black;
+  }
+
+  &.l {
+    padding: 8px 36px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: $font-basic;
+    font-weight: bold;
+    color: $black;
+  }
+
+  &.pink {
+    background-color: $pink;
+  }
+  &.yellow {
+    background-color: $yellow;
+  }
+  &.green {
+    background-color: $green;
+  }
+  &.blue {
+    background-color: $blue;
+  }
+
+  &:disabled {
+    background-color: $gray;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    transform: rotate(3deg);
+  }
+}
