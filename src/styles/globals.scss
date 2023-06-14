@@ -32,3 +32,22 @@ body {
   border: 0;
   white-space: nowrap;
 }
+
+
+.container {
+  margin-top: 120px;
+  padding: 0 40px;
+
+  @media screen and (max-width: $mobile-size) {
+    margin-top: 170px;
+    padding: 0 16px;
+  }
+}
+
+.loading-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
