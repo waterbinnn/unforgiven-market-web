@@ -3,6 +3,12 @@ const path = require("path");
 
 module.exports = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true,
+  },
+  images: {
+    domains: ["openmarket.weniv.co.kr"],
+  },
   typescript: {},
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,
