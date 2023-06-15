@@ -6,6 +6,10 @@
     font-weight: bold;
     color: $black;
     text-align: center;
+
+    &:hover {
+      transform: rotate(3deg);
+    }
   }
 
   &.m {
@@ -21,7 +25,7 @@
   &.l {
     padding: 8px 36px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 20px;
     font-family: $font-basic;
     font-weight: bold;
@@ -31,12 +35,15 @@
   &.pink {
     background-color: $pink;
   }
+
   &.yellow {
     background-color: $yellow;
   }
+
   &.green {
     background-color: $green;
   }
+
   &.blue {
     background-color: $blue;
   }
@@ -44,9 +51,5 @@
   &:disabled {
     background-color: $gray;
     cursor: not-allowed;
-  }
-
-  &:hover {
-    transform: rotate(3deg);
   }
 }
