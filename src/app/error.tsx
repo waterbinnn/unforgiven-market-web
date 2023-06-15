@@ -1,12 +1,24 @@
 "use client";
 
+import { Button } from "@/components";
 import { useEffect } from "react";
 
-export default function Error() {
+interface Props {
+  error: string;
+  reset: () => void;
+}
+
+export default function Error({ error, reset }: Props) {
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   return (
-    <div>
-      <div>ERROR</div>
+    <div className={"error-container"}>
       <p>Something went wrong!</p>
+      <Button color="yellow" width="300px" onClick={() => reset()}>
+        TryAgain
+      </Button>
     </div>
   );
 }

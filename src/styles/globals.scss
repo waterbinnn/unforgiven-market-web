@@ -44,10 +44,20 @@ body {
   }
 }
 
-.loading-container {
+.loading-container,
+.error-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error-container {
+  flex-direction: column;
+  gap: 20px;
+
+  >button {
+    padding: 10px;
+  }
 }
