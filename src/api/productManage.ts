@@ -12,24 +12,23 @@ interface ProductManage {
    * @method {GET}
    * @return {AxiosPromise<ProductDataListType>}
    **/
-  readonly getProductList: () => AxiosPromise<ProductDataListType>;
+  // readonly getProductList: (
+  //   pageParam: string
+  // ) => AxiosPromise<ProductDataListType>;
 
   /**
    * @description 상품 디테일 조회
    * @name productManage.getProductDetail
    * @method {GET}
-   * @return {AxiosPromise<ProductListType>}
+   * @return {Promise<ProductListType>}
    **/
-  readonly getProductDetail: (id: string) => AxiosPromise<ProductListType>;
+  readonly getProductDetail: (id: string) => Promise<ProductListType>;
 }
 
 const productManage: ProductManage = {
-  getProductList: () => {
-    return axios.get("products/");
-  },
-  getProductDetail: (id: string) => {
-    return axios.get(`products/${id}`);
-  },
+  // getProductDetail: (id: string) => {
+  //   return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/products/${id}`);
+  // },
 };
 
 export { productManage };
