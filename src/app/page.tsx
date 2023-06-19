@@ -1,17 +1,20 @@
 export const dynamic = "force-dynamic"; // this is the fix of params
 
-import { ProductListType } from "@/types/productManage";
-import ProductList from "./products/page";
-import { productManage } from "@/api/productManage";
-import axios from "axios";
-
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+import { Hydrate, dehydrate } from "@tanstack/react-query";
+import ProductList from "./products/components/ProductList";
+import getQueryClient from "@/utils/getQueryClient";
+import ProductPage from "./products/page";
 
 export default async function Home() {
-  const productList = await productManage.getProductList();
-  const { data } = productList;
+  const queryClient = getQueryClient();
+  const dehydrateState = dehydrate(queryClient);
 
-  const list: ProductListType[] = data.results;
-
-  return <ProductList list={list} />;
+  return (
+    <Hydrate state={dehydrateState}>
+      <main>
+        {/* @ts-expect-error Server Component */}
+        <ProductPage />
+      </main>
+    </Hydrate>
+  );
 }
