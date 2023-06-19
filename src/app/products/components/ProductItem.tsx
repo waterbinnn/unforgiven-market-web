@@ -18,35 +18,29 @@ export const ProductItem = ({ product }: Props) => {
   };
 
   return (
-    <>
-      <div
-        key={product.product_id}
-        className={cx("product-item")}
-        onClick={handleGoToDetail}
-      >
-        <img
-          className={cx("product-image")}
-          src={product.image}
-          alt={product.product_name}
-        />
-        <dl className={cx("info-wrap")}>
-          <div className={cx("store-name-wrap")}>
-            <dt className={cx("visually-hidden")}>store name</dt>
-            <dd className={cx("store-name")}>{product.store_name}</dd>
-          </div>
-          <div className={cx("data-wrap")}>
-            <dt className={cx("visually-hidden")}>store name</dt>
-            <dd className={cx("data-info", "name")}>{product.product_name}</dd>
-          </div>
-          <div className={cx("data-wrap")}>
-            <dt className={cx("data-title")}>Price</dt>
-            <dd className={cx("data-info")}>
-              ￦ {product.price.toLocaleString("ko-KR")}
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </>
+    <div className={cx("product-item")} onClick={handleGoToDetail}>
+      <img
+        className={cx("product-image")}
+        src={product.image}
+        alt={product.product_name}
+      />
+      <dl className={cx("info-wrap")}>
+        <div className={cx("store-name-wrap")}>
+          <dt className={cx("visually-hidden")}>store name</dt>
+          <dd className={cx("store-name")}>{product.store_name}</dd>
+        </div>
+        <div className={cx("data-wrap")}>
+          <dt className={cx("visually-hidden")}>store name</dt>
+          <dd className={cx("data-info", "name")}>{product.product_name}</dd>
+        </div>
+        <div className={cx("data-wrap")}>
+          <dt className={cx("data-title")}>Price</dt>
+          <dd className={cx("data-info")}>
+            ￦ {product.price.toLocaleString("ko-KR")}
+          </dd>
+        </div>
+      </dl>
+    </div>
   );
 };
 

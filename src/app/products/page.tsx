@@ -1,24 +1,30 @@
-import { ProductListType } from "@/types/productManage";
 import classNames from "classnames/bind";
 import styles from "./products.module.scss";
-import ProductItem from "./components/ProductItem";
+import axios from "axios";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
+import getQueryClient from "@/utils/getQueryClient";
+import ProductList from "./components/ProductList";
 
 const cx = classNames.bind(styles);
 
-interface Props {
-  list: ProductListType[];
-}
+const URL = "https://openmarket.weniv.co.kr/products/";
 
-export const ProductList = ({ list }: Props) => {
+const getProducts = async () => {
+  const res = await fetch(URL);
+  const data = await res.json();
+  return data;
+};
+
+export const ProductPage = async () => {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchInfiniteQuery(["productsList"], getProducts);
+  const dehydrateState = dehydrate(queryClient);
+
   return (
-    <section className={cx("list-container")}>
-      <h2 className={cx("visually-hidden")}>전체상품목록</h2>
-      {list.length > 0 &&
-        list.map((product: ProductListType) => (
-          <ProductItem product={product} />
-        ))}
-    </section>
+    <Hydrate state={dehydrateState}>
+      <ProductList />
+    </Hydrate>
   );
 };
 
-export default ProductList;
+export default ProductPage;
