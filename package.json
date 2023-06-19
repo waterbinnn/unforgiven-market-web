@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.13",
+    "@tanstack/react-query-devtools": "^4.29.13",
+    "@types/lodash": "^4.14.195",
     "@types/node": "20.2.5",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.4",
@@ -16,9 +19,12 @@
     "classnames": "^2.3.2",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "lodash": "^4.17.21",
     "next": "^13.4.4",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.12.1",
     "sass": "^1.62.1",
     "scss": "^0.2.4",
