@@ -2,7 +2,6 @@
 
 import classNames from "classnames/bind";
 import styles from "./Button.module.scss";
-import { MouseEventHandler } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +11,7 @@ interface ButtonProps {
   width?: string;
   disabled?: boolean;
   children: React.ReactNode;
-  onClick?: MouseEventHandler;
+  onClick?: React.MouseEventHandler;
 }
 
 export const Button = ({
