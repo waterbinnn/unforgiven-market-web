@@ -8,20 +8,15 @@ import { useQuery } from "@tanstack/react-query";
 
 const cx = classNames.bind(styles);
 
-const INIT_URL = "https://openmarket.weniv.co.kr/products/";
+interface Props {
+  params: { id: string };
+}
 
-const getDetail = async (id: string) => {
-  const res = await fetch(`${INIT_URL}${id}`);
-  const data = await res.json();
-  return data;
-};
-
-export const ProductDetail = async ({ params }: any) => {
+export const ProductDetail = async ({ params }: Props) => {
   const id = params.id.toString();
 
-  // const product = await getDetail(id);
   const { isLoading, isError, data } = useQuery(["product"], () =>
-    getDetail(id)
+    productManage.getProductDetail(id)
   );
 
   if (isLoading) return <div className="loading">Loading...</div>;
