@@ -5,7 +5,7 @@ import { Button } from "@/components";
 
 import classNames from "classnames/bind";
 import styles from "../products.module.scss";
-import { ProductListType } from "@/types/productManage";
+import { ProductListType } from "@/types";
 
 const cx = classNames.bind(styles);
 
