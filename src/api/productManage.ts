@@ -1,5 +1,5 @@
 import { ProductDataListType, ProductListType } from "@/types/productManage";
-import axios, { AxiosPromise } from "axios";
+
 /**
  * @name productManage
  * @description 상품 관리 api set 입니다.
