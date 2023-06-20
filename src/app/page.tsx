@@ -5,7 +5,6 @@ import ProductPage from "./products/page";
 export default async function Home() {
   return (
     <main>
-      {/* @ts-expect-error Server Component */}
       <ProductPage />
     </main>
   );
