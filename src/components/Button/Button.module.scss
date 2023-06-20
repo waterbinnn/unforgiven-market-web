@@ -1,11 +1,11 @@
 .button {
   &.s {
     border-radius: 20px;
-    font-family: $font-basic;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     color: $black;
     text-align: center;
+    padding-top: 4px;
 
     &:hover {
       transform: rotate(3deg);
