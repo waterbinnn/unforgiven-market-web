@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./MobileGnb.module.scss";
 import { useRouter } from "next/navigation";
 
-import { Portal, Overlay, BaseModal } from "@/components";
+import { BaseModal } from "@/components";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 
@@ -18,6 +18,7 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
 
   const handleRouter = (page: string) => {
     router.push(page);
+    setShowGnb(!setShowGnb);
   };
 
   return (
