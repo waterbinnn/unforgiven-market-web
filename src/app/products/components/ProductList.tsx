@@ -6,17 +6,17 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductItem from "./ProductItem";
 import Loading from "@/app/loading";
-import { ProductListType } from "@/types/productManage";
+import { ProductListType } from "@/types";
 
 const cx = classNames.bind(styles);
+
+const INIT_URL = `${process.env.NEXT_PUBLIC_API_URL}products/`;
 
 const getProducts = async (pageParam: string) => {
   const res = await fetch(pageParam);
   const data = await res.json();
   return data;
 };
-
-const INIT_URL = "https://openmarket.weniv.co.kr/products/";
 
 export const ProductList = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } =
