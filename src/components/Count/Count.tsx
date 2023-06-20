@@ -2,24 +2,48 @@
 
 import classNames from "classnames/bind";
 import styles from "./Count.module.scss";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
 interface Props {
   count: number;
-  isMinusDisable?: boolean;
-  isPlusDisable?: boolean;
-  handleMinus: () => void;
-  handlePlus: () => void;
+  setCount: Dispatch<SetStateAction<number>>;
+  stock: number;
 }
 
-export const Count = ({
-  count,
-  handleMinus,
-  handlePlus,
-  isMinusDisable,
-  isPlusDisable,
-}: Props) => {
+export const Count = ({ count, setCount, stock }: Props) => {
+  const [isMinusDisable, setMinusDisable] = useState<boolean>(false);
+  const [isPlusDisable, setPlusDisable] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (count === 1) {
+      setMinusDisable(true);
+    }
+  }, [count]);
+
+  const handleMinus = () => {
+    if (count === 1) {
+      setMinusDisable(true);
+    } else {
+      setCount(count - 1);
+      setMinusDisable(false);
+    }
+  };
+
+  const handlePlus = () => {
+    if (count >= stock) {
+      alert("재고가 소진되었습니다.");
+      setCount(count - 1);
+      setPlusDisable(true);
+      setPlusDisable(false);
+    } else {
+      setCount(count + 1);
+      setPlusDisable(false);
+      setMinusDisable(false);
+    }
+  };
+
   return (
     <div className={cx("count-wrap")}>
       <button type="button" onClick={handleMinus} disabled={isMinusDisable}>
