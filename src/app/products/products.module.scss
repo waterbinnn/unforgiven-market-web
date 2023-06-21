@@ -5,6 +5,10 @@
     align-items: center;
     gap: 30px;
     flex-wrap: wrap;
+
+    @media screen and (max-width: $mobile-size) {
+        margin: 120px auto;
+    }
 }
 
 .product {
@@ -60,16 +64,21 @@
 // product detail 
 
 .detail-container {
-    padding: 50px 0;
     display: flex;
     gap: 90px;
+    margin: 200px 0;
+
+    .image-wrap {
+        width: 443px;
+        height: 443px;
+        border-radius: 2px;
+    }
 
     .image {
         width: 443px;
         height: 443px;
         object-fit: cover;
         border-radius: 2px;
-        border: 1px solid rgb(217, 217, 217);
     }
 
     .detail-data-container {
@@ -172,16 +181,22 @@
     }
 
     @media screen and (max-width: $mobile-size) {
-        padding: 0 0 50px;
-        margin-top: -20px;
+        padding: 30px 0 50px;
         flex-wrap: wrap;
         justify-content: center;
         gap: 50px;
+        margin: 50px 0;
 
         .image {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
+            &-wrap {
+                width: 360px;
+                height: 360px;
+                margin: 0 auto;
+            }
+
+            width: 360px;
+            height: 360px;
+
         }
 
         .detail-info-wrap {

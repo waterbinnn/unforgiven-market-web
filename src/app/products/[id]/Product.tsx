@@ -16,15 +16,17 @@ interface Props {
 export const Product = ({ data }: Props) => {
   return (
     <>
-      <Image
-        src={data.image}
-        alt={data.product_name}
-        width={500}
-        height={500}
-        placeholder={"blur"}
-        blurDataURL={"/assets/default_img.png"}
-        className={cx("image")}
-      />
+      <div className={cx("image-wrap")}>
+        <Image
+          src={data.image}
+          alt={data.product_name}
+          width={500}
+          height={500}
+          placeholder={"blur"}
+          blurDataURL={"/assets/default_img.png"}
+          className={cx("image")}
+        />
+      </div>
 
       {/* 상품정보 */}
       <div className={cx("detail-data-container")}>
