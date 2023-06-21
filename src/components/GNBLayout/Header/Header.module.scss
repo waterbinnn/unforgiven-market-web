@@ -1,7 +1,7 @@
 .header {
-  padding: 30px 16px 20px;
+  padding: 15px 16px 18px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 4px;
   position: fixed;
@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  transition: all 0.3s ease-in-out;
 
   @media screen and (max-width: $mobile-size) {
     justify-content: center;
@@ -38,6 +39,7 @@
     border-radius: 2px;
     border: 1px solid $black;
     color: $blue;
+    transition: all 0.3s ease-in-out;
 
     &:focus {
       outline: none;
@@ -73,15 +75,19 @@
   border-radius: 50%;
   margin-left: -10px;
   background-color: $pink;
+  transition: all 0.3s ease-in-out;
 
 }
 
 .header-title {
   font-size: 60px;
   font-weight: bold;
+  padding-top: 12px;
 
   @media screen and (max-width: $mobile-size) {
     font-size: 40px;
+    margin-top: 10px;
+    padding: 0;
   }
 }
 
@@ -90,6 +96,8 @@
   flex-direction: column;
   gap: 8px;
   width: 200px;
+  transition: all 0.3s ease-in-out;
+
 
   button {
     width: 122px;
@@ -129,8 +137,14 @@
   position: absolute;
   top: 20px;
   right: 12px;
+}
 
-  &:active {
-    transform: rotate(225deg);
-  }
+.mobile-header-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-btn {
+  margin-left: -12px;
 }

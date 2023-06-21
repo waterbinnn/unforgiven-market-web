@@ -9,11 +9,13 @@ import { useResize } from "@/utils/useResize";
 import Image from "next/image";
 import { useState } from "react";
 import { MobileGnb } from "../MobileGnb";
+import { useRouter } from "next/navigation";
 
 const cx = classNames.bind(styles);
 
 export const Header = () => {
   const browserSize = useResize({ throttleMs: 200 });
+  const router = useRouter();
   const [showGnb, setShowGnb] = useState<Boolean>(false);
 
   const handleGnb = () => {
@@ -50,17 +52,31 @@ export const Header = () => {
           </>
         ) : (
           <>
-            <Link className={cx("header-title")} href={"/"}>
-              UNFORGIVEN
-            </Link>
-            <button className={cx("mobile-menu-btn")} onClick={handleGnb}>
-              <Image
-                src={"/assets/icon-plus.svg"}
-                alt="menu"
-                width={50}
-                height={50}
-              />
-            </button>
+            <div className={cx("mobile-header-wrap")}>
+              <button
+                className={cx("back-btn")}
+                type="button"
+                onClick={() => router.back()}
+              >
+                <Image
+                  src={"/assets/icon-back.svg"}
+                  alt="back button"
+                  width={50}
+                  height={50}
+                />
+              </button>
+              <Link className={cx("header-title")} href={"/"}>
+                UNFORGIVEN
+              </Link>
+              <button className={cx("mobile-menu-btn")} onClick={handleGnb}>
+                <Image
+                  src={"/assets/icon-plus.svg"}
+                  alt="menu"
+                  width={50}
+                  height={50}
+                />
+              </button>
+            </div>
           </>
         )}
       </header>
