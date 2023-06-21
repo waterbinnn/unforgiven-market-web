@@ -35,11 +35,11 @@ body {
 
 
 .container {
-  margin-top: 120px;
+  margin-top: 105px;
   padding: 0 20px;
 
   @media screen and (max-width: $mobile-size) {
-    margin-top: 170px;
+    margin-top: 90px;
     padding: 0 12px;
   }
 }
