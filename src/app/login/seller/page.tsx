@@ -1,6 +1,6 @@
 import { Login } from "../components/Login";
 
-export const SellerLogin = () => {
+const SellerLogin = () => {
   return (
     <div className={"container"}>
       <Login type="SELLER" />

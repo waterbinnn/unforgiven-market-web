@@ -13,7 +13,7 @@ interface Props {
   price: number;
 }
 
-export const CountItem = ({ stock, price }: Props) => {
+const CountItem = ({ stock, price }: Props) => {
   const [count, setCount] = useState<number>(1);
 
   return (

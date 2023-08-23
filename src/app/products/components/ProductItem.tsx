@@ -10,7 +10,7 @@ interface Props {
   product: ProductListType;
 }
 
-export const ProductItem = ({ product }: Props) => {
+const ProductItem = ({ product }: Props) => {
   const router = useRouter();
 
   const handleGoToDetail = () => {

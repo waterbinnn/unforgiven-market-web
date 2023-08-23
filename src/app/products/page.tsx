@@ -7,7 +7,7 @@ import { productManage } from "@/api/productManage";
 
 const cx = classNames.bind(styles);
 
-export const ProductPage = async () => {
+const ProductPage = async () => {
   const queryClient = getQueryClient();
   await queryClient.prefetchInfiniteQuery(["productsList"], () =>
     productManage.getProductList()

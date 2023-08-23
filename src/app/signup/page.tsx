@@ -1,6 +1,6 @@
 import { SignUpForm } from "./components/SignUpForm";
 
-export const SignupPage = () => {
+const SignupPage = () => {
   return (
     <div className="container">
       <SignUpForm type={"BUYER"} />

@@ -12,7 +12,7 @@ interface Props {
   params: { id: string };
 }
 
-export const ProductDetail = async ({ params }: Props) => {
+const ProductDetail = async ({ params }: Props) => {
   const id = params.id.toString();
 
   const { isLoading, isError, data } = useQuery(["product"], () =>

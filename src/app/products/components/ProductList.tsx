@@ -18,7 +18,7 @@ const getProducts = async (pageParam: string) => {
   return data;
 };
 
-export const ProductList = () => {
+const ProductList = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } =
     useInfiniteQuery(
       ["productsList"],

@@ -13,7 +13,7 @@ interface Props {
   data: ProductListType;
 }
 
-export const Product = ({ data }: Props) => {
+const Product = ({ data }: Props) => {
   return (
     <>
       <div className={cx("image-wrap")}>
