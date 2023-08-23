@@ -1,0 +1,57 @@
+//input style
+
+.input-wrap {
+    position: relative;
+    width: 100%;
+
+    @media screen and (max-width: $mobile-size) {
+        width: 100%;
+    }
+}
+
+.input-style {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid $yellow;
+    padding: 7px 4px;
+    background-color: transparent;
+    color: $white;
+    font-size: 16px;
+
+    &::placeholder {
+        font-size: 12px;
+        color: $light-gray;
+    }
+
+    &:focus,
+    &:active {
+        outline: none;
+        background-color: transparent;
+    }
+
+    @media screen and (max-width: $mobile-size) {
+        font-size: 12px;
+    }
+}
+
+.input-btn {
+    position: absolute;
+    right: 0;
+    border-radius: 20px;
+    font-size: 14px;
+    color: $black;
+    text-align: center;
+    background-color: $yellow;
+    padding: 4px 10px 0;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    @media screen and (max-width: $mobile-size) {
+        position: relative;
+        justify-content: flex-end;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+}
