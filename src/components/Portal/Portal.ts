@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 
 interface Props {
-  children: React.ReactNode;
+  children: any;
   selector: string;
 }
 
