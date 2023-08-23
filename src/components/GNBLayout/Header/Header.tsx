@@ -46,7 +46,13 @@ export const Header = () => {
             <div className={cx("btn-wrap")}>
               <Button>CART</Button>
               <div className={cx("btn-right")}>
-                <Button color="green">LOGIN</Button>
+                <Button
+                  color="green"
+                  type="button"
+                  onClick={() => router.push("/login")}
+                >
+                  LOGIN
+                </Button>
               </div>
             </div>
           </>
