@@ -1,19 +1,19 @@
 .list-container {
-    margin: 150px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 30px;
+    justify-items: center;
 
-    @media screen and (max-width: $mobile-size) {
-        margin: 120px auto;
+    @media screen and (max-width: $tablet-size) {
+        grid-gap: 50px;
     }
 }
 
 .product {
     &-item {
         cursor: pointer;
+        width: fit-content;
     }
 
     &-image {

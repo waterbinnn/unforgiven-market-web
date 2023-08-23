@@ -35,7 +35,7 @@ export const ProductList = () => {
   return (
     <>
       {isFetching && <div className="loading">Loading...</div>}
-      <section>
+      <section className={cx("container")}>
         <h2 className={cx("visually-hidden")}>전체상품목록</h2>
         <InfiniteScroll
           loader={<Loading />}
