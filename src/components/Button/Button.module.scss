@@ -20,6 +20,10 @@
     font-family: $font-basic;
     font-weight: bold;
     color: $black;
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 
   &.l {

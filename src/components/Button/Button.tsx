@@ -9,6 +9,7 @@ interface ButtonProps {
   size?: "s" | "m" | "l";
   color?: "pink" | "yellow" | "blue" | "green";
   width?: string;
+  type?: "button" | "submit";
   disabled?: boolean;
   children: React.ReactNode;
   onClick?: React.MouseEventHandler;
@@ -21,11 +22,12 @@ export const Button = ({
   width,
   disabled = false,
   onClick,
+  type = "button",
   ...rest
 }: ButtonProps) => {
   return (
     <button
-      type="button"
+      type={type}
       className={cx("button", size, color)}
       style={{ width: width }}
       disabled={disabled}
