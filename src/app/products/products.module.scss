@@ -1,13 +1,11 @@
 .list-container {
     margin: 50px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
     justify-items: center;
 
-    @media screen and (max-width: $tablet-size) {
-        grid-gap: 50px;
-    }
+    @media screen and (max-width: $tablet-size) {}
 }
 
 .product {
@@ -17,8 +15,8 @@
     }
 
     &-image {
-        width: 350px;
-        height: 350px;
+        width: 250px;
+        height: 250px;
         object-fit: cover;
         margin-bottom: 6px;
     }
@@ -108,6 +106,7 @@
         .info-name {
             display: inline-block;
             margin-left: 78px;
+            line-height: 1.2;
         }
 
         .info-price {
@@ -121,7 +120,6 @@
             border-top: 1px solid $yellow;
             padding: 17px 0 6px;
             font-size: 20px;
-            line-height: 14px;
 
             &:last-child {
                 border-bottom: 1px solid $yellow;
