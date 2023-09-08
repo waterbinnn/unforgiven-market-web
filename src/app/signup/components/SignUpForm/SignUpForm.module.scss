@@ -4,13 +4,18 @@
 }
 
 .phone-input {
-    border: 2px solid $yellow;
+    border: 2px solid $white;
+
+    &.error {
+        border-color: $pink;
+    }
 }
 
 .checkbox-wrap {
     display: flex;
     justify-content: center;
     gap: 8px;
+    margin-top: 20px;
 
     .checkbox {
         background-color: $white;
