@@ -13,7 +13,7 @@ interface Props {
   type: "BUYER" | "SELLER";
 }
 
-export const Login = ({ type }: Props) => {
+export const LoginForm = ({ type }: Props) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 

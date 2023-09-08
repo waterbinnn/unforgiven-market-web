@@ -1,9 +1,9 @@
-import { Login } from "../components/Login";
+import { LoginForm } from "../components";
 
 const SellerLogin = () => {
   return (
     <div className={"container"}>
-      <Login type="SELLER" />
+      <LoginForm type="SELLER" />
     </div>
   );
 };
