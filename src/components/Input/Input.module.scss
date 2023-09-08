@@ -3,6 +3,7 @@
 .input-wrap {
     position: relative;
     width: 100%;
+    padding: 20px 0;
 
     @media screen and (max-width: $mobile-size) {
         width: 100%;
@@ -12,7 +13,8 @@
 .input-style {
     width: 100%;
     border: none;
-    border-bottom: 2px solid $yellow;
+    border-bottom: 2px solid $white;
+
     padding: 7px 4px;
     background-color: transparent;
     color: $white;
@@ -29,8 +31,36 @@
         background-color: transparent;
     }
 
+    &.none {
+        border-color: $yellow;
+
+    }
+
+    &.error {
+        border-color: $pink;
+    }
+
+    &.valid {
+        border-color: $green;
+    }
+
     @media screen and (max-width: $mobile-size) {
         font-size: 12px;
+    }
+}
+
+.message {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 14px;
+
+    &.negative {
+        color: $pink;
+    }
+
+    &.positive {
+        color: $green;
     }
 }
 
