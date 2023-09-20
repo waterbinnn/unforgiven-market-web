@@ -9,8 +9,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
   return (
     <html>
       <Head />
