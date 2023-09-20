@@ -1,8 +1,8 @@
 import {
   BuyerSignupReq,
   BuyerSignupRes,
-  SellerSignupReq,
   SellerSignupRes,
+  SignInReq,
 } from "@/types";
 
 /**
@@ -48,6 +48,17 @@ interface AuthManage {
   readonly checkCompanyNumberValid: (
     company_registration_number: string
   ) => Promise<any>;
+
+  //signIn
+
+  /**
+   * @description 구매자 로그인
+   * @name authManage.signIn
+   * @method {POST}
+   * @param {SignInReq}
+   * @return {Promise}
+   **/
+  readonly signIn: (data: any) => Promise<any>;
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -96,6 +107,16 @@ const authManage: AuthManage = {
         }),
       }
     );
+    return res.json();
+  },
+  signIn: async (data: SignInReq) => {
+    const res = await fetch(`${baseUrl}accounts/login/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     return res.json();
   },
 };
