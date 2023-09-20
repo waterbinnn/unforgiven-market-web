@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { BaseModal } from "@/components";
 import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 const cx = classNames.bind(styles);
 
@@ -14,11 +15,18 @@ interface Props {
 }
 
 export const MobileGnb = ({ setShowGnb }: Props) => {
+  const { data: session } = useSession();
+
   const router = useRouter();
 
   const handleRouter = (page: string) => {
     router.push(page);
     setShowGnb(!setShowGnb);
+  };
+
+  const handleLogout = () => {
+    signOut();
+    handleRouter("/");
   };
 
   return (
@@ -44,14 +52,23 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
           >
             CART
           </button>
-          <button
-            className={cx("gnb-btn")}
-            type="button"
-            onClick={() => handleRouter("/login")}
-          >
-            {/* 추후 상태관리 필요  */}
-            LOGIN
-          </button>
+          {session ? (
+            <button
+              className={cx("gnb-btn")}
+              type="button"
+              onClick={handleLogout}
+            >
+              LOGOUT
+            </button>
+          ) : (
+            <button
+              className={cx("gnb-btn")}
+              type="button"
+              onClick={() => handleRouter("/signin")}
+            >
+              LOGIN
+            </button>
+          )}
         </nav>
       </section>
     </BaseModal>

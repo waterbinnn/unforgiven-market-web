@@ -10,12 +10,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { MobileGnb } from "../MobileGnb";
 import { useRouter } from "next/navigation";
+import { SignInButton } from "@/components/SignInButton";
 
 const cx = classNames.bind(styles);
 
 export const Header = () => {
   const browserSize = useResize({ throttleMs: 200 });
   const router = useRouter();
+
   const [showGnb, setShowGnb] = useState<Boolean>(false);
 
   const handleGnb = () => {
@@ -36,7 +38,7 @@ export const Header = () => {
                 <input
                   type="text"
                   className={cx("search")}
-                  placeholder={"Search... (not working)"}
+                  placeholder={"Search..."}
                 />
                 <button className={cx("btn-search")} type="button">
                   ?
@@ -44,15 +46,9 @@ export const Header = () => {
               </form>
             </div>
             <div className={cx("btn-wrap")}>
-              <Button>CART</Button>
+              <Button onClick={() => router.push("/cart")}>CART</Button>
               <div className={cx("btn-right")}>
-                <Button
-                  color="green"
-                  type="button"
-                  onClick={() => router.push("/login")}
-                >
-                  LOGIN
-                </Button>
+                <SignInButton />
               </div>
             </div>
           </>
