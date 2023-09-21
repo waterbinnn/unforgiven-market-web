@@ -1,4 +1,3 @@
-import axios from "axios";
 import Head from "./head";
 import "../styles/globals.scss";
 import { GNBLayout } from "@/components";
