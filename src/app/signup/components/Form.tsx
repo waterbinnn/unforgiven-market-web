@@ -1,13 +1,14 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./Form.module.scss";
-import CommonStyle from "../../../../styles/authStyle.module.scss";
+import CommonStyle from "../../../styles/authStyle.module.scss";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Input } from "@/components";
 import { useState } from "react";
 import { authManage } from "@/api";
 import { BuyerSignupReq, SellerSignupReq } from "@/types";
+import { signIn } from "next-auth/react";
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -127,7 +128,7 @@ export const Form = ({ type }: Props) => {
             setValue("middleNum", "");
             setValue("lastNum", "");
           } else if (Object.values(res).length === 4) {
-            handleRouter("/login");
+            signIn(undefined, { callbackUrl: "/" });
           }
         } else {
           //판매자 회원가입 로직
@@ -136,7 +137,7 @@ export const Form = ({ type }: Props) => {
             setValue("store_name", "");
             setError("store_name", { type: "custom", message: res.store_name });
           } else {
-            router.push("/login/seller");
+            handleRouter("/signin/seller");
           }
         }
       } catch (error) {
