@@ -3,8 +3,12 @@
  * @description 장바구니 api set 입니다.
  */
 
-import { CartList, CartResult, PostCart } from "@/types/cartManage";
-import { method } from "lodash";
+import {
+  CartList,
+  CartResult,
+  PostCart,
+  UpdateCartQuantity,
+} from "@/types/cartManage";
 
 interface CartManage {
   /**
@@ -25,6 +29,20 @@ interface CartManage {
   readonly postCart: (token: string, data: PostCart) => Promise<CartResult>;
 
   /**
+   * @name cartManage.updateCount 장바구니 아이템 수량 수정
+   * @method {PUT}
+   * @param {token} JWT token
+   * @param {cartId} cart_item_id
+   * @param {UpdateCartQuantity} body type
+   * @return {UpdateCartQuantity}
+   */
+  readonly updateCount: (
+    token: string,
+    cartId: number,
+    data: UpdateCartQuantity
+  ) => Promise<UpdateCartQuantity>;
+
+  /**
    * @name cartManage.removeCart 장바구니 삭제
    * @method {DELETE}
    * @param {cartId}
@@ -43,10 +61,10 @@ const cartManage: CartManage = {
       headers: {
         Authorization: `JWT ${token}`,
       },
-      cache: "no-store",
     });
     return res.json();
   },
+
   postCart: async (token: string, data: PostCart) => {
     const res = await fetch(`${baseUrl}cart/`, {
       method: "POST",
@@ -58,6 +76,7 @@ const cartManage: CartManage = {
     });
     return res.json();
   },
+
   removeCart: async (token: string, cartId?: number) => {
     const res = await fetch(`${baseUrl}cart/${cartId ? cartId : ""}`, {
       method: "DELETE",
@@ -65,6 +84,22 @@ const cartManage: CartManage = {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json",
       },
+    });
+    return res.json();
+  },
+
+  updateCount: async (
+    token: string,
+    cartId: number,
+    data: UpdateCartQuantity
+  ) => {
+    const res = await fetch(`${baseUrl}cart/${cartId}/`, {
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     return res.json();
   },
