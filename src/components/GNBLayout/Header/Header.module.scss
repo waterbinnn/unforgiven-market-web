@@ -96,6 +96,7 @@
 .btn-wrap {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 8px;
   width: 200px;
   transition: all 0.3s ease-in-out;

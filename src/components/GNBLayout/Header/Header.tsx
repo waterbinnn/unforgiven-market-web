@@ -9,7 +9,7 @@ import { useResize } from "@/utils/useResize";
 import Image from "next/image";
 import { useState } from "react";
 import { MobileGnb } from "../MobileGnb";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { SignInButton } from "@/components/SignInButton";
 
 const cx = classNames.bind(styles);
@@ -17,6 +17,7 @@ const cx = classNames.bind(styles);
 export const Header = () => {
   const browserSize = useResize({ throttleMs: 200 });
   const router = useRouter();
+  const pathName = usePathname();
 
   const [showGnb, setShowGnb] = useState<Boolean>(false);
 
@@ -59,6 +60,7 @@ export const Header = () => {
                 className={cx("back-btn")}
                 type="button"
                 onClick={() => router.back()}
+                style={{ display: pathName === "/" ? "none" : "block" }}
               >
                 <Image
                   src={"/assets/icon-back.svg"}
