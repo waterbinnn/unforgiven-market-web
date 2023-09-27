@@ -1,11 +1,7 @@
-import classNames from "classnames/bind";
-import styles from "./products.module.scss";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/utils/getQueryClient";
 import ProductList from "./components/ProductList";
 import { productManage } from "@/api/productManage";
-
-const cx = classNames.bind(styles);
 
 const ProductPage = async () => {
   const queryClient = getQueryClient();
