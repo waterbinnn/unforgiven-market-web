@@ -8,12 +8,14 @@ interface BaseModalProps {
   children: ReactNode;
   selector: string;
   onOverlayClick?: () => void;
+  isGnb?: boolean;
 }
 
 export const BaseModal = ({
   children,
   selector,
   onOverlayClick,
+  isGnb,
 }: BaseModalProps) => {
   const getScrollBarWidth = () => {
     const el = document.createElement("div");
@@ -44,7 +46,24 @@ export const BaseModal = ({
 
   return (
     <Portal selector={selector}>
-      {children}
+      {!isGnb ? (
+        <div
+          style={{
+            position: "fixed",
+            backgroundColor: "#ffffff",
+            zIndex: 1000,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "10px",
+            padding: "0 10px",
+          }}
+        >
+          {children}
+        </div>
+      ) : (
+        <div>{children}</div>
+      )}
       <Overlay onClose={handleOverlayClick} />
     </Portal>
   );

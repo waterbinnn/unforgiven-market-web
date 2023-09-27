@@ -33,6 +33,7 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
     <BaseModal
       selector={"#portal-wrap"}
       onOverlayClick={() => setShowGnb(false)}
+      isGnb={true}
     >
       <section className={cx("mobile-gnb-container")}>
         <h2 className={cx("visually-hidden")}>Menu</h2>
