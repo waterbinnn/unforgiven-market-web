@@ -5,7 +5,7 @@ import styles from "./Button.module.scss";
 
 const cx = classNames.bind(styles);
 
-interface ButtonProps {
+export interface ButtonProps {
   size?: "s" | "m" | "l";
   color?: "pink" | "yellow" | "blue" | "green";
   width?: string;
