@@ -1,7 +1,7 @@
 "use client";
 
 import { Count } from "@/components";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import classNames from "classnames/bind";
 
 import styles from "../products.module.scss";
@@ -11,11 +11,11 @@ const cx = classNames.bind(styles);
 interface Props {
   stock: number;
   price: number;
+  count: number;
+  setCount: React.Dispatch<SetStateAction<number>>;
 }
 
-const CountItem = ({ stock, price }: Props) => {
-  const [count, setCount] = useState<number>(1);
-
+const CountItem = ({ stock, price, count, setCount }: Props) => {
   return (
     <div className={cx("count")}>
       <Count count={count} setCount={setCount} stock={stock} />
