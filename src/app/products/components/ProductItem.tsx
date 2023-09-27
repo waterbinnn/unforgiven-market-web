@@ -18,7 +18,12 @@ const ProductItem = ({ product }: Props) => {
   };
 
   return (
-    <div className={cx("product-item")} onClick={handleGoToDetail}>
+    <div
+      className={cx("product-item", {
+        soldOut: product.stock === 0,
+      })}
+      onClick={handleGoToDetail}
+    >
       <img
         className={cx("product-image")}
         src={product.image}
