@@ -5,7 +5,6 @@ import { cartManage } from "@/api";
 import { PostCart } from "@/types/cartManage";
 import { ContentsModal } from "../Modal";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 
 interface Props {
   width: string;
@@ -35,7 +34,6 @@ export const AddCartButton = ({
       try {
         const res = await cartManage.postCart(token, req);
         setIsSuccessModal(true);
-        console.log(res);
 
         /*@ts-ignore */
         if (res.FAIL_message) {
@@ -44,8 +42,8 @@ export const AddCartButton = ({
           return;
         }
       } catch (err) {
-        console.log(err);
         setIsError(true);
+        console.log(err);
       }
     }
   };
