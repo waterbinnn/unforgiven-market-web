@@ -24,10 +24,11 @@ interface PostCart extends CommonCartType {
 }
 
 // 장바구니 수량 수정시 body type
-interface EditCartQuantity extends CommonCartType {
+interface UpdateCartQuantity extends CommonCartType {
   is_active: boolean; // 장바구니 내 상품 활성화 버튼, 같이 보내지 않으면 False
+  FAIL_message?: {};
 }
 
 //product id 로 장바구니 데이터를 채워야 함
 
-export type { CartList, CartResult, PostCart, EditCartQuantity };
+export type { CartList, CartResult, PostCart, UpdateCartQuantity };
