@@ -18,16 +18,51 @@ interface Props {
 const Item = ({ data, token }: Props) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(1);
+  const [newCount, setNewCount] = useState<number>(count);
+  const [countMsg, setCountMsg] = useState<string>("");
 
-  console.log(data);
+  const handleCloseModal = () => {
+    //수량 수정 모달 close 시 동작하는 함수
+    setIsUpdateCount(false);
+    setCountMsg("");
+  };
 
-  const handleCheckbox = () => {
-    setIsChecked(!isChecked);
+  const handleUpdateCount = async () => {
+    //수량 수정시 동작하는 함수
+    const updateCountReq = {
+      product_id: data[0].product_id,
+      quantity: newCount,
+      is_active: true,
+    };
+
+    try {
+      const res = await cartManage.updateCount(
+        token,
+        data[0].cart_item_id,
+        updateCountReq
+      );
+      if (res.is_active) {
+        setIsUpdateCount(false);
+      }
+
+      if (
+        res.FAIL_message === "현재 재고보다 더 많은 수량을 담을 수 없습니다."
+      ) {
+        setCountMsg(res.FAIL_message);
+      } else {
+        setCountMsg("");
+        setIsUpdateCount(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleDeleteItem = async () => {
+    // 삭제 버튼 클릭시 동작하는 함수
     try {
-      const res = await cartManage.removeCart(token, data[0].cart_item_id);
+      await cartManage.removeCart(token, data[0].cart_item_id);
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +70,10 @@ const Item = ({ data, token }: Props) => {
 
   return (
     <li className={cx("item-wrap")} key={`${data[0].product_id}`}>
-      <Checkbox isChecked={isChecked} onClick={handleCheckbox} />
+      <Checkbox
+        isChecked={isChecked}
+        onClick={() => setIsChecked(!isChecked)}
+      />
       <div className={cx("info-wrap")}>
         <Image
           src={
@@ -68,15 +106,18 @@ const Item = ({ data, token }: Props) => {
         </div>
       </div>
 
-      <Count stock={2} count={1} setCount={() => setIsUpdateCount(true)} />
+      <Count stock={5} count={count} setCount={() => setIsUpdateCount(true)} />
       {isUpdateCount && (
         <ContentsModal
-          onClose={() => setIsUpdateCount(false)}
-          onOk={() => console.log("수량 수정 저장 로직")}
+          onClose={handleCloseModal}
+          onOk={handleUpdateCount}
           okText={"SAVE"}
           isInfo={false}
           contents={
-            <Count stock={5} count={1} setCount={() => console.log("count")} />
+            <div className={cx("modal-wrap")}>
+              <Count stock={1} count={newCount} setCount={setNewCount} />
+              <span>{countMsg}</span>
+            </div>
           }
         />
       )}

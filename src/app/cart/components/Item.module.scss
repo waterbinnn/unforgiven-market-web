@@ -83,3 +83,18 @@
     right: 0;
     padding-bottom: 4px;
 }
+
+.modal-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 150px;
+
+    >span {
+        font-size: 12px;
+        text-align: center;
+        color: $pink
+    }
+}
