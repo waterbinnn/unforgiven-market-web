@@ -17,7 +17,7 @@ export const Count = ({ count, setCount, stock }: Props) => {
   const [isPlusDisable, setPlusDisable] = useState<boolean>(false);
 
   useEffect(() => {
-    if (count === 1) {
+    if (count === 1 || count === 0 || stock === 0) {
       setMinusDisable(true);
     }
   }, [count]);
@@ -26,6 +26,9 @@ export const Count = ({ count, setCount, stock }: Props) => {
     if (count === 1) {
       setMinusDisable(true);
     } else {
+      if (count === 0) {
+        return;
+      }
       setCount(count - 1);
       setMinusDisable(false);
     }
@@ -34,7 +37,10 @@ export const Count = ({ count, setCount, stock }: Props) => {
   const handlePlus = () => {
     if (count >= stock) {
       alert("재고가 소진되었습니다.");
-      setCount(count - 1);
+      if (count === 0) {
+        return;
+      }
+      setCount(stock === 1 ? count : count - 1);
       setPlusDisable(true);
       setPlusDisable(false);
     } else {
