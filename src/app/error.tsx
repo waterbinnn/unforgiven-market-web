@@ -1,23 +1,19 @@
-"use client";
+'use client';
 
-import { Button } from "@/components";
-import { useEffect } from "react";
+import { Button } from '@/components';
+import { useRouter } from 'next/navigation';
 
 interface Props {
-  error: string;
-  reset: () => void;
+  url?: string;
 }
 
-export default function Error({ error, reset }: Props) {
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
-
+export default function Error({ url }: Props) {
+  const router = useRouter();
   return (
-    <div className={"error-container"}>
+    <div className={'error-container'}>
       <p>Something went wrong!</p>
-      <Button color="yellow" width="300px" onClick={() => reset()}>
-        TryAgain
+      <Button color="yellow" width="300px" onClick={() => router.push(url ?? '/')}>
+        Try Again
       </Button>
     </div>
   );

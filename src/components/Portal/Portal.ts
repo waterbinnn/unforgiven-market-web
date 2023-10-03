@@ -1,6 +1,6 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
+'use client';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 
 interface Props {
   children: any;
@@ -16,7 +16,5 @@ export const Portal: React.FC<Props> = ({ children, selector }) => {
     setMounted(true);
   }, [selector]);
 
-  return mounted
-    ? ReactDOM.createPortal(children, ref.current as Element)
-    : null;
+  return mounted ? ReactDOM.createPortal(children, ref.current as Element) : null;
 };

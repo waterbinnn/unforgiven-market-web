@@ -1,14 +1,8 @@
-"use client";
-import classNames from "classnames/bind";
-import styles from "./Input.module.scss";
-import {
-  ChangeEvent,
-  FocusEvent,
-  InputHTMLAttributes,
-  forwardRef,
-  useCallback,
-} from "react";
-import { FieldError } from "react-hook-form";
+'use client';
+import classNames from 'classnames/bind';
+import styles from './Input.module.scss';
+import { ChangeEvent, FocusEvent, InputHTMLAttributes, forwardRef, useCallback } from 'react';
+import { FieldError } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +14,7 @@ interface InputProps {
   needBtn?: boolean;
   btnText?: string;
   btnWidth?: string;
-  isInputError?: "none" | "error" | "valid";
+  isInputError?: 'none' | 'error' | 'valid';
   handleButton?: () => void;
 }
 
@@ -29,7 +23,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & InputProps;
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
     {
-      type = "text",
+      type = 'text',
       placeholder,
       error,
       needMessage,
@@ -46,32 +40,32 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       isInputError,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const classes = cx(
-      "input-style",
+      'input-style',
       className,
       { disabled },
-      { error: isInputError === "error" ? true : false },
-      { valid: isInputError === "valid" ? true : false }
+      { error: isInputError === 'error' ? true : false },
+      { valid: isInputError === 'valid' ? true : false },
     );
 
     const handleBlur = useCallback(
       (e: FocusEvent<HTMLInputElement>) => {
         onBlur && onBlur(e);
       },
-      [onBlur]
+      [onBlur],
     );
 
     const handleChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e);
       },
-      [onChange]
+      [onChange],
     );
 
     return (
-      <div className={cx("input-wrap")}>
+      <div className={cx('input-wrap')}>
         <input
           type={type}
           className={classes}
@@ -86,7 +80,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         />
         {needBtn && (
           <button
-            className={cx("input-btn")}
+            className={cx('input-btn')}
             style={{ width: btnWidth }}
             type="button"
             onClick={handleButton}
@@ -95,13 +89,11 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           </button>
         )}
         {needMessage && (
-          <span className={cx("message", error ? "negative" : "positive")}>
-            {messageText}
-          </span>
+          <span className={cx('message', error ? 'negative' : 'positive')}>{messageText}</span>
         )}
       </div>
     );
-  }
+  },
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';

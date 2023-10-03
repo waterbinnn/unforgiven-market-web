@@ -1,104 +1,100 @@
 .auth-container {
-    background-color: $white;
-    padding: 150px 0;
-    margin: 50px 0;
+  background-color: $white;
+  padding: 150px 0;
+  margin: 50px 0;
 
-    @media screen and (max-width: $mobile-size) {
-        padding: 50px 0;
-    }
+  @media screen and (max-width: $mobile-size) {
+    padding: 50px 0;
+  }
 }
 
 .auth-inner-container {
-    background-color: $blue;
-    width: 520px;
-    margin: 0 auto;
-    border-radius: 10px;
-    padding-bottom: 50px;
+  background-color: $blue;
+  width: 520px;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-bottom: 50px;
 
-    @media screen and (max-width: $mobile-size) {
-        width: 100%;
-
-    }
+  @media screen and (max-width: $mobile-size) {
+    width: 100%;
+  }
 }
 
 .auth-wrap {
-    padding: 45px;
-    position: relative;
+  padding: 45px;
+  position: relative;
+
+  .title {
+    position: absolute;
+    text-align: center;
+    font-size: 50px;
+    color: $white;
+    font-weight: 400;
+
+    &.top {
+      top: 53px;
+      left: 135px;
+    }
+
+    &.bottom {
+      top: 110px;
+      right: 148px;
+    }
+  }
+
+  @media screen and (max-width: $mobile-size) {
+    padding: 10px;
+    padding-bottom: 50px;
 
     .title {
-        position: absolute;
-        text-align: center;
-        font-size: 50px;
-        color: $white;
-        font-weight: 400;
+      font-size: 20px;
 
-        &.top {
-            top: 53px;
-            left: 135px;
-        }
-
-        &.bottom {
-            top: 110px;
-            right: 148px;
-
-        }
+      &.bottom {
+        top: 76px;
+        right: 132px;
+      }
     }
-
-    @media screen and (max-width: $mobile-size) {
-        padding: 10px;
-        padding-bottom: 50px;
-
-        .title {
-            font-size: 20px;
-
-            &.bottom {
-                top: 76px;
-                right: 132px;
-            }
-        }
-    }
-
+  }
 }
 
-
 .inputs-wrap {
-    margin-top: 150px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 40px;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
 
-    @media screen and (max-width: $mobile-size) {
-        width: 100%;
-        gap: 20px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    width: 100%;
+    gap: 20px;
+  }
 }
 
 .btn-wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 18px;
-    width: 50%;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .router-btn {
-    display: flex;
-    justify-content: center;
-    margin: 10px auto 0;
-    color: $gray;
-    cursor: pointer;
-    background-color: transparent;
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 0;
+  color: $gray;
+  cursor: pointer;
+  background-color: transparent;
 
-    &:hover {
-        color: $yellow;
-    }
+  &:hover {
+    color: $yellow;
+  }
 }
 
 .valid-message {
-    display: block;
-    margin-top: -14px;
-    font-size: 12px;
-    line-height: 14px;
-    color: $pink;
+  display: block;
+  margin-top: -14px;
+  font-size: 12px;
+  line-height: 14px;
+  color: $pink;
 }

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import classNames from "classnames/bind";
-import styles from "./Count.module.scss";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import classNames from 'classnames/bind';
+import styles from './Count.module.scss';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +36,7 @@ export const Count = ({ count, setCount, stock }: Props) => {
 
   const handlePlus = () => {
     if (count >= stock) {
-      alert("재고가 소진되었습니다.");
+      alert('재고가 소진되었습니다.');
       if (count === 0) {
         return;
       }
@@ -51,21 +51,13 @@ export const Count = ({ count, setCount, stock }: Props) => {
   };
 
   return (
-    <div className={cx("count-wrap")}>
+    <div className={cx('count-wrap')}>
       <button type="button" onClick={handleMinus} disabled={isMinusDisable}>
-        <img
-          src="/assets/icon-minus.svg"
-          alt="minus"
-          className={cx("count-icon")}
-        />
+        <img src="/assets/icon-minus.svg" alt="minus" className={cx('count-icon')} />
       </button>
-      <strong className={cx("count-text")}>{count}</strong>
+      <strong className={cx('count-text')}>{count}</strong>
       <button type="button" onClick={handlePlus} disabled={isPlusDisable}>
-        <img
-          src="/assets/icon-plus.svg"
-          alt="plus"
-          className={cx("count-icon")}
-        />
+        <img src="/assets/icon-plus.svg" alt="plus" className={cx('count-icon')} />
       </button>
     </div>
   );

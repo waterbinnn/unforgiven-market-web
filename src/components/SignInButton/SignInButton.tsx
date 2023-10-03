@@ -1,6 +1,6 @@
-import { Button } from "@/components";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { Button } from '@/components';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export const SignInButton = () => {
   const { data: session } = useSession();
@@ -14,11 +14,7 @@ export const SignInButton = () => {
           LOGOUT
         </Button>
       ) : (
-        <Button
-          color="green"
-          type="button"
-          onClick={() => router.push("/signin")}
-        >
+        <Button color="green" type="button" onClick={() => router.push('/signin')}>
           LOGIN
         </Button>
       )}

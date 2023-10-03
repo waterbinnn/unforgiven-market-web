@@ -1,14 +1,14 @@
-import { authManage } from "@/api";
-import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { authManage } from '@/api';
+import type { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/signin",
+    signIn: '/signin',
   },
   providers: [
     CredentialsProvider({
-      name: "Sign in",
+      name: 'Sign in',
       credentials: {},
 
       async authorize(credentials) {
@@ -57,6 +57,6 @@ export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
 };

@@ -1,9 +1,9 @@
 .checkbox {
-    border: 1px solid $black;
-    width: 15px;
-    height: 15px;
+  border: 1px solid $black;
+  width: 15px;
+  height: 15px;
 
-    &.active {
-        background-color: $green;
-    }
+  &.active {
+    background-color: $green;
+  }
 }

@@ -3,5 +3,5 @@ interface OverlayProps {
 }
 
 export const Overlay = ({ onClose }: OverlayProps) => (
-  <div className={"portal-overlay"} onClick={onClose} />
+  <div className={'portal-overlay'} onClick={onClose} />
 );

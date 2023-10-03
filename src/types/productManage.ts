@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from 'querystring';
 
 interface ProductListType {
   product_id: number;
@@ -26,13 +26,6 @@ interface ProductListParams {
   page: string;
 }
 
-interface ProductListParamsWithQuery
-  extends ParsedUrlQuery,
-    ProductListParams {}
+interface ProductListParamsWithQuery extends ParsedUrlQuery, ProductListParams {}
 
-export type {
-  ProductDataListType,
-  ProductListType,
-  ProductListParams,
-  ProductListParamsWithQuery,
-};
+export type { ProductDataListType, ProductListType, ProductListParams, ProductListParamsWithQuery };

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Checkbox, ContentsModal, Count } from "@/components";
-import classNames from "classnames/bind";
-import styles from "./Item.module.scss";
-import { useState } from "react";
-import Image from "next/image";
-import { CartList } from "@/types/cartManage";
-import { cartManage } from "@/api";
+import { Checkbox, ContentsModal, Count } from '@/components';
+import classNames from 'classnames/bind';
+import styles from './Item.module.scss';
+import { useState } from 'react';
+import Image from 'next/image';
+import { CartList } from '@/types/cartManage';
+import { cartManage } from '@/api';
 
 const cx = classNames.bind(styles);
 
 interface Props {
-  data: CartList["results"];
+  data: CartList['results'];
   token: string;
 }
 
@@ -20,12 +20,12 @@ const Item = ({ data, token }: Props) => {
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, setCount] = useState<number>(1);
   const [newCount, setNewCount] = useState<number>(count);
-  const [countMsg, setCountMsg] = useState<string>("");
+  const [countMsg, setCountMsg] = useState<string>('');
 
   const handleCloseModal = () => {
     //수량 수정 모달 close 시 동작하는 함수
     setIsUpdateCount(false);
-    setCountMsg("");
+    setCountMsg('');
   };
 
   const handleUpdateCount = async () => {
@@ -37,21 +37,15 @@ const Item = ({ data, token }: Props) => {
     };
 
     try {
-      const res = await cartManage.updateCount(
-        token,
-        data[0].cart_item_id,
-        updateCountReq
-      );
+      const res = await cartManage.updateCount(token, data[0].cart_item_id, updateCountReq);
       if (res.is_active) {
         setIsUpdateCount(false);
       }
 
-      if (
-        res.FAIL_message === "현재 재고보다 더 많은 수량을 담을 수 없습니다."
-      ) {
+      if (res.FAIL_message === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
         setCountMsg(res.FAIL_message);
       } else {
-        setCountMsg("");
+        setCountMsg('');
         setIsUpdateCount(false);
       }
     } catch (err) {
@@ -69,35 +63,30 @@ const Item = ({ data, token }: Props) => {
   };
 
   return (
-    <li className={cx("item-wrap")} key={`${data[0].product_id}`}>
-      <Checkbox
-        isChecked={isChecked}
-        onClick={() => setIsChecked(!isChecked)}
-      />
-      <div className={cx("info-wrap")}>
+    <li className={cx('item-wrap')} key={`${data[0].product_id}`}>
+      <Checkbox isChecked={isChecked} onClick={() => setIsChecked(!isChecked)} />
+      <div className={cx('info-wrap')}>
         <Image
-          src={
-            "https://openmarket.weniv.co.kr/media/products/2023/09/20/maxresdefault.jpg"
-          }
+          src={'https://openmarket.weniv.co.kr/media/products/2023/09/20/maxresdefault.jpg'}
           alt="product name"
           width={100}
           height={100}
-          placeholder={"blur"}
-          blurDataURL={"/assets/default_img.png"}
-          className={cx("image")}
+          placeholder={'blur'}
+          blurDataURL={'/assets/default_img.png'}
+          className={cx('image')}
         />
-        <div className={cx("detail-container")}>
-          <dl className={cx("detail-info-wrap")}>
-            <dt className={cx("visually-hidden")}>store name</dt>
-            <dd className={cx("store")}>store name</dd>
+        <div className={cx('detail-container')}>
+          <dl className={cx('detail-info-wrap')}>
+            <dt className={cx('visually-hidden')}>store name</dt>
+            <dd className={cx('store')}>store name</dd>
 
-            <dt className={cx("visually-hidden")}>product name</dt>
-            <dd className={cx("info-title")}>product name</dd>
+            <dt className={cx('visually-hidden')}>product name</dt>
+            <dd className={cx('info-title')}>product name</dd>
 
-            <dt className={cx("visually-hidden")}>Price</dt>
-            <dd className={cx("info-price")}>￦ 29,000</dd>
+            <dt className={cx('visually-hidden')}>Price</dt>
+            <dd className={cx('info-price')}>￦ 29,000</dd>
           </dl>
-          <span className={cx("shipping-fee")}>
+          <span className={cx('shipping-fee')}>
             {/* {data.shipping_fee > 0
               ? `택배배송/${data.shipping_fee.toLocaleString()}원`
               : "택배배송/무료배송"} */}
@@ -111,10 +100,10 @@ const Item = ({ data, token }: Props) => {
         <ContentsModal
           onClose={handleCloseModal}
           onOk={handleUpdateCount}
-          okText={"SAVE"}
+          okText={'SAVE'}
           isInfo={false}
           contents={
-            <div className={cx("modal-wrap")}>
+            <div className={cx('modal-wrap')}>
               <Count stock={1} count={newCount} setCount={setNewCount} />
               <span>{countMsg}</span>
             </div>
@@ -122,16 +111,12 @@ const Item = ({ data, token }: Props) => {
         />
       )}
 
-      <div className={cx("item-4th-wrap")}>
+      <div className={cx('item-4th-wrap')}>
         <span>total</span>
-        <strong className={cx("item-total-price")}>￦ 29,000</strong>
+        <strong className={cx('item-total-price')}>￦ 29,000</strong>
       </div>
 
-      <button
-        type="button"
-        className={cx("del-item-btn")}
-        onClick={handleDeleteItem}
-      >
+      <button type="button" className={cx('del-item-btn')} onClick={handleDeleteItem}>
         X
       </button>
     </li>

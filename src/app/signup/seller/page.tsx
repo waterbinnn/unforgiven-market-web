@@ -1,9 +1,9 @@
-import { Form } from "../components";
+import { Form } from '../components';
 
 const SellerSignUp = () => {
   return (
     <div className="container">
-      <Form type={"SELLER"} />
+      <Form type={'SELLER'} />
     </div>
   );
 };

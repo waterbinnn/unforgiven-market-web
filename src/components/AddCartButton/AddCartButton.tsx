@@ -1,26 +1,20 @@
-"use client";
-import React, { useState } from "react";
-import { Button, ButtonProps } from "../Button";
-import { cartManage } from "@/api";
-import { PostCart } from "@/types/cartManage";
-import { ContentsModal } from "../Modal";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState } from 'react';
+import { Button, ButtonProps } from '../Button';
+import { cartManage } from '@/api';
+import { PostCart } from '@/types/cartManage';
+import { ContentsModal } from '../Modal';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   width: string;
   token: string;
-  color: ButtonProps["color"];
+  color: ButtonProps['color'];
   req: PostCart;
   disabled: boolean;
 }
 
-export const AddCartButton = ({
-  width,
-  token,
-  req,
-  color,
-  disabled,
-}: Props) => {
+export const AddCartButton = ({ width, token, req, color, disabled }: Props) => {
   const router = useRouter();
 
   const [isLoginModal, setIsLoginModal] = useState<boolean>(false);
@@ -51,11 +45,11 @@ export const AddCartButton = ({
   return (
     <>
       <Button
-        type={"button"}
+        type={'button'}
         width={width}
         onClick={handleAddCart}
         color={color}
-        size={"l"}
+        size={'l'}
         disabled={disabled}
       >
         CART
@@ -68,9 +62,9 @@ export const AddCartButton = ({
               <p>로그인 페이지로 이동하시겠습니까?</p>
             </>
           }
-          okText={"LOGIN"}
+          okText={'LOGIN'}
           isInfo={false}
-          onOk={() => router.push("/signin")}
+          onOk={() => router.push('/signin')}
           onClose={() => setIsLoginModal(false)}
         />
       )}
@@ -82,9 +76,9 @@ export const AddCartButton = ({
               <p>장바구니로 이동하시겠습니까?</p>
             </>
           }
-          okText={"장바구니로 이동"}
+          okText={'장바구니로 이동'}
           isInfo={false}
-          onOk={() => router.push("/cart")}
+          onOk={() => router.push('/cart')}
           onClose={() => setIsSuccessModal(false)}
         />
       )}
@@ -95,7 +89,7 @@ export const AddCartButton = ({
               <p>문제가 발생했습니다. </p>
             </>
           }
-          okText={"확인"}
+          okText={'확인'}
           isInfo={true}
           onOk={() => setIsError(false)}
           onClose={() => setIsError(false)}

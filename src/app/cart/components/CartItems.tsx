@@ -1,22 +1,19 @@
-"use client";
+'use client';
 
-import Item from "./Item";
-import classNames from "classnames/bind";
-import styles from "../Cart.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { cartManage } from "@/api/cartManage";
-import { useSession } from "next-auth/react";
-import Loading from "@/app/loading";
+import Item from './Item';
+import classNames from 'classnames/bind';
+import styles from '../Cart.module.scss';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { cartManage } from '@/api/cartManage';
+import { useSession } from 'next-auth/react';
+import Loading from '@/app/loading';
+import Error from '@/app/error';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
 const CartItems = () => {
-  /**
-   * 카트 내 아이템 id 를 받아서 리액트 쿼리에 저장된 제품 데이터를 받아와야 함.
-   * how ?
-   *
-   */
-
+  const router = useRouter();
   const { data: session } = useSession();
   const token = session?.token;
 
@@ -24,8 +21,8 @@ const CartItems = () => {
     return;
   }
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["cartData"],
+  const { isLoading, data, isError, error } = useQuery({
+    queryKey: ['cartData'],
     queryFn: () => cartManage.getList(token),
   });
 
@@ -38,22 +35,26 @@ const CartItems = () => {
     }
   };
 
+  const deleteMutation = useMutation(() => handleRemoveCart());
+
   if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   return (
     <>
       <button
         type="button"
-        onClick={handleRemoveCart}
+        onClick={() => deleteMutation.mutate()}
         disabled={data?.count === 0}
-        className={cx("del-btn")}
+        className={cx('del-btn')}
       >
         전체 삭제
       </button>
-      <ol className={cx("item-list-wrap")}>
+      {deleteMutation.isError && <div>error</div>}
+      <ol className={cx('item-list-wrap')}>
         {data?.count === 0 && (
-          <div className={cx("no-items-wrap")}>
-            <p className={cx("text")}>장바구니에 담은 물건이 없습니다.</p>
+          <div className={cx('no-items-wrap')}>
+            <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
           </div>
         )}
         {data?.results.map(() => (

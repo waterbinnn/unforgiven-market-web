@@ -1,5 +1,5 @@
-import { throttle } from "lodash";
-import { useEffect, useMemo, useState } from "react";
+import { throttle } from 'lodash';
+import { useEffect, useMemo, useState } from 'react';
 
 /**
  * @name useResize
@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from "react";
  * @return { width: number;  height: number;} 현재 브라우저의 사이즈 BrowserSizes
  **/
 
-type BrowserSizeKey = "width" | "height";
+type BrowserSizeKey = 'width' | 'height';
 
 type BrowserSizes = {
   [key in BrowserSizeKey]: number;
@@ -18,11 +18,9 @@ type BrowserSizes = {
 
 export type { BrowserSizes };
 
-export const useResize: ({
-  throttleMs,
-}: {
-  throttleMs?: number | undefined;
-}) => BrowserSizes = ({ throttleMs = 0 }): BrowserSizes => {
+export const useResize: ({ throttleMs }: { throttleMs?: number | undefined }) => BrowserSizes = ({
+  throttleMs = 0,
+}): BrowserSizes => {
   const [browserSize, setBrowserSize] = useState<BrowserSizes>({
     width: 0,
     height: 0,
@@ -36,7 +34,7 @@ export const useResize: ({
           height: window.innerHeight,
         });
       }, throttleMs),
-    [throttleMs]
+    [throttleMs],
   );
 
   useEffect(() => {
@@ -45,9 +43,9 @@ export const useResize: ({
       height: window.innerHeight,
     });
 
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
 
-    return () => window.removeEventListener("resize", onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, [onResize]);
 
   return browserSize;
