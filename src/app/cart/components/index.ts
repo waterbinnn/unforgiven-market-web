@@ -1,3 +1,3 @@
 export * from "./Payment";
-export * from "./CartItems";
+export * from "./CartList";
 export * from "./Item";
