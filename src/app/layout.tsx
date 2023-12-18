@@ -1,5 +1,5 @@
 import Head from "./head";
-import "../styles/globals.scss";
+import "@/styles/globals.scss";
 import { GNBLayout } from "@/components";
 import Providers from "@/utils/provider";
 
