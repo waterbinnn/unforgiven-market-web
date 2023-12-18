@@ -34,19 +34,12 @@ export const Header = () => {
               <Link className={cx('header-title')} href={'/'} as={'/'}>
                 UNFORGIVEN
               </Link>
-
-              <form className={cx('input-wrap')}>
-                <input type="text" className={cx('search')} placeholder={'Search...'} />
-                <button className={cx('btn-search')} type="button">
-                  ?
-                </button>
-              </form>
             </div>
             <div className={cx('btn-wrap')}>
-              <Button onClick={() => router.push('/cart')}>CART</Button>
-              <div className={cx('btn-right')}>
-                <SignInButton />
-              </div>
+              <Button onClick={() => router.push('/cart')} color="outline">
+                CART
+              </Button>
+              <SignInButton />
             </div>
           </>
         ) : (

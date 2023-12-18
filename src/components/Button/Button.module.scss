@@ -1,15 +1,13 @@
 .button {
+  transition: all 0.3s ease-out;
+
   &.s {
     border-radius: 20px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 300;
     color: $black;
     text-align: center;
     padding-top: 4px;
-
-    &:hover {
-      transform: rotate(3deg);
-    }
   }
 
   &.m {
@@ -18,7 +16,7 @@
     border-radius: 20px;
     font-size: 14px;
     font-family: $font-basic;
-    font-weight: bold;
+    font-weight: 300;
     color: $black;
 
     &:hover {
@@ -30,9 +28,8 @@
     padding: 8px 36px;
     text-align: center;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: $font-basic;
-    font-weight: bold;
     color: $black;
   }
 
@@ -52,8 +49,23 @@
     background-color: $blue;
   }
 
+  &.outline {
+    background-color: $white;
+    color: $black;
+    border: 1px solid $gray;
+  }
+
+  &.black {
+    background-color: $black;
+    color: $white
+  }
+
   &:disabled {
     background-color: $gray;
     cursor: not-allowed;
+  }
+
+  &:hover {
+    opacity: 0.89;
   }
 }

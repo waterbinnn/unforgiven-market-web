@@ -10,7 +10,7 @@ export const SignInButton = () => {
   return (
     <>
       {session ? (
-        <Button color="green" type="button" onClick={() => signOut()}>
+        <Button color="black" type="button" onClick={() => signOut()}>
           LOGOUT
         </Button>
       ) : (

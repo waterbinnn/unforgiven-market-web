@@ -24,7 +24,9 @@ const ProductItem = ({ product }: Props) => {
       })}
       onClick={handleGoToDetail}
     >
-      <img className={cx('product-image')} src={product.image} alt={product.product_name} />
+      <div className={cx('product-image-wrap')}>
+        <img className={cx('product-image')} src={product.image} alt={product.product_name} />
+      </div>
       <dl className={cx('info-wrap')}>
         <div className={cx('store-name-wrap')}>
           <dt className={cx('visually-hidden')}>store name</dt>
@@ -35,7 +37,7 @@ const ProductItem = ({ product }: Props) => {
           <dd className={cx('data-info', 'name')}>{product.product_name}</dd>
         </div>
         <div className={cx('data-wrap')}>
-          <dt className={cx('data-title')}>Price</dt>
+          <dt className={cx('visually-hidden')}>Price</dt>
           <dd className={cx('data-info')}>￦ {product.price.toLocaleString('ko-KR')}</dd>
         </div>
       </dl>

@@ -3,24 +3,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
-    border: 1px solid black;
+    width: 120px;
+    border: 1px solid $gray;
+    border-radius: 2px;
 
     button {
       padding: 9px 9px 4px;
       width: calc(100% / 3);
 
       &:first-child {
-        border-right: 1px solid black;
+        border-right: 1px solid $gray;
       }
 
       &:last-child {
-        border-left: 1px solid black;
+        border-left: 1px solid $gray;
       }
 
       &:disabled {
         cursor: not-allowed;
-        background-color: rgb(242, 242, 242);
+        background-color: $light-gray;
       }
     }
   }
@@ -33,8 +34,7 @@
 
   &-text {
     width: calc(100% / 3);
-    font-size: 20px;
-    line-height: 14px;
+    font-size: 14px;
     margin-top: 5px;
     padding: 0 10px;
     text-align: center;

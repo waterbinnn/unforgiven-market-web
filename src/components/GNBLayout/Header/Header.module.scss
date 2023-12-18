@@ -8,10 +8,11 @@
   top: 0;
   left: 0;
   right: 0;
-  color: $pink;
+  color: $black;
   background-color: $white;
-  border-bottom: 1px solid $black;
+  border-bottom: 1px solid $gray;
   z-index: 10;
+  transition: all 3s ease-in-out;
 
   &-title {
     position: relative;
@@ -22,7 +23,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  transition: all 0.3s ease-in-out;
+  transition: all 2s ease-in-out;
 
   @media screen and (max-width: $mobile-size) {
     justify-content: center;
@@ -38,9 +39,8 @@
     font-size: 16px;
     letter-spacing: 0.02em;
     border-radius: 2px;
-    border: 1px solid $black;
-    color: $blue;
-    transition: all 0.3s ease-in-out;
+    border: 1px solid $gray;
+    transition: all 2s ease-in-out;
 
     &:focus {
       outline: none;
@@ -70,17 +70,17 @@
   right: -8px;
   top: 3px;
   background-color: $blue;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   padding: 2px 2px 2px 3px;
   border-radius: 50%;
   margin-left: -10px;
   background-color: $pink;
-  transition: all 0.3s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 
 .header-title {
-  font-size: 60px;
+  font-size: 40px;
   font-weight: bold;
   padding-top: 12px;
 
@@ -96,30 +96,13 @@
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 8px;
-  width: 200px;
-  transition: all 0.3s ease-in-out;
 
   button {
-    width: 122px;
-    padding: 2px 30px;
+    transition: all 0.5s ease-in-out;
+    width: 80px;
+    padding: 2px 8px;
   }
 
-  .btn-right {
-    margin-left: 46px;
-  }
-
-  @media screen and (max-width: $tablet-size) {
-    width: fit-content;
-
-    .btn-right {
-      margin-left: 20px;
-    }
-
-    button {
-      width: 90px;
-      padding: 0;
-    }
-  }
 
   @media screen and (max-width: $mobile-size) {
     margin-top: 10px;

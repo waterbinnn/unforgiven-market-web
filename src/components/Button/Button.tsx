@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 export interface ButtonProps {
   size?: 's' | 'm' | 'l';
-  color?: 'pink' | 'yellow' | 'blue' | 'green';
+  color?: 'pink' | 'yellow' | 'blue' | 'green' | 'black' | 'outline';
   width?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
@@ -17,7 +17,7 @@ export interface ButtonProps {
 
 export const Button = ({
   size = 's',
-  color = 'pink',
+  color = 'black',
   children,
   width,
   disabled = false,

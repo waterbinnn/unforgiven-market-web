@@ -71,10 +71,8 @@ const ProductDetail = ({ productId }: Props) => {
               <dd className={cx('info-name')}>{data.product_name}</dd>
             </div>
             <div className={cx('info-data')}>
-              <dt className={cx('info-title')}>Price</dt>
-              <dd className={cx('info-price')}>
-                ￦ {data.price.toLocaleString()}
-              </dd>
+              <dt className={cx('visually-hidden')}>Price</dt>
+              <dd className={cx('info-price')}>￦ {data.price.toLocaleString()}</dd>
             </div>
           </dl>
           <span className={cx('shipping-fee')}>
@@ -83,37 +81,33 @@ const ProductDetail = ({ productId }: Props) => {
               : '택배배송/무료배송'}
           </span>
         </div>
-        {data.stock < 5 && (
+        {data.stock < 5 && data.stock > 1 && (
           <p className={cx('stock-info')}>
             현재 {data.stock}개의 재고가 남아있습니다. 구매를 서두르세요!
           </p>
         )}
+        {data.stock === 0 && <p className={cx('stock-info')}>품절된 상품입니다.</p>}
 
         {/* 수량 컴포넌트  */}
         <CountItem
           stock={data.stock}
           price={data.price}
-          count={count}
+          count={data.stock > 1 ? count : 0}
           setCount={setCount}
         />
 
         {/* 버튼 섹션  */}
         <div className={cx('button-wrap')}>
-          <Button
-            color='yellow'
-            size='l'
-            width='60%'
-            disabled={data.stock ? false : true}
-          >
-            ORDER
-          </Button>
           <AddCartButton
             disabled={data.stock ? false : true}
             width={'40%'}
-            color={'blue'}
+            color={'black'}
             token={token ?? ''}
             req={cartReq}
           />
+          <Button color={'outline'} size="l" width="60%" disabled={data.stock ? false : true}>
+            ORDER
+          </Button>
         </div>
       </div>
     </>
