@@ -1,8 +1,8 @@
-"use client";
-import React, { ReactNode, useCallback, useEffect } from "react";
+'use client';
+import React, { ReactNode, useCallback, useEffect } from 'react';
 
-import { Portal } from "../../Portal";
-import { Overlay } from "@/components/Overlay";
+import { Portal } from '../../Portal';
+import { Overlay } from '@/components/Overlay';
 
 interface BaseModalProps {
   children: ReactNode;
@@ -11,15 +11,10 @@ interface BaseModalProps {
   isGnb?: boolean;
 }
 
-export const BaseModal = ({
-  children,
-  selector,
-  onOverlayClick,
-  isGnb,
-}: BaseModalProps) => {
+export const BaseModal = ({ children, selector, onOverlayClick, isGnb }: BaseModalProps) => {
   const getScrollBarWidth = () => {
-    const el = document.createElement("div");
-    el.style.cssText = "overflow:scroll; visibility:hidden; position:absolute;";
+    const el = document.createElement('div');
+    el.style.cssText = 'overflow:scroll; visibility:hidden; position:absolute;';
     document.body.appendChild(el);
     const width = el.offsetWidth - el.clientWidth;
     el.remove();
@@ -27,16 +22,13 @@ export const BaseModal = ({
   };
 
   useEffect(() => {
-    const isScrollbarVisible =
-      document.body.scrollHeight > document.body.clientHeight;
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = isScrollbarVisible
-      ? `${getScrollBarWidth()}px`
-      : "0px";
+    const isScrollbarVisible = document.body.scrollHeight > document.body.clientHeight;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = isScrollbarVisible ? `${getScrollBarWidth()}px` : '0px';
 
     return () => {
-      document.body.style.overflow = "auto";
-      document.body.style.paddingRight = "0px";
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0px';
     };
   }, []);
 
@@ -49,14 +41,14 @@ export const BaseModal = ({
       {!isGnb ? (
         <div
           style={{
-            position: "fixed",
-            backgroundColor: "#ffffff",
+            position: 'fixed',
+            backgroundColor: '#ffffff',
             zIndex: 1000,
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            borderRadius: "10px",
-            padding: "0 10px",
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            borderRadius: '10px',
+            padding: '0 10px',
           }}
         >
           {children}

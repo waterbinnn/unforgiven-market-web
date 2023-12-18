@@ -1,1 +1,1 @@
-export * from "./MobileGnb";
+export * from './MobileGnb';

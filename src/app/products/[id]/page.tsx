@@ -20,7 +20,7 @@ const ProductDetail = async ({ params }: Props) => {
   //pre-fetching
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(['productDetail'], () =>
-    productManage.getProductDetail(productId)
+    productManage.getProductDetail(productId),
   );
   const dehydrateState = dehydrate(queryClient);
 

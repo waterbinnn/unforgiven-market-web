@@ -26,11 +26,11 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const productManage: ProductManage = {
   getProductList: async () => {
-    const res = await fetch(`${baseUrl}/products/`);
+    const res = await fetch(`${baseUrl}products/`);
     return res.json();
   },
   getProductDetail: async (id: string) => {
-    const res = await fetch(`${baseUrl}/products/${id}`);
+    const res = await fetch(`${baseUrl}products/${id}`);
     return res.json();
   },
 };

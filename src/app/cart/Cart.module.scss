@@ -1,57 +1,54 @@
 .page-title {
-    display: flex;
-    justify-content: center;
-    padding: 60px;
-    font-size: 50px;
-    line-height: 40px;
-    color: $blue;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+  font-size: 50px;
+  line-height: 40px;
+  color: $blue;
 
-    @media screen and (max-width: $mobile-size) {
-        padding-bottom: 20px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    padding-bottom: 20px;
+  }
 }
 
 .cart-container {
-    max-width: 800px;
-    min-width: 600px;
-    margin: 0 auto 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  max-width: 800px;
+  min-width: 600px;
+  margin: 0 auto 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
-    @media screen and (max-width: $mobile-size) {
-        min-width: 300px;
-        width: 80%;
-    }
+  @media screen and (max-width: $mobile-size) {
+    min-width: 300px;
+    width: 80%;
+  }
 }
 
 .item-list-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-
-
-
 .no-items-wrap {
-    display: flex;
-    justify-content: center;
-    padding: 50px 0;
-    border: 1px solid $yellow;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  border: 1px solid $yellow;
 
-    .text {
-        font-size: 13px;
-        color: $gray;
-    }
+  .text {
+    font-size: 13px;
+    color: $gray;
+  }
 }
 
 .del-btn {
-    font-size: 13px;
-    background-color: #000000;
-    padding: 10px 8px;
-    border-radius: 2px;
-    color: $white;
-    align-self: flex-end;
-    border-radius: 2px;
+  font-size: 13px;
+  background-color: #000000;
+  padding: 10px 8px;
+  border-radius: 2px;
+  color: $white;
+  align-self: flex-end;
+  border-radius: 2px;
 }

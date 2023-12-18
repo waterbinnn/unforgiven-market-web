@@ -32,12 +32,12 @@ interface SellerSignupRes extends BuyerSignupRes {
 interface SignInReq {
   username: string;
   password: string;
-  login_type: "BUYER" | "SELLER"; // BUYER : 일반 구매자, SELLER : 판매자
+  login_type: 'BUYER' | 'SELLER'; // BUYER : 일반 구매자, SELLER : 판매자
 }
 interface SignInRes {
   id: number;
   token: string;
-  user_type: "BUYER" | "SELLER";
+  user_type: 'BUYER' | 'SELLER';
 }
 export type {
   BuyerSignupReq,

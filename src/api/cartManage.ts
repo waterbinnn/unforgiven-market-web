@@ -3,12 +3,7 @@
  * @description 장바구니 api set 입니다.
  */
 
-import {
-  CartList,
-  CartResult,
-  PostCart,
-  UpdateCartQuantity,
-} from "@/types/cartManage";
+import { CartList, CartResult, PostCart, UpdateCartQuantity } from '@/types/cartManage';
 
 interface CartManage {
   /**
@@ -39,7 +34,7 @@ interface CartManage {
   readonly updateCount: (
     token: string,
     cartId: number,
-    data: UpdateCartQuantity
+    data: UpdateCartQuantity,
   ) => Promise<UpdateCartQuantity>;
 
   /**
@@ -49,7 +44,7 @@ interface CartManage {
    * @param {token} JWT token
    * @return {Promise<any>}
    */
-  readonly removeCart: (token: string, cartId?: number) => Promise<string>;
+  readonly removeCart: (token: string, cartId?: number) => Promise<any>;
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -57,7 +52,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 const cartManage: CartManage = {
   getList: async (token: string) => {
     const res = await fetch(`${baseUrl}cart/`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `JWT ${token}`,
       },
@@ -67,10 +62,10 @@ const cartManage: CartManage = {
 
   postCart: async (token: string, data: PostCart) => {
     const res = await fetch(`${baseUrl}cart/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
@@ -78,26 +73,21 @@ const cartManage: CartManage = {
   },
 
   removeCart: async (token: string, cartId?: number) => {
-    const res = await fetch(`${baseUrl}cart/${cartId ? cartId : ""}`, {
-      method: "DELETE",
+    const res = await fetch(`${baseUrl}cart/${cartId ? cartId : ''}`, {
+      method: 'DELETE',
       headers: {
         Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
       },
     });
     return res.json();
   },
 
-  updateCount: async (
-    token: string,
-    cartId: number,
-    data: UpdateCartQuantity
-  ) => {
+  updateCount: async (token: string, cartId: number, data: UpdateCartQuantity) => {
     const res = await fetch(`${baseUrl}cart/${cartId}/`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
         Authorization: `JWT ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });

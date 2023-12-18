@@ -1,5 +1,5 @@
-import classNames from "classnames/bind";
-import styles from "./Checkbox.module.scss";
+import classNames from 'classnames/bind';
+import styles from './Checkbox.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -10,10 +10,6 @@ interface Props {
 
 export const Checkbox = ({ isChecked, onClick }: Props) => {
   return (
-    <button
-      type="button"
-      className={cx("checkbox", { active: isChecked })}
-      onClick={onClick}
-    />
+    <button type="button" className={cx('checkbox', { active: isChecked })} onClick={onClick} />
   );
 };

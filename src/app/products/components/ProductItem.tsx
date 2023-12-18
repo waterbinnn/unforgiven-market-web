@@ -1,8 +1,8 @@
-"use client";
-import classNames from "classnames/bind";
-import styles from "../products.module.scss";
-import { ProductListType } from "@/types";
-import { useRouter } from "next/navigation";
+'use client';
+import classNames from 'classnames/bind';
+import styles from '../products.module.scss';
+import { ProductListType } from '@/types';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -19,30 +19,24 @@ const ProductItem = ({ product }: Props) => {
 
   return (
     <div
-      className={cx("product-item", {
+      className={cx('product-item', {
         soldOut: product.stock === 0,
       })}
       onClick={handleGoToDetail}
     >
-      <img
-        className={cx("product-image")}
-        src={product.image}
-        alt={product.product_name}
-      />
-      <dl className={cx("info-wrap")}>
-        <div className={cx("store-name-wrap")}>
-          <dt className={cx("visually-hidden")}>store name</dt>
-          <dd className={cx("store-name")}>{product.store_name}</dd>
+      <img className={cx('product-image')} src={product.image} alt={product.product_name} />
+      <dl className={cx('info-wrap')}>
+        <div className={cx('store-name-wrap')}>
+          <dt className={cx('visually-hidden')}>store name</dt>
+          <dd className={cx('store-name')}>{product.store_name}</dd>
         </div>
-        <div className={cx("data-wrap")}>
-          <dt className={cx("visually-hidden")}>store name</dt>
-          <dd className={cx("data-info", "name")}>{product.product_name}</dd>
+        <div className={cx('data-wrap')}>
+          <dt className={cx('visually-hidden')}>store name</dt>
+          <dd className={cx('data-info', 'name')}>{product.product_name}</dd>
         </div>
-        <div className={cx("data-wrap")}>
-          <dt className={cx("data-title")}>Price</dt>
-          <dd className={cx("data-info")}>
-            ￦ {product.price.toLocaleString("ko-KR")}
-          </dd>
+        <div className={cx('data-wrap')}>
+          <dt className={cx('data-title')}>Price</dt>
+          <dd className={cx('data-info')}>￦ {product.price.toLocaleString('ko-KR')}</dd>
         </div>
       </dl>
     </div>

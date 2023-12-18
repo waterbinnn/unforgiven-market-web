@@ -1,9 +1,4 @@
-import {
-  BuyerSignupReq,
-  BuyerSignupRes,
-  SellerSignupRes,
-  SignInReq,
-} from "@/types";
+import { BuyerSignupReq, BuyerSignupRes, SellerSignupRes, SignInReq } from '@/types';
 
 /**
  * @name authManage
@@ -45,9 +40,7 @@ interface AuthManage {
    * @param {string}
    * @return {Promise}
    **/
-  readonly checkCompanyNumberValid: (
-    company_registration_number: string
-  ) => Promise<any>;
+  readonly checkCompanyNumberValid: (company_registration_number: string) => Promise<any>;
 
   //signIn
 
@@ -66,9 +59,9 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 const authManage: AuthManage = {
   buyerSignup: async (data: BuyerSignupReq) => {
     const res = await fetch(`${baseUrl}accounts/signup/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
@@ -76,9 +69,9 @@ const authManage: AuthManage = {
   },
   sellerSignup: async (data: BuyerSignupReq) => {
     const res = await fetch(`${baseUrl}accounts/signup_seller/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
@@ -86,34 +79,31 @@ const authManage: AuthManage = {
   },
   checkIdValid: async (username: string) => {
     const res = await fetch(`${baseUrl}accounts/signup/valid/username/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username: username }),
     });
     return res.json();
   },
   checkCompanyNumberValid: async (company_registration_number: string) => {
-    const res = await fetch(
-      `${baseUrl}accounts/signup/valid/company_registration_number/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          company_registration_number: company_registration_number,
-        }),
-      }
-    );
+    const res = await fetch(`${baseUrl}accounts/signup/valid/company_registration_number/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        company_registration_number: company_registration_number,
+      }),
+    });
     return res.json();
   },
   signIn: async (data: SignInReq) => {
     const res = await fetch(`${baseUrl}accounts/login/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });

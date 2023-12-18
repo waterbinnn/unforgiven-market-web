@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import classNames from "classnames/bind";
+import classNames from 'classnames/bind';
 
-import styles from "./Header.module.scss";
-import { Button } from "../../Button";
-import Link from "next/link";
-import { useResize } from "@/utils/useResize";
-import Image from "next/image";
-import { useState } from "react";
-import { MobileGnb } from "../MobileGnb";
-import { usePathname, useRouter } from "next/navigation";
-import { SignInButton } from "@/components/SignInButton";
+import styles from './Header.module.scss';
+import { Button } from '../../Button';
+import Link from 'next/link';
+import { useResize } from '@/utils/useResize';
+import Image from 'next/image';
+import { useState } from 'react';
+import { MobileGnb } from '../MobileGnb';
+import { usePathname, useRouter } from 'next/navigation';
+import { SignInButton } from '@/components/SignInButton';
 
 const cx = classNames.bind(styles);
 
@@ -27,58 +27,44 @@ export const Header = () => {
 
   return (
     <>
-      <header className={cx("header")}>
+      <header className={cx('header')}>
         {browserSize.width >= 768 ? (
           <>
-            <div className={cx("search-wrap")}>
-              <Link className={cx("header-title")} href={"/"} as={"/"}>
+            <div className={cx('search-wrap')}>
+              <Link className={cx('header-title')} href={'/'} as={'/'}>
                 UNFORGIVEN
               </Link>
 
-              <form className={cx("input-wrap")}>
-                <input
-                  type="text"
-                  className={cx("search")}
-                  placeholder={"Search..."}
-                />
-                <button className={cx("btn-search")} type="button">
+              <form className={cx('input-wrap')}>
+                <input type="text" className={cx('search')} placeholder={'Search...'} />
+                <button className={cx('btn-search')} type="button">
                   ?
                 </button>
               </form>
             </div>
-            <div className={cx("btn-wrap")}>
-              <Button onClick={() => router.push("/cart")}>CART</Button>
-              <div className={cx("btn-right")}>
+            <div className={cx('btn-wrap')}>
+              <Button onClick={() => router.push('/cart')}>CART</Button>
+              <div className={cx('btn-right')}>
                 <SignInButton />
               </div>
             </div>
           </>
         ) : (
           <>
-            <div className={cx("mobile-header-wrap")}>
+            <div className={cx('mobile-header-wrap')}>
               <button
-                className={cx("back-btn")}
+                className={cx('back-btn')}
                 type="button"
                 onClick={() => router.back()}
-                style={{ display: pathName === "/" ? "none" : "block" }}
+                style={{ display: pathName === '/' ? 'none' : 'block' }}
               >
-                <Image
-                  src={"/assets/icon-back.svg"}
-                  alt="back button"
-                  width={50}
-                  height={50}
-                />
+                <Image src={'/assets/icon-back.svg'} alt="back button" width={50} height={50} />
               </button>
-              <Link className={cx("header-title")} href={"/"} as={"/"}>
+              <Link className={cx('header-title')} href={'/'} as={'/'}>
                 UNFORGIVEN
               </Link>
-              <button className={cx("mobile-menu-btn")} onClick={handleGnb}>
-                <Image
-                  src={"/assets/icon-plus.svg"}
-                  alt="menu"
-                  width={50}
-                  height={50}
-                />
+              <button className={cx('mobile-menu-btn')} onClick={handleGnb}>
+                <Image src={'/assets/icon-plus.svg'} alt="menu" width={50} height={50} />
               </button>
             </div>
           </>
