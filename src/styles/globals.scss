@@ -33,7 +33,6 @@ body {
   white-space: nowrap;
 }
 
-
 .container {
   margin-top: 105px;
   padding: 0 20px;
@@ -46,8 +45,7 @@ body {
 
 .loading-container,
 .error-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +55,7 @@ body {
   flex-direction: column;
   gap: 20px;
 
-  >button {
+  > button {
     padding: 10px;
   }
 }
