@@ -31,7 +31,7 @@ export const Header = () => {
         {browserSize.width >= 768 ? (
           <>
             <div className={cx("search-wrap")}>
-              <Link className={cx("header-title")} href={"/"}>
+              <Link className={cx("header-title")} href={"/"} as={"/"}>
                 UNFORGIVEN
               </Link>
 
@@ -69,7 +69,7 @@ export const Header = () => {
                   height={50}
                 />
               </button>
-              <Link className={cx("header-title")} href={"/"}>
+              <Link className={cx("header-title")} href={"/"} as={"/"}>
                 UNFORGIVEN
               </Link>
               <button className={cx("mobile-menu-btn")} onClick={handleGnb}>
