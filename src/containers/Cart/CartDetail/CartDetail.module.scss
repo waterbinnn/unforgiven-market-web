@@ -1,0 +1,96 @@
+.item-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $light-gray;
+    padding: 20px 14px;
+    gap: 20px;
+
+    @media screen and (max-width: $mobile-size) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+.info-wrap {
+    display: flex;
+    gap: 26px;
+}
+
+.detail {
+    &-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &-info-wrap {
+        width: 200px;
+
+        .store {
+            font-size: 12px;
+            margin-bottom: 4px;
+            color: $gray;
+        }
+
+        .info-title {
+            font-size: 16px;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .info-price {
+            font-size: 14px;
+        }
+    }
+}
+
+.shipping-fee {
+    font-size: 12px;
+    color: $gray;
+}
+
+.item-4th-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    >span {
+        color: $gray;
+    }
+
+    @media screen and (max-width: $mobile-size) {
+        align-self: flex-end;
+    }
+}
+
+.item-total-price {
+    color: $dark-gray;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.del-item-btn {
+    padding: 4px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding-bottom: 4px;
+}
+
+.modal-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 150px;
+
+    >span {
+        font-size: 12px;
+        text-align: center;
+        color: $pink;
+    }
+}

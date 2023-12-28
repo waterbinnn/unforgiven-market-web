@@ -2,22 +2,24 @@
 
 import { Checkbox, ContentsModal, Count } from '@/components';
 import classNames from 'classnames/bind';
-import styles from './Item.module.scss';
+import styles from './CartDetail.module.scss';
+import ListStyles from '../CartList/CartList.module.scss';
 import { useState } from 'react';
 import Image from 'next/image';
 import { CartResult } from '@/types/cartManage';
-import { cartManage } from '@/api';
+import { cartManage } from '@/service';
 import { useProductDetail } from '@/hooks';
 import Loading from '@/app/loading';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind({ ...styles, ...ListStyles });
 
 interface Props {
   detail: CartResult;
   token: string;
 }
 
-const Item = ({ detail, token }: Props) => {
+export const CartDetail = ({ detail, token }: Props) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, setCount] = useState<number>(detail.quantity);
@@ -59,6 +61,13 @@ const Item = ({ detail, token }: Props) => {
       console.log(err);
     }
   };
+  const queryClient = useQueryClient();
+
+  // const { status, error, mutate } = useMutation(deleteItem, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries('');
+  //   },
+  // });
 
   const handleDeleteItem = async () => {
     // 삭제 버튼 클릭시 동작하는 함수
@@ -123,7 +132,9 @@ const Item = ({ detail, token }: Props) => {
 
       <div className={cx('item-4th-wrap')}>
         <span>total</span>
-        <strong className={cx('item-total-price')}>￦ 29,000</strong>
+        <strong className={cx('item-total-price')}>
+          ￦ {(count * data.price + data.shipping_fee).toLocaleString()}
+        </strong>
       </div>
 
       <button type="button" className={cx('del-item-btn')} onClick={handleDeleteItem}>
@@ -132,5 +143,3 @@ const Item = ({ detail, token }: Props) => {
     </li>
   );
 };
-
-export default Item;
