@@ -1,20 +1,14 @@
-import { productManage } from '@/api/productManage';
+import { productManage } from '@/service/productManage';
 
-import classNames from 'classnames/bind';
-import styles from '../products.module.scss';
-import Product from './ProductDetail';
-import { Hydrate, dehydrate, useQuery } from '@tanstack/react-query';
-import Loading from '@/app/loading';
-import Error from '@/app/error';
+import { Hydrate, dehydrate } from '@tanstack/react-query';
 import getQueryClient from '@/utils/getQueryClient';
-
-const cx = classNames.bind(styles);
+import { ProductDetail } from '@/containers';
 
 interface Props {
   params: { id: string };
 }
 
-const ProductDetail = async ({ params }: Props) => {
+const ProductDetailPage = async ({ params }: Props) => {
   const productId = params.id.toString();
 
   //pre-fetching
@@ -26,14 +20,9 @@ const ProductDetail = async ({ params }: Props) => {
 
   return (
     <Hydrate state={dehydrateState}>
-      <main className={cx('container')}>
-        <section className={cx('detail-container')}>
-          <h2 className={cx('visually-hidden')}>상품상세페이지</h2>
-          <Product productId={productId} />
-        </section>
-      </main>
+      <ProductDetail productId={productId} />
     </Hydrate>
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;

@@ -1,6 +1,6 @@
 'use client';
 import classNames from 'classnames/bind';
-import styles from '../products.module.scss';
+import styles from '../ProductList.module.scss';
 import { ProductListType } from '@/types';
 import { useRouter } from 'next/navigation';
 
@@ -10,7 +10,7 @@ interface Props {
   product: ProductListType;
 }
 
-const ProductItem = ({ product }: Props) => {
+export const ProductItem = ({ product }: Props) => {
   const router = useRouter();
 
   const handleGoToDetail = () => {
@@ -44,5 +44,3 @@ const ProductItem = ({ product }: Props) => {
     </div>
   );
 };
-
-export default ProductItem;

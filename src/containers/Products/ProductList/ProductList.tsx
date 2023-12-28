@@ -1,13 +1,13 @@
 'use client';
 import classNames from 'classnames/bind';
-import styles from '../products.module.scss';
+import styles from './ProductList.module.scss';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import ProductItem from './ProductItem';
 import Loading from '@/app/loading';
 import { ProductListType } from '@/types';
 import Error from '@/app/error';
+import { ProductItem } from './localComponents';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ const getProducts = async (pageParam: string) => {
   return data;
 };
 
-const ProductList = () => {
+export const ProductList = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } = useInfiniteQuery(
     ['productsList'],
     ({ pageParam = INIT_URL }) => getProducts(pageParam),
@@ -61,5 +61,3 @@ const ProductList = () => {
     </>
   );
 };
-
-export default ProductList;
