@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic'; // this is the fix of params
 
-import ProductPage from './products/page';
+import ProductPage from './(Routers)/products/page';
 
 export default async function Home() {
   return (

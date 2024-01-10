@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Button, ButtonProps } from '../Button';
-import { cartManage } from '@/api';
+import { cartManage } from '@/service';
 import { PostCart } from '@/types/cartManage';
 import { ContentsModal } from '../Modal';
 import { useRouter } from 'next/navigation';
