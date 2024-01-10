@@ -8,3 +8,4 @@ export * from './Input';
 export * from './SignInButton';
 export * from './Checkbox';
 export * from './AddCartButton';
+export * from './PaymentForm';
