@@ -1,6 +1,6 @@
 'use client';
 
-import { Checkbox, ContentsModal, Count } from '@/components';
+import { Button, Checkbox, ContentsModal, Count } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './CartDetail.module.scss';
 import ListStyles from '../CartList/CartList.module.scss';
@@ -78,7 +78,7 @@ export const CartDetail = ({ detail, token }: Props) => {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <></>;
   if (isError) return <div>error</div>;
 
   return (
@@ -113,7 +113,6 @@ export const CartDetail = ({ detail, token }: Props) => {
           </span>
         </div>
       </div>
-
       <Count stock={data.stock} count={detail.quantity} setCount={() => setIsUpdateCount(true)} />
       {isUpdateCount && (
         <ContentsModal
@@ -130,14 +129,20 @@ export const CartDetail = ({ detail, token }: Props) => {
         />
       )}
 
-      <div className={cx('item-4th-wrap')}>
+      <div className={cx('price-wrap')}>
         <span>total</span>
         <strong className={cx('item-total-price')}>
           ￦ {(count * data.price + data.shipping_fee).toLocaleString()}
         </strong>
       </div>
 
-      <button type="button" className={cx('del-item-btn')} onClick={handleDeleteItem}>
+      <div className={cx('btn-order')}>
+        <Button color={'yellow'} width={'80px'}>
+          ORDER
+        </Button>
+      </div>
+
+      <button type="button" className={cx('btn-del-item')} onClick={handleDeleteItem}>
         X
       </button>
     </li>

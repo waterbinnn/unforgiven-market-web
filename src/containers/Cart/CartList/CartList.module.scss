@@ -11,17 +11,12 @@
 }
 
 .cart-container {
+    width: 100%;
     max-width: 800px;
-    min-width: 600px;
-    margin: 0 auto 200px;
+    margin: 0 auto 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-    @media screen and (max-width: $mobile-size) {
-        min-width: 300px;
-        width: 80%;
-    }
 }
 
 .item-list-wrap {
@@ -50,4 +45,10 @@
     color: $white;
     align-self: flex-end;
     border-radius: 2px;
+}
+
+.btn-order-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
 }

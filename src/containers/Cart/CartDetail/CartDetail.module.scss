@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     border-top: 1px solid $light-gray;
     padding: 20px 14px;
     gap: 20px;
@@ -52,10 +51,13 @@
     color: $gray;
 }
 
-.item-4th-wrap {
+
+
+.price-wrap {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: 80px;
 
     >span {
         color: $gray;
@@ -66,13 +68,25 @@
     }
 }
 
+
 .item-total-price {
     color: $dark-gray;
     font-size: 18px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
-.del-item-btn {
+.btn-order {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    @media screen and (max-width: $mobile-size) {
+        bottom: 60px;
+    }
+}
+
+.btn-del-item {
     padding: 4px;
     position: absolute;
     top: 10px;

@@ -10,6 +10,7 @@ import { useCartList } from '@/hooks';
 import { Suspense } from 'react';
 import Error from '@/app/error';
 import { CartDetail } from '../CartDetail';
+import { Button, PaymentForm } from '@/components';
 
 const cx = classNames.bind(styles);
 interface Props {
@@ -65,6 +66,12 @@ export const CartList = ({ token }: Props) => {
             </ol>
           </Suspense>
         </section>
+        <PaymentForm totalPrice={25000} deliveryFee={2500} discount={0} />
+        <div className={cx('btn-order-wrap')}>
+          <Button size={'m'} color={'yellow'}>
+            ORDER
+          </Button>
+        </div>
       </main>
     </>
   );
