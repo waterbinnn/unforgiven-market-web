@@ -1,7 +1,7 @@
 .checkbox {
   border: 1px solid $black;
-  width: 15px;
-  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
 
   &.active {
     background-color: $green;
