@@ -8,8 +8,8 @@ import { CartList, CartResult, PostCart, UpdateCartQuantity } from '@/types/cart
 interface CartManage {
   /**
    * @name cartManage.getList 장바구니 목록 조회
-   * @method {GET}
    * @param {token} JWT token
+   * @method {GET}
    * @return {CartList}
    */
   readonly getList: (token: string) => Promise<CartList>;
@@ -44,7 +44,15 @@ interface CartManage {
    * @param {token} JWT token
    * @return {Promise<any>}
    */
-  readonly removeCart: (token: string, cartId?: number) => Promise<any>;
+  readonly removeItem: (token: string, cartId: string) => Promise<any>;
+
+  /**
+   * @name cartManage.removeCart 장바구니 삭제
+   * @method {DELETE}
+   * @param {token} JWT token
+   * @return {Promise<any>}
+   */
+  readonly removeCart: (token: string) => Promise<any>;
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -72,14 +80,22 @@ const cartManage: CartManage = {
     return res.json();
   },
 
-  removeCart: async (token: string, cartId?: number) => {
-    const res = await fetch(`${baseUrl}cart/${cartId ? cartId : ''}`, {
+  removeItem: async (token: string, cartId: string) => {
+    await fetch(`${baseUrl}cart/${cartId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `JWT ${token}`,
       },
     });
-    return res.json();
+  },
+
+  removeCart: async (token: string) => {
+    await fetch(`${baseUrl}cart/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
   },
 
   updateCount: async (token: string, cartId: number, data: UpdateCartQuantity) => {

@@ -9,8 +9,9 @@ import Image from 'next/image';
 import { CartResult } from '@/types/cartManage';
 import { cartManage } from '@/service';
 import { useProductDetail } from '@/hooks';
-import Loading from '@/app/loading';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import Error from '@/app/error';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -22,64 +23,68 @@ interface Props {
 export const CartDetail = ({ detail, token }: Props) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(detail.quantity);
+  const [count, _setCount] = useState<number>(detail.quantity);
   const [newCount, setNewCount] = useState<number>(count);
   const [countMsg, setCountMsg] = useState<string>('');
 
   const { isLoading, isError, data } = useProductDetail(detail.product_id.toString());
 
+  const queryClient = useQueryClient();
+
+  const router = useRouter();
+
+  //수량 수정 모달 close 시 동작하는 함수
   const handleCloseModal = () => {
-    //수량 수정 모달 close 시 동작하는 함수
     setIsUpdateCount(false);
     setCountMsg('');
   };
 
-  const handleUpdateCount = async () => {
+  //count 수정시 mutate 되는 함수
+  const updateCount = async () => {
     if (!data) {
       return;
     }
-    //수량 수정시 동작하는 함수
+
     const updateCountReq = {
       product_id: data.product_id,
       quantity: newCount,
       is_active: true,
     };
 
-    try {
-      const res = await cartManage.updateCount(token, detail.cart_item_id, updateCountReq);
-      if (res.is_active) {
-        setIsUpdateCount(false);
-      }
+    const res = await cartManage.updateCount(token, detail.cart_item_id, updateCountReq);
 
-      if (res.FAIL_message === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
-        setCountMsg(res.FAIL_message);
-      } else {
-        setCountMsg('');
-        setIsUpdateCount(false);
-      }
-    } catch (err) {
-      console.log(err);
+    if (res.FAIL_message === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
+      setCountMsg(res.FAIL_message);
+    } else {
+      setCountMsg('');
+      setIsUpdateCount(false);
     }
+
+    return res;
   };
-  const queryClient = useQueryClient();
 
-  // const { status, error, mutate } = useMutation(deleteItem, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries('');
-  //   },
-  // });
+  const { mutate: mutateUpdateCount } = useMutation(updateCount, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['cartList']);
+    },
+  });
 
-  const handleDeleteItem = async () => {
-    // 삭제 버튼 클릭시 동작하는 함수
-    try {
-      await cartManage.removeCart(token, data?.product_id);
-    } catch (err) {
-      console.log(err);
+  // 삭제 버튼 클릭시 동작하는 함수
+  const deleteItem = async () => {
+    if (!data) {
+      return;
     }
+    await cartManage.removeItem(token, detail.cart_item_id.toString());
   };
+
+  const { mutate: mutateDeleteItem } = useMutation(deleteItem, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['cartList']);
+    },
+  });
 
   if (isLoading) return <></>;
-  if (isError) return <div>error</div>;
+  if (isError) return <Error errorMsg={'문제가 발생했습니다. 다시 시도해주세요.'} url={'/cart'} />;
 
   return (
     <li className={cx('item-wrap')} key={`${data.product_id}`}>
@@ -117,7 +122,7 @@ export const CartDetail = ({ detail, token }: Props) => {
       {isUpdateCount && (
         <ContentsModal
           onClose={handleCloseModal}
-          onOk={handleUpdateCount}
+          onOk={mutateUpdateCount}
           okText={'SAVE'}
           isInfo={false}
           contents={
@@ -132,17 +137,22 @@ export const CartDetail = ({ detail, token }: Props) => {
       <div className={cx('price-wrap')}>
         <span>total</span>
         <strong className={cx('item-total-price')}>
-          ￦ {(count * data.price + data.shipping_fee).toLocaleString()}
+          ￦ {(newCount * data.price).toLocaleString()}
         </strong>
       </div>
 
       <div className={cx('btn-order')}>
-        <Button color={'yellow'} width={'80px'}>
+        <Button color={'yellow'} width={'80px'} onClick={() => router.push('/order')}>
           ORDER
         </Button>
       </div>
 
-      <button type="button" className={cx('btn-del-item')} onClick={handleDeleteItem}>
+      <button
+        type="button"
+        className={cx('btn-del-item')}
+        id={detail.product_id.toString()}
+        onClick={() => mutateDeleteItem()}
+      >
         X
       </button>
     </li>

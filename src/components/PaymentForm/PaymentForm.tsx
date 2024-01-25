@@ -5,11 +5,10 @@ const cx = classNames.bind(styles);
 
 interface Props {
   totalPrice: number;
-  discount: number;
-  deliveryFee: number;
+  shipping: number;
 }
 
-export const PaymentForm = ({ totalPrice, discount, deliveryFee }: Props) => {
+export const PaymentForm = ({ totalPrice, shipping }: Props) => {
   return (
     <article className={cx('payment-container')}>
       <h2 className={cx('visually-hidden')}>Payment</h2>
@@ -17,15 +16,15 @@ export const PaymentForm = ({ totalPrice, discount, deliveryFee }: Props) => {
         <div className={cx('left-wrap')}>
           <ItemWrap label={'Total'} data={totalPrice.toLocaleString()} />
           <img src="/assets/icon-minus.svg" alt="minus" className={cx('count-icon')} />
-          <ItemWrap label={'Discount'} data={discount.toLocaleString()} />
+          <ItemWrap label={'Discount'} data={0} />
           <img src="/assets/icon-plus.svg" alt="plus" className={cx('count-icon')} />
-          <ItemWrap label={'Delivery Fee'} data={deliveryFee.toLocaleString()} />
+          <ItemWrap label={'Delivery Fee'} data={shipping.toLocaleString()} />
         </div>
         <div className={cx('right-wrap')}>
           <ItemWrap
             label={'Your Payment'}
             isTotal
-            data={(totalPrice - discount + deliveryFee).toLocaleString()}
+            data={(totalPrice - 0 + shipping).toLocaleString()}
           />
         </div>
       </dl>
@@ -35,7 +34,7 @@ export const PaymentForm = ({ totalPrice, discount, deliveryFee }: Props) => {
 
 interface ItemWrapProps {
   label: string;
-  data: string;
+  data: string | number;
   isTotal?: boolean;
 }
 
