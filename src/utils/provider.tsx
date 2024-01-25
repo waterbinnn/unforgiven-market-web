@@ -4,12 +4,19 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+import { Session } from 'next-auth/core/types';
 
-export const Providers = ({ children }: { children: React.ReactNode }) => {
+export const Providers = ({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session: Session | null;
+}) => {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
         <ReactQueryDevtools initialIsOpen={false} />
