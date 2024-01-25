@@ -1,3 +1,5 @@
+import { ProductListType } from './productManage';
+
 interface CommonCartType {
   product_id: number; // 상품 아이디
   quantity: number; // 장바구니에 담긴 상품의 개수
@@ -30,5 +32,8 @@ interface UpdateCartQuantity extends CommonCartType {
 }
 
 //product id 로 장바구니 데이터를 채워야 함
+interface CartItemType extends CartResult {
+  detail: ProductListType;
+}
 
-export type { CartList, CartResult, PostCart, UpdateCartQuantity };
+export type { CartList, CartResult, PostCart, UpdateCartQuantity, CartItemType };
