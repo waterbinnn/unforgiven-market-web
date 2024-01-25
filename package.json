@@ -30,7 +30,8 @@
     "react-router-dom": "^6.12.1",
     "sass": "^1.62.1",
     "scss": "^0.2.4",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "zustand": "^4.5.0"
   },
   "resolutions": {
     "@types/react": "18.2.0"
