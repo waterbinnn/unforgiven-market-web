@@ -14,17 +14,17 @@ export const PaymentForm = ({ totalPrice, shipping }: Props) => {
       <h2 className={cx('visually-hidden')}>Payment</h2>
       <dl className={cx('payment-wrap')}>
         <div className={cx('left-wrap')}>
-          <ItemWrap label={'Total'} data={totalPrice.toLocaleString()} />
+          <ItemWrap label={'Total'} data={totalPrice ? totalPrice.toLocaleString() : 0} />
           <img src="/assets/icon-minus.svg" alt="minus" className={cx('count-icon')} />
           <ItemWrap label={'Discount'} data={0} />
           <img src="/assets/icon-plus.svg" alt="plus" className={cx('count-icon')} />
-          <ItemWrap label={'Delivery Fee'} data={shipping.toLocaleString()} />
+          <ItemWrap label={'Delivery Fee'} data={shipping ? shipping.toLocaleString() : 0} />
         </div>
         <div className={cx('right-wrap')}>
           <ItemWrap
             label={'Your Payment'}
             isTotal
-            data={(totalPrice - 0 + shipping).toLocaleString()}
+            data={totalPrice ? (totalPrice - 0 + shipping).toLocaleString() : 0}
           />
         </div>
       </dl>
