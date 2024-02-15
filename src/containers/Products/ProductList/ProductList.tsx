@@ -13,13 +13,13 @@ const cx = classNames.bind(styles);
 
 const INIT_URL = `${process.env.NEXT_PUBLIC_API_URL}products/`;
 
-const getProducts = async (pageParam: string) => {
-  const res = await fetch(pageParam);
-  const data = await res.json();
-  return data;
-};
-
 export const ProductList = () => {
+  const getProducts = async (pageParam: string) => {
+    const res = await fetch(pageParam);
+    const data = await res.json();
+    return data;
+  };
+
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isError } = useInfiniteQuery(
     ['productsList'],
     ({ pageParam = INIT_URL }) => getProducts(pageParam),

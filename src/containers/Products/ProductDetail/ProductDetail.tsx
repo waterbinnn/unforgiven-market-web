@@ -6,7 +6,7 @@ import { Button, Count } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
 import { AddCartButton } from '@/components/AddCartButton/AddCartButton';
-import { PostCart } from '@/types/cartManage';
+import { PostCart } from '@/types/cartTypes';
 import { useSession } from 'next-auth/react';
 import { useProductDetail } from '@/hooks';
 import Error from '@/app/error';
@@ -30,6 +30,7 @@ export const ProductDetail = ({ productId }: Props) => {
     return;
   }
 
+  //장바구니 추가 버튼에 들어가는 객체
   const cartReq: PostCart = {
     check: false,
     product_id: data.product_id,

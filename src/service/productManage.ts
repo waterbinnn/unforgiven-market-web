@@ -1,4 +1,4 @@
-import { ProductDataListType, ProductListType } from "@/types/productManage";
+import { ProductDataListType, ProductListType } from '@/types';
 
 /**
  * @name productManage
