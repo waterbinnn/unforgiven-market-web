@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button, ButtonProps } from '../Button';
 import { cartManage } from '@/service';
-import { PostCart } from '@/types/cartManage';
+import { PostCart } from '@/types/cartTypes';
 import { ContentsModal } from '../Modal';
 import { useRouter } from 'next/navigation';
 

@@ -1,23 +1,22 @@
-import { ProductListType } from './productManage';
+import { ProductListType } from './productTypes';
 
 interface CommonCartType {
   product_id: number; // 상품 아이디
   quantity: number; // 장바구니에 담긴 상품의 개수
 }
 
-interface CartResult {
+interface CartResult extends CommonCartType {
   my_cart: number; // 카트 고유번호, User가 바뀌지 않는이상 번호가 바뀌지 않음
   cart_item_id: number; // cartItem의 고유번호, 요청시마다 번호가 바뀜
-  product_id: number; // 상품 아이디
-  quantity: number; // 장바구니에 담긴 상품의 개수
+  isActive: boolean;
 }
 
 //장바구니 목록 조회시 res type
-interface CartList {
+interface CartListType {
   count: number;
   next: String;
   previous: String;
-  results: CartResult[];
+  results: CartResult[] | null;
 }
 
 // 장바구니 추가시 body type
@@ -36,4 +35,4 @@ interface CartItemType extends CartResult {
   detail: ProductListType;
 }
 
-export type { CartList, CartResult, PostCart, UpdateCartQuantity, CartItemType };
+export type { CartListType, CartResult, PostCart, UpdateCartQuantity, CartItemType };
