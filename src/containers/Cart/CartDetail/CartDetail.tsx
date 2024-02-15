@@ -1,37 +1,39 @@
 'use client';
 
-import { Button, Checkbox, ContentsModal, Count } from '@/components';
+import { Button, ContentsModal, Count } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './CartDetail.module.scss';
 import ListStyles from '../CartList/CartList.module.scss';
 import { useState } from 'react';
 import Image from 'next/image';
-import { CartResult } from '@/types/cartManage';
-import { cartManage } from '@/service';
-import { useProductDetail } from '@/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import Error from '@/app/error';
+import { CartItemType } from '@/types/cartTypes';
+import { useProductDetail } from '@/hooks';
+import { removeItem, updateCount } from '@/actions/CartListActions';
+import { message } from 'antd';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
 interface Props {
-  detail: CartResult;
-  token: string;
+  product: CartItemType;
 }
 
-export const CartDetail = ({ detail, token }: Props) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+export const CartDetail = ({ product }: Props) => {
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
-  const [count, _setCount] = useState<number>(detail.quantity);
+  const [count, _setCount] = useState<number>(product.quantity);
   const [newCount, setNewCount] = useState<number>(count);
   const [countMsg, setCountMsg] = useState<string>('');
-
-  const { isLoading, isError, data } = useProductDetail(detail.product_id.toString());
 
   const queryClient = useQueryClient();
 
   const router = useRouter();
+
+  const { data: detail, isLoading } = useProductDetail(product.product_id.toString());
+
+  if (!detail) {
+    return;
+  }
 
   //수량 수정 모달 close 시 동작하는 함수
   const handleCloseModal = () => {
@@ -40,30 +42,24 @@ export const CartDetail = ({ detail, token }: Props) => {
   };
 
   //count 수정시 mutate 되는 함수
-  const updateCount = async () => {
-    if (!data) {
-      return;
-    }
-
+  const handleUpdateCount = async () => {
     const updateCountReq = {
-      product_id: data.product_id,
+      product_id: product.product_id,
       quantity: newCount,
       is_active: true,
     };
 
-    const res = await cartManage.updateCount(token, detail.cart_item_id, updateCountReq);
+    const { msg } = await updateCount(product.cart_item_id, updateCountReq);
 
-    if (res.FAIL_message === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
-      setCountMsg(res.FAIL_message);
+    if (msg === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
+      setCountMsg(msg);
     } else {
       setCountMsg('');
       setIsUpdateCount(false);
     }
-
-    return res;
   };
 
-  const { mutate: mutateUpdateCount } = useMutation(updateCount, {
+  const { mutate: mutateUpdateCount } = useMutation(handleUpdateCount, {
     onSuccess: () => {
       queryClient.invalidateQueries(['cartList']);
     },
@@ -71,27 +67,23 @@ export const CartDetail = ({ detail, token }: Props) => {
 
   // 삭제 버튼 클릭시 동작하는 함수
   const deleteItem = async () => {
-    if (!data) {
-      return;
-    }
-    await cartManage.removeItem(token, detail.cart_item_id.toString());
+    await removeItem(product.cart_item_id.toString());
   };
 
   const { mutate: mutateDeleteItem } = useMutation(deleteItem, {
     onSuccess: () => {
       queryClient.invalidateQueries(['cartList']);
+      message.success({
+        content: `삭제됐습니다.`,
+      });
     },
   });
 
-  if (isLoading) return <></>;
-  if (isError) return <Error errorMsg={'문제가 발생했습니다. 다시 시도해주세요.'} url={'/cart'} />;
-
   return (
-    <li className={cx('item-wrap')} key={`${data.product_id}`}>
-      <Checkbox isChecked={isChecked} onClick={() => setIsChecked(!isChecked)} />
+    <li className={cx('item-wrap')} key={`${detail?.product_id}`}>
       <div className={cx('info-wrap')}>
         <Image
-          src={data.image}
+          src={product.detail.image}
           alt="product name"
           width={100}
           height={100}
@@ -103,22 +95,28 @@ export const CartDetail = ({ detail, token }: Props) => {
         <div className={cx('detail-container')}>
           <dl className={cx('detail-info-wrap')}>
             <dt className={cx('visually-hidden')}>store name</dt>
-            <dd className={cx('store')}>{data.store_name}</dd>
+            <dd className={cx('store')}>{detail.store_name}</dd>
 
             <dt className={cx('visually-hidden')}>product name</dt>
-            <dd className={cx('info-title')}>{data.product_name}</dd>
+            <dd className={cx('info-title')}>{detail.product_name}</dd>
 
             <dt className={cx('visually-hidden')}>Price</dt>
-            <dd className={cx('info-price')}>￦ {data.price.toLocaleString()}</dd>
+            <dd className={cx('info-price')}>￦ {detail.price.toLocaleString()}</dd>
           </dl>
           <span className={cx('shipping-fee')}>
-            {data.shipping_fee > 0
-              ? `택배배송/${data.shipping_fee.toLocaleString()}원`
+            {product.detail.shipping_fee > 0
+              ? `택배배송/${detail.shipping_fee.toLocaleString()}원`
               : '택배배송/무료배송'}
           </span>
         </div>
       </div>
-      <Count stock={data.stock} count={detail.quantity} setCount={() => setIsUpdateCount(true)} />
+
+      <Count
+        stock={detail.stock}
+        count={product.quantity}
+        setCount={() => setIsUpdateCount(true)}
+      />
+
       {isUpdateCount && (
         <ContentsModal
           onClose={handleCloseModal}
@@ -127,7 +125,7 @@ export const CartDetail = ({ detail, token }: Props) => {
           isInfo={false}
           contents={
             <div className={cx('modal-wrap')}>
-              <Count stock={data.stock} count={newCount} setCount={setNewCount} />
+              <Count stock={detail.stock} count={newCount} setCount={setNewCount} />
               <span>{countMsg}</span>
             </div>
           }
@@ -137,7 +135,7 @@ export const CartDetail = ({ detail, token }: Props) => {
       <div className={cx('price-wrap')}>
         <span>total</span>
         <strong className={cx('item-total-price')}>
-          ￦ {(newCount * data.price).toLocaleString()}
+          ￦ {(product.quantity * detail.price).toLocaleString()}
         </strong>
       </div>
 
@@ -150,7 +148,7 @@ export const CartDetail = ({ detail, token }: Props) => {
       <button
         type="button"
         className={cx('btn-del-item')}
-        id={detail.product_id.toString()}
+        id={product.product_id.toString()}
         onClick={() => mutateDeleteItem()}
       >
         X

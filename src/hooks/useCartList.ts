@@ -1,10 +1,7 @@
-import { cartManage } from '@/service';
+import { getCartList } from '@/actions/CartListActions';
+
 import { useQuery } from '@tanstack/react-query';
 
-export const useCartList = (token: string) => {
-  const getCartList = async (token: string) => {
-    return await cartManage.getList(token);
-  };
-
-  return useQuery(['cartList'], () => getCartList(token));
+export const useCartList = () => {
+  return useQuery(['cartList'], () => getCartList());
 };
