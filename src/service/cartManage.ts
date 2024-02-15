@@ -3,7 +3,7 @@
  * @description 장바구니 api set 입니다.
  */
 
-import { CartList, CartResult, PostCart, UpdateCartQuantity } from '@/types/cartManage';
+import { CartListType, CartResult, PostCart, UpdateCartQuantity } from '@/types';
 
 interface CartManage {
   /**
@@ -12,7 +12,7 @@ interface CartManage {
    * @method {GET}
    * @return {CartList}
    */
-  readonly getList: (token: string) => Promise<CartList>;
+  readonly getList: (token: string) => Promise<CartListType>;
 
   /**
    * @name cartManage.postCart 장바구니 추가
