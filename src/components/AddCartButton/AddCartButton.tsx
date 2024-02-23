@@ -1,44 +1,34 @@
 'use client';
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { Button, ButtonProps } from '../Button';
-import { cartManage } from '@/service';
-import { PostCart } from '@/types/cartTypes';
+import { PostCart } from '@/types';
 import { ContentsModal } from '../Modal';
 import { useRouter } from 'next/navigation';
+import { postCart } from '@/actions';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   width: string;
-  token: string;
   color: ButtonProps['color'];
   req: PostCart;
   disabled: boolean;
 }
 
-export const AddCartButton = ({ width, token, req, color, disabled }: Props) => {
+export const AddCartButton = ({ width, req, color, disabled }: Props) => {
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const [isLoginModal, setIsLoginModal] = useState<boolean>(false);
   const [isSuccessModal, setIsSuccessModal] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
 
   const handleAddCart = async () => {
-    if (!token) {
+    if (!session) {
       setIsLoginModal(true);
     } else {
-      try {
-        const res = await cartManage.postCart(token, req);
-        setIsSuccessModal(true);
-
-        /*@ts-ignore */
-        if (res.FAIL_message) {
-          setIsError(true);
-          setIsSuccessModal(false);
-          return;
-        }
-      } catch (err) {
-        setIsError(true);
-        console.log(err);
-      }
+      await postCart(req);
+      await setIsSuccessModal(true);
     }
   };
 
@@ -80,19 +70,6 @@ export const AddCartButton = ({ width, token, req, color, disabled }: Props) => 
           isInfo={false}
           onOk={() => router.push('/cart')}
           onClose={() => setIsSuccessModal(false)}
-        />
-      )}
-      {isError && (
-        <ContentsModal
-          contents={
-            <>
-              <p>문제가 발생했습니다. </p>
-            </>
-          }
-          okText={'확인'}
-          isInfo={true}
-          onOk={() => setIsError(false)}
-          onClose={() => setIsError(false)}
         />
       )}
     </>

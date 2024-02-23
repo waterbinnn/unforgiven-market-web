@@ -6,30 +6,25 @@ import styles from './CartDetail.module.scss';
 import ListStyles from '../CartList/CartList.module.scss';
 import { useState } from 'react';
 import Image from 'next/image';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { CartItemType } from '@/types/cartTypes';
-import { useProductDetail } from '@/hooks';
 import { removeItem, updateCount } from '@/actions/CartListActions';
-import { message } from 'antd';
-import { getProductDetail } from '@/actions/ProductActions';
+import { ProductListType } from '@/types';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
 interface Props {
   product: CartItemType;
+  detail: ProductListType;
 }
 
-export const CartDetail = ({ product }: Props) => {
-  const queryClient = useQueryClient();
+export const CartDetail = ({ product, detail }: Props) => {
   const router = useRouter();
 
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, _setCount] = useState<number>(product.quantity);
   const [newCount, setNewCount] = useState<number>(count);
   const [countMsg, setCountMsg] = useState<string>('');
-
-  const { data: detail, isLoading } = useProductDetail(product.product_id.toString());
 
   //수량 수정 모달 close 시 동작하는 함수
   const handleCloseModal = () => {
@@ -45,38 +40,14 @@ export const CartDetail = ({ product }: Props) => {
       is_active: true,
     };
 
-    const { msg } = await updateCount(product.cart_item_id, updateCountReq);
-
-    if (msg === '현재 재고보다 더 많은 수량을 담을 수 없습니다.') {
-      setCountMsg(msg);
-    } else {
-      setCountMsg('');
-      setIsUpdateCount(false);
-    }
+    await updateCount(product.cart_item_id, updateCountReq);
+    await setIsUpdateCount(false);
   };
-
-  const { mutate: mutateUpdateCount } = useMutation(handleUpdateCount, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['cartList']);
-    },
-  });
 
   // 삭제 버튼 클릭시 동작하는 함수
   const deleteItem = async () => {
     await removeItem(product.cart_item_id.toString());
   };
-
-  const { mutate: mutateDeleteItem } = useMutation(deleteItem, {
-    onSuccess: () => {
-      // queryClient.invalidateQueries(['cartList']);
-      message.success({
-        content: `삭제됐습니다.`,
-      });
-      router.push('/cart');
-    },
-  });
-
-  if (isLoading || !detail) return <div>loading</div>;
 
   return (
     <li className={cx('item-wrap')} key={`${detail?.product_id}`}>
@@ -119,7 +90,7 @@ export const CartDetail = ({ product }: Props) => {
       {isUpdateCount && (
         <ContentsModal
           onClose={handleCloseModal}
-          onOk={mutateUpdateCount}
+          onOk={handleUpdateCount}
           okText={'SAVE'}
           isInfo={false}
           contents={
@@ -148,7 +119,7 @@ export const CartDetail = ({ product }: Props) => {
         type="button"
         className={cx('btn-del-item')}
         id={product.product_id.toString()}
-        onClick={() => mutateDeleteItem()}
+        onClick={deleteItem}
       >
         X
       </button>

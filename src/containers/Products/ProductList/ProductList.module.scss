@@ -1,93 +1,88 @@
 .list-container {
-    margin: 30px auto;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 40px 20px;
-    overflow: hidden;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 40px 20px;
+  overflow: hidden;
 }
-
-
 
 .product {
-    &-item {
-        position: relative;
-        grid-column: auto / span 3;
-        cursor: pointer;
+  &-item {
+    position: relative;
+    grid-column: auto / span 3;
+    cursor: pointer;
 
-        &.soldOut {
-            &::after {
-                content: 'sold out';
-                position: absolute;
-                bottom: 0;
-                top: 0;
-                color: $white;
-                background-color: #000000b0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                font-size: 18px;
-                font-weight: 700;
-                border-radius: 2px;
-            }
-        }
-
-        @media screen and (max-width: $mobile-size) {
-            grid-column: auto / span 6;
-        }
-    }
-
-    &-image-wrap {
-        overflow: hidden;
-        position: relative;
-        padding-top: 100%;
-        background-color: $light-gray;
-        margin-bottom: 12px;
-    }
-
-    &-image {
-        width: 100%;
+    &.soldOut {
+      &::after {
+        content: 'sold out';
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        object-fit: cover;
-        margin-bottom: 6px;
+        bottom: 0;
+        top: 0;
+        color: $white;
+        background-color: #000000b0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 2px;
+      }
     }
 
+    @media screen and (max-width: $mobile-size) {
+      grid-column: auto / span 6;
+    }
+  }
 
+  &-image-wrap {
+    overflow: hidden;
+    position: relative;
+    padding-top: 100%;
+    background-color: $light-gray;
+    margin-bottom: 12px;
+  }
+
+  &-image {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    margin-bottom: 6px;
+  }
 }
 
-
 .info-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    color: $dark-gray;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $dark-gray;
 }
 
 .data-wrap {
-    display: flex;
-    border-bottom: 1px solid $pink;
-    padding: 2px;
+  display: flex;
+  border-bottom: 1px solid $pink;
+  padding: 2px;
 }
 
 .store-name-wrap {
-    display: flex;
-    flex-direction: row-reverse;
-    border-bottom: 1px solid $pink;
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid $pink;
 }
 
 .store-name {
-    color: $gray;
-    font-size: 12px;
+  color: $gray;
+  font-size: 12px;
 }
 
 .data-title {
-    width: 10%;
-    margin-right: 10px;
+  width: 10%;
+  margin-right: 10px;
 }
 
 .data-info {
-    margin-left: 10px;
+  margin-left: 10px;
 }

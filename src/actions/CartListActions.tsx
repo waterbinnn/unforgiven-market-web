@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { cartManage } from '@/service';
 import { PostCart, UpdateCartQuantity } from '@/types/cartTypes';
 import { getServerSession } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 const getCartList = async () => {
   const session = await getServerSession(authOptions);
@@ -12,6 +13,7 @@ const getCartList = async () => {
   if (token) {
     try {
       const res = await cartManage.getList(token);
+      revalidatePath('/cart');
 
       return {
         data: res,
@@ -35,7 +37,11 @@ const postCart = async (data: PostCart) => {
 
   if (token) {
     try {
-      await cartManage.postCart(token!, data);
+      const res = await cartManage.postCart(token!, data);
+      revalidatePath('/cart');
+      return {
+        res,
+      };
     } catch (err) {
       console.log(err);
     }
@@ -51,6 +57,7 @@ const removeItem = async (id: string) => {
   if (token) {
     try {
       await cartManage.removeItem(token, id);
+      revalidatePath('/cart');
     } catch (err) {
       console.log(err);
     }
@@ -66,6 +73,7 @@ const removeCart = async () => {
   if (token) {
     try {
       await cartManage.removeCart(token!);
+      revalidatePath('/cart');
     } catch (err) {
       console.log(err);
     }
@@ -80,18 +88,13 @@ const updateCount = async (cartId: number, data: UpdateCartQuantity) => {
 
   if (token) {
     try {
-      const res = await cartManage.updateCount(token!, cartId, data);
-      return {
-        msg: res.FAIL_message,
-      };
+      await cartManage.updateCount(token!, cartId, data);
+      revalidatePath('/cart');
     } catch (err) {
       console.log(err);
-      return {
-        msg: 'fail',
-      };
     }
   } else {
-    console.log('error');
+    console.log('token error');
   }
 };
 
