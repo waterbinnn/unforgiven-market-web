@@ -16,7 +16,7 @@ interface CartListType {
   count: number;
   next: String;
   previous: String;
-  results: CartResult[] | null;
+  results: CartResult[];
 }
 
 // 장바구니 추가시 body type
