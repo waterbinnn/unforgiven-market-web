@@ -3,39 +3,55 @@
 import classNames from 'classnames/bind';
 import styles from './CartList.module.scss';
 
-import Loading from '@/app/loading';
-import { CartItemType, CartListType } from '@/types/cartTypes';
-import { useProductDetail } from '@/hooks';
-import { Suspense } from 'react';
+import { CartItemType } from '@/types/cartTypes';
+import { useEffect, useState } from 'react';
 import { CartDetail } from '../CartDetail';
 import { Button, PaymentForm } from '@/components';
 import { useRouter } from 'next/navigation';
 
-import { removeCart } from '@/actions/CartListActions';
+import { getCartList, removeCart } from '@/actions/CartListActions';
+import { useQuery } from '@tanstack/react-query';
+import { useCartList } from '@/hooks';
+import { getServerSession } from 'next-auth';
 
 const cx = classNames.bind(styles);
 
-export const CartList = ({ data }: { data: CartListType | null }) => {
+// export const CartList = ({ carts, detail }: { carts: any; detail: any[] }) => {
+export const CartList = ({ token }: { token: string }) => {
   const router = useRouter();
 
-  if (!data || !data.results) {
-    return;
+  // const [cartDetail, setCartDetail] = useState(detail.map((detail) => detail));
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalShippingFee, setTotalShippingFee] = useState(0);
+
+  const { data, isLoading, isError } = useCartList(token);
+
+  // if (!data || !data.results || data.count === 0) {
+  if (!data) {
+    return (
+      <div className={cx('no-items-wrap')}>
+        <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
+      </div>
+    );
   }
 
-  //카트에 담긴 아이템 상세 데이터
-  const cartDetails = data.results.map((item) => {
-    const { data: detail } = useProductDetail(item.product_id.toString());
-    return { ...item, detail };
-  });
+  console.log(data);
 
-  const payments = cartDetails.map((item) => ({
-    price: Number(item.detail?.price),
-    quantity: Number(item.quantity),
-    shipping: Number(item.detail?.shipping_fee),
-  }));
+  // useEffect(() => {
+  //   const payments = detail.map((item) => ({
+  //     price: Number(item.data.price),
+  //     quantity: Number(item.quantity),
+  //     shipping: Number(item.data.shipping_fee),
+  //   }));
+  //   // const quantity = data.map((v) => v.);
+  //   // console.log('q', quantity);
 
-  const totalPrice = payments.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const totalShippingFee = payments.reduce((sum, item) => sum + item.shipping, 0);
+  //   // setTotalPrice(payments.reduce((sum, item) => sum + item.price * item.quantity, 0));
+  //   // setTotalShippingFee(payments.reduce((sum, item) => sum + item.shipping, 0));
+  // }, []);
+
+  if (isLoading || !data) return <div className={cx('container')}>loading</div>;
+  if (isError) return <div className={cx('container')}>error</div>;
 
   return (
     <>
@@ -44,31 +60,26 @@ export const CartList = ({ data }: { data: CartListType | null }) => {
         <section className={cx('cart-container')}>
           <h2 className={cx('visually-hidden')}>cart list</h2>
 
-          <Suspense fallback={<Loading />}>
-            {/* delete all button  */}
-            <button
-              type="button"
-              onClick={() => removeCart()}
-              disabled={data?.count === 0}
-              className={cx('del-btn')}
-            >
-              전체 삭제
-            </button>
+          <button
+            type="button"
+            onClick={() => removeCart()}
+            disabled={data?.count === 0}
+            className={cx('del-btn')}
+          >
+            전체 삭제
+          </button>
 
-            {/* cart item list section */}
-            <ol className={cx('item-list-wrap')}>
-              {data.count > 0 ? (
-                cartDetails.map(
-                  (product: CartItemType | any, index: number) =>
-                    product.detail && <CartDetail product={product} key={`c-d-${index}`} />,
-                )
-              ) : (
-                <div className={cx('no-items-wrap')}>
-                  <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
-                </div>
-              )}
-            </ol>
-          </Suspense>
+          <ol className={cx('item-list-wrap')}>
+            {data.count > 0 ? (
+              data.results.map((product: CartItemType | any, index: number) => (
+                <CartDetail product={product} key={`c-d-${index}`} />
+              ))
+            ) : (
+              <div className={cx('no-items-wrap')}>
+                <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
+              </div>
+            )}
+          </ol>
         </section>
 
         {/* total price payment form  */}

@@ -1,4 +1,5 @@
 import { productManage } from '@/service';
+import { CartItemType } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchData = async (id: string) => {
@@ -6,5 +7,8 @@ const fetchData = async (id: string) => {
 };
 
 export const useProductDetail = (id: string) => {
-  return useQuery(['productDetail', id], () => fetchData(id));
+  return useQuery({
+    queryKey: ['productDetail', id],
+    queryFn: () => fetchData(id),
+  });
 };

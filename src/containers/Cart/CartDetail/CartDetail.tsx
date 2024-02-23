@@ -6,12 +6,13 @@ import styles from './CartDetail.module.scss';
 import ListStyles from '../CartList/CartList.module.scss';
 import { useState } from 'react';
 import Image from 'next/image';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { CartItemType } from '@/types/cartTypes';
 import { useProductDetail } from '@/hooks';
 import { removeItem, updateCount } from '@/actions/CartListActions';
 import { message } from 'antd';
+import { getProductDetail } from '@/actions/ProductActions';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -20,20 +21,15 @@ interface Props {
 }
 
 export const CartDetail = ({ product }: Props) => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, _setCount] = useState<number>(product.quantity);
   const [newCount, setNewCount] = useState<number>(count);
   const [countMsg, setCountMsg] = useState<string>('');
 
-  const queryClient = useQueryClient();
-
-  const router = useRouter();
-
   const { data: detail, isLoading } = useProductDetail(product.product_id.toString());
-
-  if (!detail) {
-    return;
-  }
 
   //수량 수정 모달 close 시 동작하는 함수
   const handleCloseModal = () => {
@@ -72,18 +68,21 @@ export const CartDetail = ({ product }: Props) => {
 
   const { mutate: mutateDeleteItem } = useMutation(deleteItem, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['cartList']);
+      // queryClient.invalidateQueries(['cartList']);
       message.success({
         content: `삭제됐습니다.`,
       });
+      router.push('/cart');
     },
   });
+
+  if (isLoading || !detail) return <div>loading</div>;
 
   return (
     <li className={cx('item-wrap')} key={`${detail?.product_id}`}>
       <div className={cx('info-wrap')}>
         <Image
-          src={product.detail.image}
+          src={detail.image}
           alt="product name"
           width={100}
           height={100}
@@ -104,7 +103,7 @@ export const CartDetail = ({ product }: Props) => {
             <dd className={cx('info-price')}>￦ {detail.price.toLocaleString()}</dd>
           </dl>
           <span className={cx('shipping-fee')}>
-            {product.detail.shipping_fee > 0
+            {detail.shipping_fee > 0
               ? `택배배송/${detail.shipping_fee.toLocaleString()}원`
               : '택배배송/무료배송'}
           </span>
