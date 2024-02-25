@@ -18,7 +18,7 @@ export const ProductItem = ({ product }: Props) => {
   };
 
   return (
-    <div
+    <li
       className={cx('product-item', {
         soldOut: product.stock === 0,
       })}
@@ -41,6 +41,6 @@ export const ProductItem = ({ product }: Props) => {
           <dd className={cx('data-info')}>￦ {product.price.toLocaleString('ko-KR')}</dd>
         </div>
       </dl>
-    </div>
+    </li>
   );
 };

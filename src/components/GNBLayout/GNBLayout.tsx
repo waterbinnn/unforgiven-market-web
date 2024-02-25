@@ -13,7 +13,7 @@ export const GNBLayout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );

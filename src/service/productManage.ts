@@ -10,9 +10,10 @@ interface ProductManage {
    * @description 전체 상품 리스트 조회
    * @name productManage.getProductList
    * @method {GET}
+   * @param {page} string
    * @return {ProductDataListType}
    **/
-  readonly getProductList: () => Promise<ProductDataListType>;
+  readonly getProductList: (page?: number) => Promise<ProductDataListType>;
 
   /**
    * @description 상품 디테일 조회
@@ -25,8 +26,8 @@ interface ProductManage {
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const productManage: ProductManage = {
-  getProductList: async () => {
-    const res = await fetch(`${baseUrl}products/`);
+  getProductList: async (page?: number) => {
+    const res = await fetch(`${baseUrl}products/${page ? `?page=${page}` : ''}`);
     return res.json();
   },
   getProductDetail: async (id: string) => {
