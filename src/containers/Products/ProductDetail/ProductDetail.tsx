@@ -41,7 +41,7 @@ export const ProductDetail = ({ detail }: Props) => {
         </div>
 
         {/* 상품정보 */}
-        <div className={cx('detail-detail-container')}>
+        <div className={cx('detail-data-container')}>
           <div className={cx('detail-info-wrap')}>
             <span className={cx('store')}>{detail.store_name}</span>
             <dl className={cx('info-wrap')}>
