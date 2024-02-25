@@ -1,11 +1,13 @@
-export const dynamic = 'force-dynamic'; // this is the fix of params
+import { getProductList } from '@/actions';
+import { ProductList } from '@/containers';
 
-import ProductPage from './(Routers)/products/page';
+const Main = async () => {
+  const data = await getProductList(1);
 
-export default async function Home() {
-  return (
-    <main>
-      <ProductPage />
-    </main>
-  );
-}
+  if (!data) {
+    return;
+  }
+  return <ProductList data={data.results} />;
+};
+
+export default Main;
