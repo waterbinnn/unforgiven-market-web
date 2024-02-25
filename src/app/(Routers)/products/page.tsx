@@ -1,6 +1,6 @@
 import { ProductList } from '@/containers';
 
-const ProductPage = async () => {
+const ProductPage = () => {
   return <ProductList />;
 };
 
