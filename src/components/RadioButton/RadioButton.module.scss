@@ -1,0 +1,33 @@
+.radio-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .label {
+    display: block;
+    font-size: 14px;
+    margin-top: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+}
+
+.radio {
+  display: none;
+
+  & + label {
+    display: inline-block;
+    position: relative;
+    min-width: 16px;
+    min-height: 16px;
+    border: 1px solid $green;
+    border-radius: 50%;
+    background-color: $white;
+    cursor: pointer;
+  }
+
+  &:checked + label {
+    border: 1px solid $green;
+    background-color: $green;
+  }
+}
