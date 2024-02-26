@@ -28,7 +28,4 @@ module.exports = {
   compiler: {
     reactRemoveProperties: { properties: ['^data-cy$'] },
   },
-  experimental: {
-    serverActions: true,
-  },
 };
