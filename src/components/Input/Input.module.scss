@@ -43,6 +43,11 @@
     border-color: $green;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+  }
+
   @media screen and (max-width: $mobile-size) {
     font-size: 12px;
   }
