@@ -1,0 +1,126 @@
+.page-title {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-size: 30px;
+  color: $black;
+
+  @media screen and (max-width: $mobile-size) {
+    padding-bottom: 20px;
+  }
+}
+
+.order-container {
+  max-width: 600px;
+  min-width: 600px;
+  width: 100%;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  width: 100%;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+
+  tr {
+    width: 100%;
+    border: 10px solid transparent;
+  }
+
+  tbody {
+    overflow-y: auto;
+  }
+}
+
+.table-header {
+  th {
+    border-bottom: 1px solid $yellow;
+    color: $dark-gray;
+  }
+}
+
+.info-layout {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+  margin-bottom: 60px;
+
+  .title {
+    min-width: 100px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .shipping-form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .pay-radio-wrap {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .receipt-container {
+    width: 100%;
+    border-radius: 4px;
+    padding: 38px 36px;
+    background-color: $blue;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid $yellow;
+    }
+
+    .agree-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .label {
+        display: block;
+        font-size: 14px;
+        color: $white;
+        margin-top: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .receipt-layout-wrap {
+    display: flex;
+    gap: 20px;
+    color: $white;
+
+    .title {
+      width: 60px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .content {
+      font-size: 14px;
+
+      &.total {
+        font-size: 16px;
+        color: $yellow;
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobile-size) {
+    flex-direction: column;
+  }
+}
