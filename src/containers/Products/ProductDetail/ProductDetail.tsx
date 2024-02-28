@@ -7,6 +7,8 @@ import { Button, Count, AddCartButton } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
 import { PostCart, ProductListType } from '@/types';
+import { useCartStore, useOrderStore } from '@/store';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +17,41 @@ interface Props {
 }
 
 export const ProductDetail = ({ detail }: Props) => {
+  const { setOrderKind, setOrderDetail } = useOrderStore();
+  const { cartDetail, setCartDetail } = useCartStore();
   const [count, setCount] = useState<number>(1);
+  const router = useRouter();
 
   //장바구니 추가 버튼에 들어가는 객체
   const cartReq: PostCart = {
     check: false,
     product_id: detail.product_id,
     quantity: count,
+  };
+
+  const handleOrder = () => {
+    const data = { ...detail, count };
+    setOrderDetail([data]);
+    setOrderKind('direct_order');
+    router.push('/order');
+  };
+
+  const handleCart = () => {
+    let found = false;
+    const updatedCartDetail = cartDetail!.map((item) => {
+      if (item.product_id === detail.product_id) {
+        found = true;
+        return { ...item, count: item.count! + count };
+      } else {
+        return item;
+      }
+    });
+
+    if (!found) {
+      updatedCartDetail.push({ ...detail, count });
+    }
+
+    setCartDetail(updatedCartDetail);
   };
 
   return (
@@ -89,8 +119,15 @@ export const ProductDetail = ({ detail }: Props) => {
               width={'40%'}
               color={'black'}
               req={cartReq}
+              onClick={handleCart}
             />
-            <Button color={'outline'} size="l" width="60%" disabled={detail.stock ? false : true}>
+            <Button
+              onClick={handleOrder}
+              color={'outline'}
+              size="l"
+              width="60%"
+              disabled={detail.stock ? false : true}
+            >
               ORDER
             </Button>
           </div>
