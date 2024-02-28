@@ -11,3 +11,4 @@ export * from './AddCartButton';
 export * from './PaymentForm';
 export * from './ShippingForm';
 export * from './RadioButton';
+export * from './OrderTable';

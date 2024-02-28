@@ -2,37 +2,45 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import styles from './OrderDetail.module.scss';
 
+import { OrderDetailType } from '@/store';
+
 const cx = classNames.bind(styles);
 
-export const OrderDetail = () => {
+export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
+  if (!detail) {
+    return;
+  }
+
   return (
     <tr className={cx('order-detail-wrap')}>
       <td className={cx('item-wrap')}>
         <Image
           width={100}
           height={100}
-          src={'/assets/default_img.png'}
-          alt="product name"
+          src={detail.image}
+          alt={detail.product_name}
           placeholder={'blur'}
           blurDataURL={'/assets/default_img.png'}
           loading="lazy"
         />
         <div className={cx('info-wrap')}>
           <div className={cx('column-wrap')}>
-            <p className={cx('info', 'store')}>{'우당탕탕 스토어'}</p>
-            <p className={cx('info')}>{'언포기븐 앨범'}</p>
+            <p className={cx('info', 'store')}>{detail.store_name}</p>
+            <p className={cx('info')}>{detail.product_name}</p>
           </div>
-          <span className={cx('info', 'count')}>{'수량 1 개'}</span>
+          <span className={cx('info', 'count')}>수량 : {detail.count}</span>
         </div>
       </td>
       <td>
-        <p className={cx('info-base')}>-￦ {'1,000'}</p>
+        <p className={cx('info-base')}>-￦ {0}</p>
       </td>
       <td>
-        <p className={cx('info-base')}>￦ {'무료배송'}</p>
+        <p className={cx('info-base')}>
+          ￦ {`${detail.shipping_fee > 0 ? detail.shipping_fee.toLocaleString() : '무료배송'}`}
+        </p>
       </td>
       <td>
-        <p className={cx('info-base', 'price')}>{'￦ 15,000'}</p>
+        <p className={cx('info-base', 'price')}>{`￦ ${detail.price.toLocaleString()}`}</p>
       </td>
     </tr>
   );
