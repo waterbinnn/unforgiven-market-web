@@ -1,3 +1,7 @@
 import { Order } from '@/containers';
 
-export default Order;
+export const Page = async () => {
+  return <Order />;
+};
+
+export default Page;
