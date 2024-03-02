@@ -28,17 +28,16 @@ export const Order = () => {
     setPayment(e.target.id);
   };
 
-  if (!orderDetail || orderDetail.length === 0) {
-    router.back();
-    return;
-  }
-
   useEffect(() => {
     setIsCSR(typeof window !== 'undefined');
     return () => setIsCSR(false);
   }, []);
 
   useEffect(() => {
+    if (!orderDetail || orderDetail.length === 0) {
+      return;
+    }
+
     const price = orderDetail.map((item) => item.count! * item.price + item.shipping_fee);
     if (orderKind === 'cart_order') {
       setTotal(price.reduce((a, c) => a + c, 0));
@@ -54,11 +53,16 @@ export const Order = () => {
       <h1 className={cx('page-title')}>ORDER</h1>
 
       <div className={cx('order-container')}>
-        <OrderTable>
-          {orderDetail?.map((item) => (
-            <OrderDetail detail={item} key={item.product_id} />
-          ))}
-        </OrderTable>
+        {orderDetail ? (
+          <OrderTable>
+            {orderDetail.map((item) => (
+              <OrderDetail detail={item} key={item.product_id} />
+            ))}
+          </OrderTable>
+        ) : (
+          <Loading />
+        )}
+
         <div className={cx('total-price')}>total : {total.toLocaleString()}</div>
 
         <section className={cx('info-layout')}>

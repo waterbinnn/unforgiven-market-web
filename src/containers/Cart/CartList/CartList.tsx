@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import { removeCart } from '@/actions';
 
 import Loading from '@/app/loading';
-import { useCartStore, useOrderStore } from '@/store';
+import { OrderDetailType, useOrderStore } from '@/store';
 
 const cx = classNames.bind(styles);
 
@@ -29,13 +29,20 @@ export const CartList = ({
 }) => {
   const router = useRouter();
   const { setOrderKind, setOrderDetail } = useOrderStore();
-  const { cartDetail, setCartDetail } = useCartStore();
 
   const [productDetail, _setProductDetail] = useState(detail.map((v) => v.data));
 
   const handleOrder = () => {
+    const orderList: OrderDetailType[] = [];
+    carts.results.map((cart) =>
+      productDetail.map((product) => {
+        if (product?.product_id === cart.product_id) {
+          orderList.push({ ...product, count: cart.quantity });
+        }
+      }),
+    );
     setOrderKind('cart_order');
-    setOrderDetail(cartDetail!);
+    setOrderDetail(orderList);
     router.push('/order');
   };
 
@@ -58,7 +65,6 @@ export const CartList = ({
             type="button"
             onClick={() => {
               removeCart();
-              setCartDetail([]);
             }}
             disabled={carts?.count === 0}
             className={cx('del-btn')}

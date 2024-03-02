@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { removeItem, updateCount } from '@/actions';
 import { ProductListType, CartItemType } from '@/types';
-import { useCartStore, useOrderStore } from '@/store';
+import { useOrderStore } from '@/store';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -21,7 +21,6 @@ interface Props {
 export const CartDetail = ({ product, detail }: Props) => {
   const router = useRouter();
   const { setOrderDetail, setOrderKind } = useOrderStore();
-  const { cartDetail, setCartDetail } = useCartStore();
 
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, _setCount] = useState<number>(product.quantity);
@@ -43,25 +42,12 @@ export const CartDetail = ({ product, detail }: Props) => {
     };
 
     await updateCount(product.cart_item_id, updateCountReq);
-
-    const updatedCartDetail = cartDetail?.map((item) => {
-      if (item.product_id === product.product_id) {
-        return { ...item, count: newCount };
-      }
-      return item;
-    });
-
-    setCartDetail(updatedCartDetail!);
-
     await setIsUpdateCount(false);
   };
 
   // 삭제 버튼 클릭시 동작하는 함수
   const deleteItem = async () => {
     await removeItem(product.cart_item_id.toString());
-
-    const updatedCartDetail = cartDetail?.filter((item) => item.product_id !== product.product_id);
-    setCartDetail(updatedCartDetail!);
   };
 
   const handleOrder = () => {
