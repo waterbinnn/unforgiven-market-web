@@ -74,7 +74,6 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           ref={ref}
           onBlur={handleBlur}
           onChange={handleChange}
-          maxLength={20}
           disabled={disabled}
           {...rest}
         />
