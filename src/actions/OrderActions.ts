@@ -1,9 +1,8 @@
 'use server';
 import { authOptions } from '@/lib';
 import { orderManage } from '@/service';
-import { OrderRequest } from '@/types';
+import { CartOrderRequest, OneOrderRequest } from '@/types';
 import { getServerSession } from 'next-auth';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 const getOrderList = async () => {
@@ -26,14 +25,13 @@ const getOrderList = async () => {
   }
 };
 
-const postOrder = async (data: OrderRequest) => {
+const postOrder = async (data: OneOrderRequest | CartOrderRequest) => {
   const session = await getServerSession(authOptions);
   const token = session?.token.toString();
 
   if (token) {
     try {
       const res = await orderManage.postOrder(token, data);
-      revalidatePath('/order');
       return {
         res,
         success: true,

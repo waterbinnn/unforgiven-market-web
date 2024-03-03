@@ -3,10 +3,8 @@ import { create } from 'zustand';
 
 import { persist } from 'zustand/middleware';
 
-// 초기화 할 때 : const clearStore = useOrderStore.persist.clearStorage
-
 type OrderDetailType = {
-  count?: number;
+  quantity?: number;
 } & ProductListType;
 
 interface OrderStore {

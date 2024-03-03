@@ -8,28 +8,28 @@ interface OrderListData {
   count: number;
   next: null;
   previous: null;
-  results: [
-    {
-      buyer: number; // 구매자(로그인 된 유저)
-      order_number: number; // 주문번호
-      order_items: [
-        // 구매 상품들
-        number,
-        number,
-      ];
-      order_quantity: [
-        // 구매 상품들의 수량
-        number,
-        number,
-      ];
-      receiver: String; // 받는사람
-      receiver_phone_number: String; // 받는사람의 핸드폰번호
-      address: String; // 주소
-      address_message: String; // 배송메세지
-      payment_method: String; // 배송방법
-      total_price: number; // 결제금액
-    },
-  ];
+  results: {
+    buyer: number; // 구매자(로그인 된 유저)
+    order_number: number; // 주문번호
+    order_items: [
+      // 구매 상품들
+      number,
+      number,
+    ];
+    order_quantity: [
+      // 구매 상품들의 수량
+      number,
+      number,
+    ];
+    receiver: String; // 받는사람
+    receiver_phone_number: String; // 받는사람의 핸드폰번호
+    address: String; // 주소
+    address_message: String; // 배송메세지
+    payment_method: String; // 배송방법
+    total_price: number; // 결제금액
+    delivery_status: string;
+    created_at: string;
+  }[];
 }
 
 interface OrderCommonData {

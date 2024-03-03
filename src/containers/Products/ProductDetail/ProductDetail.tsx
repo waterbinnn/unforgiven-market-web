@@ -30,7 +30,7 @@ export const ProductDetail = ({ detail }: Props) => {
   };
 
   const handleOrder = () => {
-    const data = { ...detail, count };
+    const data = { ...detail, quantity: count };
     setOrderDetail([data]);
     setOrderKind('direct_order');
     router.push('/order');
