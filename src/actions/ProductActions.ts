@@ -15,7 +15,6 @@ const getProductList = async (page: number) => {
 const getProductDetail = async (id: string) => {
   try {
     const res = await productManage.getProductDetail(id);
-    revalidatePath('/cart');
     return {
       data: res,
     };
