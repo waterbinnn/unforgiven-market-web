@@ -34,6 +34,7 @@
 
   &.pink {
     background-color: $pink;
+    color: $white;
   }
 
   &.yellow {
@@ -42,10 +43,12 @@
 
   &.green {
     background-color: $green;
+    color: $white;
   }
 
   &.blue {
     background-color: $blue;
+    color: $white;
   }
 
   &.outline {
@@ -56,7 +59,7 @@
 
   &.black {
     background-color: $black;
-    color: $white
+    color: $white;
   }
 
   &:disabled {
