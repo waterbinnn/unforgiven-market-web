@@ -11,91 +11,64 @@
 }
 
 .order-container {
-  max-width: 600px;
-  min-width: 600px;
-  width: 100%;
+  width: 900px;
   margin: 0 auto 50px;
   display: flex;
   flex-direction: column;
 }
 
-.info-layout {
+.item-wrap {
   display: flex;
-  gap: 25px;
-  width: 100%;
-  margin-bottom: 60px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  border-top: 1px solid $light-gray;
+  padding: 20px 0;
 
-  .title {
-    min-width: 100px;
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-  .shipping-form-wrap {
+  .order-info-wrap {
+    width: 400px;
+    min-width: 300px;
+    max-height: 600px;
+    overflow-y: auto;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 10px;
+    font-size: 12px;
+    border: 1px solid $black;
+    padding: 20px;
   }
 
-  .pay-radio-wrap {
+  .info-header {
     display: flex;
-    gap: 12px;
     align-items: center;
+    justify-content: space-between;
   }
 
-  .receipt-container {
-    width: 100%;
-    border-radius: 4px;
-    padding: 38px 36px;
-    background-color: $blue;
+  h3 {
+    color: $green;
+  }
+
+  .info-wrap {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 8px;
+    font-size: 13px;
+    padding: 8px;
 
-    .top {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid $yellow;
+    .label {
+      font-weight: bold;
+      color: $dark-gray;
     }
 
-    .agree-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      .label {
-        display: block;
-        font-size: 14px;
-        color: $white;
-        margin-top: 4px;
-        cursor: pointer;
-      }
+    .info {
+      word-break: break-all;
+      display: block;
     }
   }
 
-  .receipt-layout-wrap {
-    display: flex;
-    gap: 20px;
-    color: $white;
-
-    .title {
-      width: 60px;
-      font-size: 14px;
-      font-weight: 300;
-    }
-    .content {
-      font-size: 14px;
-
-      &.total {
-        font-size: 16px;
-        color: $yellow;
-      }
-    }
-  }
-
-  @media screen and (max-width: $mobile-size) {
-    flex-direction: column;
+  .time {
+    font-size: 12px;
+    color: $dark-gray;
   }
 }
