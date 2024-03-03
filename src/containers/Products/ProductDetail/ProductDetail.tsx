@@ -7,6 +7,8 @@ import { Button, Count, AddCartButton } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
 import { PostCart, ProductListType } from '@/types';
+import { useOrderStore } from '@/store';
+import { useRouter } from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +17,23 @@ interface Props {
 }
 
 export const ProductDetail = ({ detail }: Props) => {
+  const { setOrderKind, setOrderDetail } = useOrderStore();
+
   const [count, setCount] = useState<number>(1);
+  const router = useRouter();
 
   //장바구니 추가 버튼에 들어가는 객체
   const cartReq: PostCart = {
     check: false,
     product_id: detail.product_id,
     quantity: count,
+  };
+
+  const handleOrder = () => {
+    const data = { ...detail, quantity: count };
+    setOrderDetail([data]);
+    setOrderKind('direct_order');
+    router.push('/order');
   };
 
   return (
@@ -90,7 +102,13 @@ export const ProductDetail = ({ detail }: Props) => {
               color={'black'}
               req={cartReq}
             />
-            <Button color={'outline'} size="l" width="60%" disabled={detail.stock ? false : true}>
+            <Button
+              onClick={handleOrder}
+              color={'outline'}
+              size="l"
+              width="60%"
+              disabled={detail.stock ? false : true}
+            >
               ORDER
             </Button>
           </div>

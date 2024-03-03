@@ -1,9 +1,55 @@
 .order-detail-wrap {
-    display: flex;
+  width: 100%;
+  position: relative;
 
+  td {
+    border-bottom: 1px solid $light-gray;
+  }
+
+  @media screen and (max-width: $mobile-size) {
+    gap: 20px;
+  }
+}
+
+.item-wrap {
+  display: flex;
+
+  .info {
+    font-size: 14px;
+  }
+  .store {
+    font-size: 12px;
+    color: $gray;
+  }
+  .count {
+    font-size: 13px;
+    color: $dark-gray;
+  }
 }
 
 .info-wrap {
-    display: flex;
-    flex-direction: column;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 200px;
+}
+
+.column-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-base {
+  font-size: 14px;
+  line-height: 1.2;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  color: $dark-gray;
+
+  &.price {
+    color: $pink;
+  }
 }

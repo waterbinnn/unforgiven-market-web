@@ -7,9 +7,9 @@ import ListStyles from '../CartList/CartList.module.scss';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { CartItemType } from '@/types/cartTypes';
-import { removeItem, updateCount } from '@/actions/CartListActions';
-import { ProductListType } from '@/types';
+import { removeItem, updateCount } from '@/actions';
+import { ProductListType, CartItemType } from '@/types';
+import { useOrderStore } from '@/store';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -20,6 +20,7 @@ interface Props {
 
 export const CartDetail = ({ product, detail }: Props) => {
   const router = useRouter();
+  const { setOrderDetail, setOrderKind } = useOrderStore();
 
   const [isUpdateCount, setIsUpdateCount] = useState<boolean>(false);
   const [count, _setCount] = useState<number>(product.quantity);
@@ -47,6 +48,13 @@ export const CartDetail = ({ product, detail }: Props) => {
   // 삭제 버튼 클릭시 동작하는 함수
   const deleteItem = async () => {
     await removeItem(product.cart_item_id.toString());
+  };
+
+  const handleOrder = () => {
+    setOrderDetail([]);
+    setOrderDetail([{ ...detail, count: newCount }]);
+    setOrderKind('cart_one_order');
+    router.push('/order');
   };
 
   return (
@@ -110,7 +118,7 @@ export const CartDetail = ({ product, detail }: Props) => {
       </div>
 
       <div className={cx('btn-order')}>
-        <Button color={'yellow'} width={'80px'} onClick={() => router.push('/order')}>
+        <Button color={'yellow'} width={'80px'} onClick={handleOrder}>
           ORDER
         </Button>
       </div>

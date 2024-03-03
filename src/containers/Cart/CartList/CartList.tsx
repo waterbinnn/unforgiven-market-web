@@ -1,16 +1,18 @@
 'use client';
 
+import { Suspense, useState } from 'react';
+
 import classNames from 'classnames/bind';
 import styles from './CartList.module.scss';
 
 import { CartItemType, CartListType, ProductListType } from '@/types';
-import { Suspense, useState } from 'react';
 import { CartDetail } from '../CartDetail';
 import { Button, PaymentForm } from '@/components';
 import { useRouter } from 'next/navigation';
-import { removeCart } from '@/actions/CartListActions';
+import { removeCart } from '@/actions';
 
 import Loading from '@/app/loading';
+import { OrderDetailType, useOrderStore } from '@/store';
 
 const cx = classNames.bind(styles);
 
@@ -26,8 +28,23 @@ export const CartList = ({
   totalShippingFee: number;
 }) => {
   const router = useRouter();
+  const { setOrderKind, setOrderDetail } = useOrderStore();
 
   const [productDetail, _setProductDetail] = useState(detail.map((v) => v.data));
+
+  const handleOrder = () => {
+    const orderList: OrderDetailType[] = [];
+    carts.results.map((cart) =>
+      productDetail.map((product) => {
+        if (product?.product_id === cart.product_id) {
+          orderList.push({ ...product, count: cart.quantity });
+        }
+      }),
+    );
+    setOrderKind('cart_order');
+    setOrderDetail(orderList);
+    router.push('/order');
+  };
 
   if (!carts) {
     return (
@@ -46,7 +63,9 @@ export const CartList = ({
 
           <button
             type="button"
-            onClick={() => removeCart()}
+            onClick={() => {
+              removeCart();
+            }}
             disabled={carts?.count === 0}
             className={cx('del-btn')}
           >
@@ -80,7 +99,7 @@ export const CartList = ({
         <PaymentForm totalPrice={totalPrice} shipping={totalShippingFee} />
 
         <div className={cx('btn-order-wrap')}>
-          <Button size={'m'} color={'yellow'} onClick={() => router.push('/order')}>
+          <Button size={'m'} color={'yellow'} onClick={handleOrder}>
             ORDER
           </Button>
         </div>

@@ -13,9 +13,10 @@ interface Props {
   color: ButtonProps['color'];
   req: PostCart;
   disabled: boolean;
+  onClick?: () => void;
 }
 
-export const AddCartButton = ({ width, req, color, disabled }: Props) => {
+export const AddCartButton = ({ width, req, color, disabled, onClick }: Props) => {
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -29,6 +30,7 @@ export const AddCartButton = ({ width, req, color, disabled }: Props) => {
     } else {
       await postCart(req);
       await setIsSuccessModal(true);
+      onClick && onClick();
     }
   };
 

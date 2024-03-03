@@ -1,110 +1,107 @@
 .item-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border-top: 1px solid $light-gray;
-    padding: 20px 14px;
-    gap: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid $light-gray;
+  padding: 20px 14px;
+  gap: 20px;
 
-    @media screen and (max-width: $mobile-size) {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
 }
 
 .info-wrap {
-    display: flex;
-    gap: 26px;
+  display: flex;
+  gap: 26px;
 }
 
 .detail {
-    &-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &-info-wrap {
+    width: 200px;
+
+    .store {
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: $gray;
     }
 
-    &-info-wrap {
-        width: 200px;
-
-        .store {
-            font-size: 12px;
-            margin-bottom: 4px;
-            color: $gray;
-        }
-
-        .info-title {
-            font-size: 16px;
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-
-        .info-price {
-            font-size: 14px;
-        }
+    .info-title {
+      font-size: 16px;
+      line-height: 1.2;
+      margin-bottom: 4px;
     }
+
+    .info-price {
+      font-size: 14px;
+    }
+  }
 }
 
 .shipping-fee {
-    font-size: 12px;
-    color: $gray;
+  font-size: 12px;
+  color: $gray;
 }
-
-
 
 .price-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 80px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 80px;
 
-    >span {
-        color: $gray;
-    }
+  > span {
+    color: $gray;
+  }
 
-    @media screen and (max-width: $mobile-size) {
-        align-self: flex-end;
-    }
+  @media screen and (max-width: $mobile-size) {
+    align-self: flex-end;
+  }
 }
 
-
 .item-total-price {
-    color: $dark-gray;
-    font-size: 18px;
-    font-weight: 500;
-    white-space: nowrap;
+  color: $dark-gray;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .btn-order {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 
-    @media screen and (max-width: $mobile-size) {
-        bottom: 60px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    bottom: 60px;
+  }
 }
 
 .btn-del-item {
-    padding: 4px;
-    position: absolute;
-    top: 10px;
-    right: 0;
-    padding-bottom: 4px;
+  padding: 4px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding-bottom: 4px;
 }
 
 .modal-wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 150px;
 
-    >span {
-        font-size: 12px;
-        text-align: center;
-        color: $pink;
-    }
+  > span {
+    font-size: 12px;
+    text-align: center;
+    color: $pink;
+  }
 }
