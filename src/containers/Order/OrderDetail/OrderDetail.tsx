@@ -6,7 +6,13 @@ import { OrderDetailType } from '@/store';
 
 const cx = classNames.bind(styles);
 
-export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
+export const OrderDetail = ({
+  detail,
+  type,
+}: {
+  detail: OrderDetailType | null;
+  type?: 'complete' | 'order';
+}) => {
   if (!detail) {
     return;
   }
@@ -28,7 +34,7 @@ export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
             <p className={cx('info', 'store')}>{detail.store_name}</p>
             <p className={cx('info')}>{detail.product_name}</p>
           </div>
-          <span className={cx('info', 'count')}>수량 : {detail.count}</span>
+          <span className={cx('info', 'count')}>수량 : {detail.quantity}</span>
         </div>
       </td>
       <td>
