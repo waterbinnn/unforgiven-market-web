@@ -32,6 +32,7 @@ const OrderComplete = async () => {
         }),
       );
       orderDetails.push({ id: item.order_number, listData: item, productDetail: itemData });
+      orderDetails.sort((a, b) => b.id - a.id);
     }),
   );
 
