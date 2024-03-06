@@ -1,5 +1,5 @@
 .button {
-  transition: all 0.3s ease-out;
+  // transition: all 0.2s ease-out;
 
   &.s {
     border-radius: 20px;
@@ -55,6 +55,10 @@
     background-color: $white;
     color: $black;
     border: 1px solid $gray;
+
+    &:hover {
+      filter: drop-shadow(0 0 2px rgb(0 0 0 / 20%));
+    }
   }
 
   &.black {
