@@ -52,7 +52,7 @@ export const CartDetail = ({ product, detail }: Props) => {
 
   const handleOrder = () => {
     setOrderDetail([]);
-    setOrderDetail([{ ...detail, count: newCount }]);
+    setOrderDetail([{ ...detail, quantity: newCount }]);
     setOrderKind('cart_one_order');
     router.push('/order');
   };

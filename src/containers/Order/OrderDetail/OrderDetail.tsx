@@ -6,13 +6,7 @@ import { OrderDetailType } from '@/store';
 
 const cx = classNames.bind(styles);
 
-export const OrderDetail = ({
-  detail,
-  type,
-}: {
-  detail: OrderDetailType | null;
-  type?: 'complete' | 'order';
-}) => {
+export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
   if (!detail) {
     return;
   }

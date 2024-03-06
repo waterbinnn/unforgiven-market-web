@@ -37,7 +37,7 @@ export const CartList = ({
     carts.results.map((cart) =>
       productDetail.map((product) => {
         if (product?.product_id === cart.product_id) {
-          orderList.push({ ...product, count: cart.quantity });
+          orderList.push({ ...product, quantity: cart.quantity });
         }
       }),
     );

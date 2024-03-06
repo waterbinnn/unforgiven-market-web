@@ -50,10 +50,10 @@ export const Order = () => {
     if (!orderDetail || orderDetail.length === 0) {
       return;
     }
+    console.log(orderDetail);
+    const price = orderDetail.map((item) => item.quantity! * item.price + item.shipping_fee);
+    console.log(price);
 
-    const price = orderDetail.map(
-      (item) => Number(item.quantity!) * item.price + item.shipping_fee,
-    );
     if (orderKind === 'cart_order') {
       setTotal(price.reduce((a, c) => a + c, 0));
     } else {
