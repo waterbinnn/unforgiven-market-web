@@ -14,7 +14,6 @@
   width: 100%;
   border: none;
   border-bottom: 2px solid $light-gray;
-
   padding: 7px 4px;
   background-color: transparent;
   color: $white;
@@ -29,7 +28,7 @@
   &:active {
     outline: none;
     background-color: transparent;
-    border-bottom: $yellow;
+    border-color: $yellow;
   }
 
   &.none {
