@@ -50,9 +50,7 @@ export const Order = () => {
     if (!orderDetail || orderDetail.length === 0) {
       return;
     }
-    console.log(orderDetail);
     const price = orderDetail.map((item) => item.quantity! * item.price + item.shipping_fee);
-    console.log(price);
 
     if (orderKind === 'cart_order') {
       setTotal(price.reduce((a, c) => a + c, 0));
@@ -97,7 +95,7 @@ export const Order = () => {
         const { success, res } = await postOrder({ ...formData, ...oneReq });
         if (success) {
           message.success('주문이 완료되었습니다.');
-          console.log(res);
+
           router.push('/order/complete');
         } else {
           message.error('오류가 발생했습니다. 다시 시도해 주세요.');
@@ -120,9 +118,8 @@ export const Order = () => {
       <div className={cx('order-container')}>
         {orderDetail ? (
           <OrderTable>
-            {orderDetail.map((item) => (
-              <OrderDetail detail={item} key={item.product_id} />
-            ))}
+            {orderDetail &&
+              orderDetail.map((item) => <OrderDetail detail={item} key={item.product_id} />)}
           </OrderTable>
         ) : (
           <Loading />

@@ -3,7 +3,7 @@ import { OrderList } from '@/containers';
 import { OrderDetailType } from '@/store';
 import { OrderListData } from '@/types';
 
-export const page = async () => {
+const OrderComplete = async () => {
   const { list } = await getOrderList();
 
   interface NewItem {
@@ -38,4 +38,4 @@ export const page = async () => {
   return <OrderList orderDetails={orderDetails} />;
 };
 
-export default page;
+export default OrderComplete;
