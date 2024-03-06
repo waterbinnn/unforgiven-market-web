@@ -16,6 +16,7 @@ interface Props {
 
 export const MobileGnb = ({ setShowGnb }: Props) => {
   const { data: session } = useSession();
+  const userType = session?.user_type;
 
   const router = useRouter();
 
@@ -37,9 +38,19 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
           <Image src={'/assets/icon-plus.svg'} alt="menu" width={50} height={50} />
         </button>
         <nav className={cx('gnb-wrap')}>
-          <button className={cx('gnb-btn')} type="button" onClick={() => handleRouter('/cart')}>
-            CART
-          </button>
+          {userType === 'SELLER' ? (
+            <button
+              className={cx('gnb-korean')}
+              type="button"
+              onClick={() => handleRouter('/seller-center')}
+            >
+              판매자센터
+            </button>
+          ) : (
+            <button className={cx('gnb-btn')} type="button" onClick={() => handleRouter('/cart')}>
+              CART
+            </button>
+          )}
           {session ? (
             <button className={cx('gnb-btn')} type="button" onClick={handleLogout}>
               LOGOUT

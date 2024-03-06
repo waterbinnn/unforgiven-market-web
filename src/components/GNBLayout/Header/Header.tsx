@@ -11,10 +11,14 @@ import { useState } from 'react';
 import { MobileGnb } from '../MobileGnb';
 import { usePathname, useRouter } from 'next/navigation';
 import { SignInButton } from '@/components/SignInButton';
+import { useSession } from 'next-auth/react';
 
 const cx = classNames.bind(styles);
 
 export const Header = () => {
+  const { data: session } = useSession();
+  const userType = session?.user_type;
+
   const browserSize = useResize({ throttleMs: 200 });
   const router = useRouter();
   const pathName = usePathname();
@@ -36,9 +40,15 @@ export const Header = () => {
               </Link>
             </div>
             <div className={cx('btn-wrap')}>
-              <Button onClick={() => router.push('/cart')} color="outline">
-                CART
-              </Button>
+              {userType === 'SELLER' ? (
+                <Button color="outline" width="120px">
+                  👨‍🌾 판매자센터
+                </Button>
+              ) : (
+                <Button onClick={() => router.push('/cart')} color="outline">
+                  CART
+                </Button>
+              )}
               <SignInButton />
             </div>
           </>

@@ -12,7 +12,7 @@
   background-color: $white;
   border-bottom: 1px solid $gray;
   z-index: 10;
-  transition: all 3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &-title {
     position: relative;
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  transition: all 2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   @media screen and (max-width: $mobile-size) {
     justify-content: center;
@@ -93,16 +93,14 @@
 
 .btn-wrap {
   display: flex;
-  flex-direction: column;
   flex-wrap: nowrap;
   gap: 8px;
 
   button {
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in;
     width: 80px;
     padding: 2px 8px;
   }
-
 
   @media screen and (max-width: $mobile-size) {
     margin-top: 10px;
