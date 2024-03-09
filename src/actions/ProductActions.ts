@@ -1,7 +1,6 @@
 'use server';
 
 import { productManage } from '@/service';
-import { revalidatePath } from 'next/cache';
 
 const getProductList = async (page: number) => {
   try {

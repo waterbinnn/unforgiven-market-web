@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './CartList.module.scss';
@@ -11,7 +11,6 @@ import { Button, PaymentForm } from '@/components';
 import { useRouter } from 'next/navigation';
 import { removeCart } from '@/actions';
 
-import Loading from '@/app/loading';
 import { OrderDetailType, useOrderStore } from '@/store';
 
 const cx = classNames.bind(styles);
