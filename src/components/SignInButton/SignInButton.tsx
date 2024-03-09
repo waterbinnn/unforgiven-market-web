@@ -4,17 +4,24 @@ import { useRouter } from 'next/navigation';
 import classNames from 'classnames/bind';
 
 import styles from './SignInButton.module.scss';
+import { useUserType } from '@/hooks';
 const cx = classNames.bind(styles);
 
 export const SignInButton = () => {
   const { data: session } = useSession();
+  const { removeUserType } = useUserType();
 
   const router = useRouter();
+
+  const onLogout = () => {
+    signOut();
+    removeUserType;
+  };
 
   return (
     <>
       {session ? (
-        <Button color="black" type="button" onClick={() => signOut()} width="fit-content">
+        <Button color="black" type="button" onClick={onLogout} width="fit-content">
           <img className={cx('logout-image')} src={'/assets/icon-logout.svg'} alt="logout" />
         </Button>
       ) : (
