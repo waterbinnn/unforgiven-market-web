@@ -10,6 +10,7 @@ import { PostCart, ProductListType } from '@/types';
 import { useOrderStore } from '@/store';
 import { useRouter } from 'next/navigation';
 import Loading from '@/app/loading';
+import { useUserType } from '@/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ interface Props {
 
 export const ProductDetail = ({ detail }: Props) => {
   const { setOrderKind, setOrderDetail } = useOrderStore();
+  const { userType } = useUserType();
 
   const [count, setCount] = useState<number>(1);
   const router = useRouter();
@@ -85,38 +87,39 @@ export const ProductDetail = ({ detail }: Props) => {
             )}
             {detail.stock === 0 && <p className={cx('stock-info')}>품절된 상품입니다.</p>}
 
-            {/* 수량 */}
-            <div className={cx('count')}>
-              <Count count={count} setCount={setCount} stock={detail.stock} />
-              <div className={cx('total-wrap')}>
-                <h3 className={cx('title')}>total</h3>
-                <div className={cx('total-num-wrap')}>
-                  <span className={cx('detail-title')}>Total Item</span>
-                  <strong className={cx('detail-num')}>{count}</strong>
+            <div>
+              {/* 수량 */}
+              <div className={cx('count')}>
+                <Count count={count} setCount={setCount} stock={detail.stock} />
+                <div className={cx('total-wrap')}>
+                  <h3 className={cx('title')}>total</h3>
+                  <div className={cx('total-num-wrap')}>
+                    <span className={cx('detail-title')}>Total Item</span>
+                    <strong className={cx('detail-num')}>{count}</strong>
+                  </div>
+                  <strong className={cx('detail-fee')}>
+                    ￦ {(detail.price * count).toLocaleString()}
+                  </strong>
                 </div>
-                <strong className={cx('detail-fee')}>
-                  ￦ {(detail.price * count).toLocaleString()}
-                </strong>
               </div>
-            </div>
 
-            {/* 버튼 섹션  */}
-            <div className={cx('button-wrap')}>
-              <AddCartButton
-                disabled={detail.stock ? false : true}
-                width={'40%'}
-                color={'black'}
-                req={cartReq}
-              />
-              <Button
-                onClick={handleOrder}
-                color={'outline'}
-                size="l"
-                width="60%"
-                disabled={detail.stock ? false : true}
-              >
-                ORDER
-              </Button>
+              <div className={cx('button-wrap')}>
+                <AddCartButton
+                  disabled={(userType === 'SELLER' ? true : false) || (detail.stock ? false : true)}
+                  width={'40%'}
+                  color={'black'}
+                  req={cartReq}
+                />
+                <Button
+                  onClick={handleOrder}
+                  color={'outline'}
+                  size="l"
+                  width="60%"
+                  disabled={(userType === 'SELLER' ? true : false) || (detail.stock ? false : true)}
+                >
+                  ORDER
+                </Button>
+              </div>
             </div>
           </div>
         </Suspense>
