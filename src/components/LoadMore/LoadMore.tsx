@@ -12,33 +12,39 @@ import { ProductItem } from '@/containers/Products/ProductList/localComponents';
 
 const cx = classNames.bind({ ...styles, ...ProductStyle });
 
-let page = 2;
-
 export const LoadMore = () => {
   const { ref, inView } = useInView();
-  const [item, setItem] = useState<ProductListType[]>([]);
+
+  const [product, setProduct] = useState<ProductListType[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onLoad = async () => {
+    const next = page + 1;
+
+    await getProductList(page).then((res) => {
+      if (!res) {
+        return;
+      }
+      if (res.results) {
+        setIsLoading(true);
+        setProduct([...product, ...res.results]);
+        setPage(next);
+        setIsLoading(false);
+      }
+    });
+  };
 
   useEffect(() => {
     if (inView) {
-      getProductList(page).then((res) => {
-        if (!res) {
-          return;
-        }
-        if (res.results) {
-          setIsLoading(true);
-          setItem([...item, ...res.results]);
-          page++;
-          setIsLoading(false);
-        }
-      });
+      onLoad();
     }
-  }, [inView, page, isLoading]);
+  }, [inView]);
 
   return (
     <>
-      {item?.map((item, index) => (
-        <ProductItem product={item} key={`item-${index}`} />
+      {product?.map((item) => (
+        <ProductItem product={item} key={item.product_id} />
       ))}
 
       <section className={cx('wrapper')} ref={ref}>

@@ -29,8 +29,7 @@ export const CartList = ({
 }) => {
   const router = useRouter();
   const { setOrderKind, setOrderDetail } = useOrderStore();
-
-  const [productDetail, _setProductDetail] = useState(detail.map((v) => v.data));
+  const [productDetail, _setProductDetail] = useState(detail ? detail.map((v) => v.data) : []);
 
   const handleOrder = () => {
     const orderList: OrderDetailType[] = [];
@@ -45,6 +44,10 @@ export const CartList = ({
     setOrderDetail(orderList);
     router.push('/order');
   };
+
+  if (!detail) {
+    return;
+  }
 
   if (!carts) {
     return (
@@ -71,28 +74,23 @@ export const CartList = ({
           >
             전체 삭제
           </button>
-          <Suspense fallback={<Loading />}>
-            <ol className={cx('item-list-wrap')}>
-              {carts.count > 0 ? (
-                carts.results.map((product: CartItemType | any, index: number) => {
-                  const productDetailItem = productDetail.find(
-                    (detail: any) => detail.product_id === product.product_id,
-                  );
-                  return (
-                    <CartDetail
-                      product={product}
-                      detail={productDetailItem!}
-                      key={`c-d-${index}`}
-                    />
-                  );
-                })
-              ) : (
-                <div className={cx('no-items-wrap')}>
-                  <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
-                </div>
-              )}
-            </ol>
-          </Suspense>
+
+          <ol className={cx('item-list-wrap')}>
+            {carts.count > 0 ? (
+              carts.results.map((product: CartItemType | any, index: number) => {
+                const productDetailItem = productDetail.find(
+                  (detail: any) => detail.product_id === product.product_id,
+                );
+                return (
+                  <CartDetail product={product} detail={productDetailItem!} key={`c-d-${index}`} />
+                );
+              })
+            ) : (
+              <div className={cx('no-items-wrap')}>
+                <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
+              </div>
+            )}
+          </ol>
         </section>
 
         {/* total price payment form  */}
