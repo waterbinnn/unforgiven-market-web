@@ -1,6 +1,7 @@
 import { authManage } from '@/service';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { cookies } from 'next/headers';
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -28,6 +29,8 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
+          cookies().set('USER_TYPE', res['user_type'], { path: '/' });
+
           return {
             id: res.id,
             token: res.token,
@@ -44,6 +47,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: ({ token, user }) => {
       user && (token.user = user);
+
       return Promise.resolve(token);
     },
     session: async ({ session, token }) => {
