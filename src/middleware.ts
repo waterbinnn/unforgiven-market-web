@@ -2,23 +2,31 @@ import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
+  let user = req.cookies.get('USER_TYPE');
+
   const token = await getToken({
     req: req,
     secret: process?.env?.NEXTAUTH_SECRET,
     cookieName: 'next-auth.session-token',
   });
 
-  const pathname = req.nextUrl.pathname;
+  const { pathname } = req.nextUrl;
 
   if (!token) {
-    if (pathname.startsWith('/cart')) {
-      //로그인 회원만 장바구니 진입 가능
+    if (pathname.startsWith('/cart') || pathname.startsWith('/order')) {
+      //로그인, 구매자회원만 장바구니 진입 가능
       const url = new URL(`/signin`, req.url);
       return NextResponse.redirect(url);
     }
   } else {
     if (pathname.startsWith('/sign')) {
       //이미 로그인 상태일 때 로그인, 회원가입 진입 차단
+      const url = new URL(`/`, req.url);
+      return NextResponse.redirect(url);
+    }
+  }
+  if (token && user?.value === 'SELLER') {
+    if (pathname.startsWith('/cart') || pathname.startsWith('/order')) {
       const url = new URL(`/`, req.url);
       return NextResponse.redirect(url);
     }
