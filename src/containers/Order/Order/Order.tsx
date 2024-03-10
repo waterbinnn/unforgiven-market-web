@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './Order.module.scss';
 
 import { OrderDetail } from '../OrderDetail';
-import { Button, Checkbox, RadioButton, OrderTable, Input } from '@/components';
+import { Button, Checkbox, RadioButton, Input, Table } from '@/components';
 import { paymentsOptions } from '../contents';
 
 import { CartOrderRequest, PaymentType } from '@/types';
@@ -117,10 +117,10 @@ export const Order = () => {
 
       <div className={cx('order-container')}>
         {orderDetail ? (
-          <OrderTable>
+          <Table thList={['ITEM', 'DISCOUNT', 'DELIVERY', 'PRICE']}>
             {orderDetail &&
               orderDetail.map((item) => <OrderDetail detail={item} key={item.product_id} />)}
-          </OrderTable>
+          </Table>
         ) : (
           <Loading />
         )}

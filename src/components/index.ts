@@ -10,4 +10,5 @@ export * from './Checkbox';
 export * from './AddCartButton';
 export * from './PaymentForm';
 export * from './RadioButton';
-export * from './OrderTable';
+export * from './Table';
+export * from './Sidebar';

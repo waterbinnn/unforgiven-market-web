@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import styles from './OrderList.module.scss';
-import { OrderTable } from '@/components/OrderTable/OrderTable';
+import { Table } from '@/components';
 import { OrderListData } from '@/types';
 import dayjs from 'dayjs';
 import { OrderDetailType } from '@/store';
@@ -41,11 +41,11 @@ export const OrderList = ({ orderDetails }: Props) => {
             return (
               <div key={order.id} className={cx('item-wrap')}>
                 <div>
-                  <OrderTable>
+                  <Table thList={['ITEM', 'DISCOUNT', 'DELIVERY', 'PRICE']}>
                     {order.productDetail.map((item, index) => (
                       <OrderDetail detail={item.productDetail as OrderDetailType} key={index} />
                     ))}
-                  </OrderTable>
+                  </Table>
                 </div>
 
                 <div className={cx('order-info-wrap')}>
