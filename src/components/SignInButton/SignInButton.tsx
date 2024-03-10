@@ -16,6 +16,7 @@ export const SignInButton = () => {
   const onLogout = () => {
     signOut();
     removeUserType;
+    router.push('/');
   };
 
   return (
