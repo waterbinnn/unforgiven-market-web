@@ -3,12 +3,12 @@ import { OrderList } from '@/containers';
 import { OrderDetailType } from '@/store';
 import { OrderListData } from '@/types';
 
+interface NewItem {
+  productDetail: OrderDetailType | unknown;
+}
+
 const OrderComplete = async () => {
   const { list } = await getOrderList();
-
-  interface NewItem {
-    productDetail: OrderDetailType | unknown;
-  }
 
   let orderDetails: {
     id: number;
