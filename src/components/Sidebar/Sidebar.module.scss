@@ -1,0 +1,32 @@
+.sidebar {
+  &-container {
+    margin-right: 30px;
+  }
+  &-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+  }
+}
+
+.menu {
+  padding: 15px 20px;
+  border-radius: 4px;
+  cursor: not-allowed;
+  transition: all 0.1s ease-in;
+
+  &.active {
+    background-color: $black;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #000000d5;
+    }
+  }
+
+  &:hover {
+    background-color: #5bff6917;
+  }
+}
