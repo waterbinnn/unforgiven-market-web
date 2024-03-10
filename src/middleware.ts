@@ -25,6 +25,14 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(url);
     }
   }
+
+  if (token && user?.value === 'BUYER') {
+    if (pathname.startsWith('/seller')) {
+      const url = new URL(`/`, req.url);
+      return NextResponse.redirect(url);
+    }
+  }
+
   if (token && user?.value === 'SELLER') {
     if (pathname.startsWith('/cart') || pathname.startsWith('/order')) {
       const url = new URL(`/`, req.url);
