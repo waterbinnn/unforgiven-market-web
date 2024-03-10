@@ -41,7 +41,11 @@ export const Header = () => {
             </div>
             <div className={cx('btn-wrap')}>
               {userType === 'SELLER' ? (
-                <Button color="outline" width="120px">
+                <Button
+                  color="outline"
+                  width="120px"
+                  onClick={() => router.push('/seller/dashboard')}
+                >
                   👨‍🌾 판매자센터
                 </Button>
               ) : (
