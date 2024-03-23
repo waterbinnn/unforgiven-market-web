@@ -1,0 +1,139 @@
+.upload-container {
+  display: flex;
+  gap: 50px;
+}
+
+.header {
+  height: 100px;
+  display: flex;
+
+  .btn-back {
+    margin: 20px;
+    cursor: pointer;
+  }
+}
+
+.h2 {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 50px;
+  font-weight: 300;
+}
+
+.upload-wrap {
+  display: flex;
+  margin: 40px auto;
+}
+
+.form {
+  width: 100%;
+}
+
+.top-wrap {
+  display: flex;
+  gap: 40px;
+
+  .image-wrap {
+    width: 100%;
+
+    .image {
+      width: 380px;
+      height: 380px;
+      background-color: #f6f6f6;
+      border-radius: 4px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .image-icon-wrap {
+      position: relative;
+      cursor: pointer;
+
+      .btn-plus {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        path {
+          stroke: $yellow;
+        }
+      }
+    }
+  }
+}
+
+.detail-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.info-wrap {
+  padding: 20px 10px;
+}
+
+.content-layout-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .content-label {
+    font-size: 13px;
+    line-height: 1.4;
+    color: $dark-gray;
+  }
+}
+
+.btn-wrap {
+  display: flex;
+  gap: 8px;
+
+  &.save {
+    margin-top: 50px;
+    padding: 20px 0;
+    justify-content: center;
+  }
+}
+
+.text-input {
+  padding: 8px 44px 8px 6px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $light-gray;
+  width: 100%;
+
+  &::placeholder {
+    color: $light-gray;
+  }
+
+  &-wrap {
+    position: relative;
+  }
+}
+
+.text-count {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  font-size: 10px;
+  color: $gray;
+  margin-bottom: 4px;
+}
+
+.textarea {
+  width: 100%;
+  resize: none;
+  height: 300px;
+  padding: 8px 6px;
+  border: 1px solid $light-gray;
+  outline: none;
+
+  &::placeholder {
+    color: $light-gray;
+  }
+}
