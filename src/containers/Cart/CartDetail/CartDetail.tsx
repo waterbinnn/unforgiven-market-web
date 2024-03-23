@@ -61,7 +61,7 @@ export const CartDetail = ({ product, detail }: Props) => {
     <li className={cx('item-wrap')} key={`${detail?.product_id}`}>
       <div className={cx('info-wrap')}>
         <Image
-          src={detail.image}
+          src={detail.image as string}
           alt="product name"
           width={100}
           height={100}

@@ -25,7 +25,11 @@ export const ProductItem = ({ product }: Props) => {
       onClick={handleGoToDetail}
     >
       <div className={cx('product-image-wrap')}>
-        <img className={cx('product-image')} src={product.image} alt={product.product_name} />
+        <img
+          className={cx('product-image')}
+          src={product.image as string}
+          alt={product.product_name}
+        />
       </div>
       <dl className={cx('info-wrap')}>
         <div className={cx('store-name-wrap')}>

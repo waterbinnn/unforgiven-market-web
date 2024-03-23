@@ -14,7 +14,7 @@ export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
           <Image
             width={100}
             height={100}
-            src={detail.image}
+            src={detail.image as string}
             alt={detail.product_name}
             placeholder={'blur'}
             blurDataURL={'/assets/default_img.png'}
