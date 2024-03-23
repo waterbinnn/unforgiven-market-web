@@ -75,16 +75,16 @@ export const Order = () => {
       };
 
       if (orderKind === 'cart_order') {
-        const { success, res } = await postOrder(formData);
+        //카트의 모든 상품 주문시 동작
+        const { success } = await postOrder(formData);
         if (success) {
           message.success('주문이 완료되었습니다.');
-          console.log(res);
           router.push('/order/complete');
         } else {
           message.error('오류가 발생했습니다. 다시 시도해 주세요.');
-          console.log(res);
         }
       } else {
+        //상품 하나만 주문할 때 동작
         if (!orderDetail) {
           return;
         }
