@@ -1,3 +1,5 @@
+'use server';
+
 import Head from './head';
 import '@/styles/globals.scss';
 import { GNBLayout } from '@/components';
