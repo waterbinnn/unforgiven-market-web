@@ -44,11 +44,7 @@ export const CartList = ({
     router.push('/order');
   };
 
-  if (!detail) {
-    return;
-  }
-
-  if (!carts) {
+  if (!carts || !detail) {
     return (
       <div className={cx('no-items-wrap')}>
         <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
@@ -92,7 +88,6 @@ export const CartList = ({
           </ol>
         </section>
 
-        {/* total price payment form  */}
         <PaymentForm totalPrice={totalPrice} shipping={totalShippingFee} />
 
         <div className={cx('btn-order-wrap')}>
