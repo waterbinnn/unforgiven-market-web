@@ -1,6 +1,6 @@
 import { SignIn } from '@/containers';
 
-const Login = () => {
+const Login = async () => {
   return <SignIn type={'BUYER'} />;
 };
 

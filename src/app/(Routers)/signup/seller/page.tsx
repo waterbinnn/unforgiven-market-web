@@ -1,6 +1,6 @@
 import { Register } from '@/containers';
 
-const SellerSignUp = () => {
+const SellerSignUp = async () => {
   return <Register type={'SELLER'} />;
 };
 
