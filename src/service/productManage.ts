@@ -1,4 +1,6 @@
-import { ProductDataListType, ProductListType } from '@/types';
+import { PostProduct, ProductDataListType, ProductListType, UpdateProduct } from '@/types';
+import axios, { AxiosPromise } from 'axios';
+import { axiosAuth } from './axiosInstance';
 
 /**
  * @name productManage
@@ -11,28 +13,81 @@ interface ProductManage {
    * @name productManage.getProductList
    * @method {GET}
    * @param {page} string
-   * @return {ProductDataListType}
+   * @return {AxiosPromise<ProductDataListType>}
    **/
-  readonly getProductList: (page?: number) => Promise<ProductDataListType>;
+  readonly getProductList: (page?: number) => AxiosPromise<ProductDataListType>;
 
   /**
    * @description 상품 디테일 조회
    * @name productManage.getProductDetail
    * @method {GET}
-   * @return {ProductListType}
+   * @return {AxiosPromise<ProductListType>}
    **/
-  readonly getProductDetail: (id: string) => Promise<ProductListType>;
+  readonly getProductDetail: (id: string) => AxiosPromise<ProductListType>;
+
+  /**
+   * @description 상품 등록 - 판매자
+   * @name productManage.postProduct
+   * @method {POST}
+   * @body {PostProduct} PostProduct
+   * @param {token} string
+   * @return {AxiosPromise<ProductDataListType>}
+   **/
+  readonly postProduct: (data: PostProduct, token: String) => AxiosPromise<ProductDataListType>;
+
+  /**
+   * @description 상품 수정 - 판매자
+   * @name productManage.updateProduct
+   * @method {PUT}
+   * @body {UpdateProduct} UpdateProduct
+   * @param {id} string
+   * @param {token} string
+   * @return {AxiosPromise<ProductDataListType>}
+   **/
+  readonly updateProduct: (
+    data: UpdateProduct,
+    id: string,
+    token: String,
+  ) => AxiosPromise<ProductDataListType>;
+
+  /**
+   * @description 상품 디테일 조회
+   * @name productManage.deleteProduct
+   * @method {DELETE}
+   * @param {id} number
+   * @return {AxiosPromise}
+   **/
+  readonly deleteProduct: (id: number) => AxiosPromise;
 }
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const productManage: ProductManage = {
-  getProductList: async (page?: number) => {
-    const res = await fetch(`${baseUrl}products/${page ? `?page=${page}` : ''}`);
-    return res.json();
+  //only buyer
+  getProductList: (page?: number) => {
+    return axiosAuth.get(`products/${page ? `?page=${page}` : ''}`);
   },
-  getProductDetail: async (id: string) => {
-    const res = await fetch(`${baseUrl}products/${id}`);
-    return res.json();
+  getProductDetail: (id: string) => {
+    return axiosAuth.get(`products/${id}`);
+  },
+
+  //only seller
+  postProduct: (data: PostProduct, token: String) => {
+    return axios.post(`${process.env.NEXT_PUBLIC_API_URL}products/`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `JWT ${token}`,
+      },
+    });
+  },
+  updateProduct: (data: UpdateProduct, id: string, token: String) => {
+    return axios.put(`${process.env.NEXT_PUBLIC_API_URL}products/${id}/`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `JWT ${token}`,
+      },
+    });
+  },
+  deleteProduct: (id: number) => {
+    return axiosAuth.delete(`products/${id}`);
   },
 };
 

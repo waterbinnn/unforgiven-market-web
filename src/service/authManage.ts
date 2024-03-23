@@ -1,4 +1,6 @@
 import { BuyerSignupReq, BuyerSignupRes, SellerSignupRes, SignInReq } from '@/types';
+import { AxiosPromise } from 'axios';
+import { axiosAuth } from './axiosInstance';
 
 /**
  * @name authManage
@@ -11,36 +13,36 @@ interface AuthManage {
    * @name authManage.buyerSignup
    * @method {POST}
    * @param {BuyerSignupReq}
-   * @return {BuyerSignupRes}
+   * @return {AxiosPromise<BuyerSignupRes>}
    **/
-  readonly buyerSignup: (data: BuyerSignupReq) => Promise<BuyerSignupRes>;
+  readonly buyerSignup: (data: BuyerSignupReq) => AxiosPromise<BuyerSignupRes>;
 
   /**
    * @description 구매자 회원가입
    * @name authManage.buyerSignup
    * @method {POST}
    * @param {SellerSignupReq}
-   * @return {SellerSignupRes}
+   * @return {AxiosPromise<SellerSignupRes>}
    **/
-  readonly sellerSignup: (data: BuyerSignupReq) => Promise<SellerSignupRes>;
+  readonly sellerSignup: (data: BuyerSignupReq) => AxiosPromise<SellerSignupRes>;
 
   /**
    * @description 구매자 회원가입 ID 중복 검사
    * @name authManage.checkIdValid
    * @method {POST}
    * @param {string}
-   * @return {Promise}
+   * @return {AxiosPromise}
    **/
-  readonly checkIdValid: (username: string) => Promise<any>;
+  readonly checkIdValid: (username: string) => AxiosPromise;
 
   /**
    * @description 판매자 사업자등록번호 중복 검사
    * @name authManage.checkCompanyNumberValid
    * @method {POST}
    * @param {string}
-   * @return {Promise}
+   * @return {AxiosPromise}
    **/
-  readonly checkCompanyNumberValid: (company_registration_number: string) => Promise<any>;
+  readonly checkCompanyNumberValid: (company_registration_number: string) => AxiosPromise;
 
   //signIn
 
@@ -49,65 +51,34 @@ interface AuthManage {
    * @name authManage.signIn
    * @method {POST}
    * @param {SignInReq}
-   * @return {Promise}
+   * @return {AxiosPromise}
    **/
-  readonly signIn: (data: any) => Promise<any>;
+  readonly signIn: (data: any) => AxiosPromise;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-
 const authManage: AuthManage = {
-  buyerSignup: async (data: BuyerSignupReq) => {
-    const res = await fetch(`${baseUrl}accounts/signup/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return res.json();
+  buyerSignup: (data: BuyerSignupReq) => {
+    return axiosAuth.post(`accounts/signup/`, data);
   },
-  sellerSignup: async (data: BuyerSignupReq) => {
-    const res = await fetch(`${baseUrl}accounts/signup_seller/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return res.json();
+
+  sellerSignup: (data: BuyerSignupReq) => {
+    return axiosAuth.post(`accounts/signup_seller/`, data);
   },
-  checkIdValid: async (username: string) => {
-    const res = await fetch(`${baseUrl}accounts/signup/valid/username/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username: username }),
+
+  checkIdValid: (username: string) => {
+    return axiosAuth.post(`accounts/signup/valid/username/`, {
+      username,
     });
-    return res.json();
   },
-  checkCompanyNumberValid: async (company_registration_number: string) => {
-    const res = await fetch(`${baseUrl}accounts/signup/valid/company_registration_number/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        company_registration_number: company_registration_number,
-      }),
+
+  checkCompanyNumberValid: (company_registration_number: string) => {
+    return axiosAuth.post(`accounts/signup/valid/company_registration_number/`, {
+      company_registration_number,
     });
-    return res.json();
   },
-  signIn: async (data: SignInReq) => {
-    const res = await fetch(`${baseUrl}accounts/login/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return res.json();
+
+  signIn: (data: SignInReq) => {
+    return axiosAuth.post(`accounts/login/`, data);
   },
 };
 
