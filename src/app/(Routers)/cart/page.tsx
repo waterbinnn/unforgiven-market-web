@@ -6,14 +6,16 @@ const Cart = async () => {
   const { data: carts } = await getCartList();
 
   if (!carts) {
-    return;
+    return <div>empty</div>;
   }
+
   const ids = carts.results.map((v) => v.product_id.toString());
 
   const detailPromises = ids.map((v: string) => getProductDetail(v));
   const detail = await Promise.all(detailPromises);
+
   if (!detail) {
-    return;
+    return <div>no data</div>;
   }
 
   const quantity = carts.results.map((item) => item.quantity);

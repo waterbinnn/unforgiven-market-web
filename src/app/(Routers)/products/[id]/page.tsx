@@ -9,9 +9,11 @@ const ProductDetailPage = async ({ params }: Props) => {
   const productId = params.id.toString();
 
   const { data: detail } = await getProductDetail(productId);
+
   if (!detail) {
-    return;
+    return <div>no data</div>;
   }
+
   return <ProductDetail detail={detail} />;
 };
 
