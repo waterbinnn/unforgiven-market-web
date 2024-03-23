@@ -2,6 +2,7 @@
 
 import { orderManage } from '@/service';
 import { CartOrderRequest, OneOrderRequest } from '@/types';
+import { revalidatePath } from 'next/cache';
 
 const getOrderList = async () => {
   try {
@@ -19,8 +20,9 @@ const getOrderList = async () => {
 const postOrder = async (data: OneOrderRequest | CartOrderRequest) => {
   try {
     const res = await orderManage.postOrder(data);
+    revalidatePath('/order/complete');
     return {
-      res,
+      data: res.data,
       success: true,
     };
   } catch (err) {
