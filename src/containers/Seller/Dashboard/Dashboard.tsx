@@ -1,46 +1,39 @@
+'use client';
+
 import { Button, Sidebar, Table } from '@/components';
 
 import classNames from 'classnames/bind';
 import styles from './Dashboard.module.scss';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { SellerListData, SellerListResult } from '@/types/sellerTypes';
+import { deleteProduct } from '@/actions';
+import { message } from 'antd';
 
 const cx = classNames.bind(styles);
 
-const mockData = [
-  {
-    product_id: 0,
-    product_name: 'product',
-    seller: 10,
-    seller_store: 'store name',
-    image: '',
-    price: 10000,
-    shipping_method: 'PARCEL',
-    shipping_fee: 2500,
-    stock: 100,
-    products_info: 'info',
-  },
-];
+export const Dashboard = ({ data, list }: { data: SellerListData; list: SellerListResult[] }) => {
+  const router = useRouter();
 
-export const Dashboard = () => {
   return (
     <div className={cx('dashboard-container', 'container')}>
       <div className={cx('header')}>
         <div className={cx('title-wrap')}>
           <h2 className={cx('h2')}>DASHBOARD</h2>
-          <h3 className={cx('h3')}>{mockData[0].seller_store}</h3>
         </div>
-        <Button size="m" color="green">
+        <Button size="m" color="green" onClick={() => router.push('/seller/upload')}>
           상품업로드
         </Button>
       </div>
 
       <div className={cx('body-wrap')}>
-        <Sidebar count={mockData.length} />
+        <Sidebar count={data.count} />
 
         <section className={cx('table-section')}>
           <h2 className={cx('visually-hidden')}>상품 정보</h2>
-          <Table thList={['INFO', 'PRICE', 'EDIT', 'DEL']}>
-            {mockData.map((item) => {
+
+          <Table thList={['INFO', 'PRICE', 'EDIT', 'DEL']} key={data.count}>
+            {list.map((item: SellerListResult) => {
               return (
                 <ProductInfoLayout
                   name={item.product_name}
@@ -48,6 +41,7 @@ export const Dashboard = () => {
                   price={item.price}
                   key={item.product_id}
                   count={item.stock}
+                  id={item.product_id}
                 />
               );
             })}
@@ -63,16 +57,29 @@ const ProductInfoLayout = ({
   name,
   count,
   price,
+  id,
 }: {
   image: string;
   name: string;
   count: number;
   price: number;
+  id: number;
 }) => {
+  const router = useRouter();
+
+  const handleDelete = async (id: number) => {
+    const { success } = await deleteProduct(id);
+    if (success) {
+      message.success('삭제에 성공했습니다.');
+    } else {
+      message.success('문제가 생겼습니다. 다시 시도해 주세요.');
+    }
+  };
+
   return (
     <tr>
       <td className={cx('table-data', 'info')}>
-        <Image width={50} height={50} alt={name} src={image} />
+        <Image className={cx('image')} width={100} height={100} alt={name} src={image} />
         <div>
           <h4 className={cx('h4')}>{name}</h4>
           <span className={cx('info-count')}>재고: {count}개</span>
@@ -82,12 +89,17 @@ const ProductInfoLayout = ({
         <span className={cx('info-price')}>￦ {price.toLocaleString()}</span>
       </td>
       <td className={cx('table-data')}>
-        <Button color="outline" size="s" width="60px">
+        <Button
+          color="outline"
+          size="s"
+          width="60px"
+          onClick={() => router.push(`/seller/upload/${id}`)}
+        >
           수정
         </Button>
       </td>
       <td className={cx('table-data')}>
-        <Button color="black" size="s" width="60px">
+        <Button color="black" size="s" width="60px" onClick={() => handleDelete(id)}>
           삭제
         </Button>
       </td>
