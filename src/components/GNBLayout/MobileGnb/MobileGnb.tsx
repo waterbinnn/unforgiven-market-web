@@ -7,6 +7,7 @@ import { BaseModal } from '@/components';
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
+import { getUserType } from '@/utils';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ interface Props {
 
 export const MobileGnb = ({ setShowGnb }: Props) => {
   const { data: session } = useSession();
-  const userType = session?.user_type;
+  const { userType } = getUserType();
 
   const router = useRouter();
 
