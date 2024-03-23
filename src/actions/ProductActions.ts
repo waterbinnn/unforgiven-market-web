@@ -55,7 +55,6 @@ const getSellerProducts = async (page?: string) => {
       success: true,
     };
   } catch (err) {
-    console.log(err);
     return {
       data: null,
       list: null,

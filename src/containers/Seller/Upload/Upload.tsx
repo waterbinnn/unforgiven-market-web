@@ -94,7 +94,6 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
     if (isEdit && productId && formData && token) {
       //수정
       const res = await productManage.updateProduct(formData, productId, token);
-      console.log(res);
       isSuccess(res.status);
     }
   };
