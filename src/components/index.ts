@@ -12,3 +12,4 @@ export * from './PaymentForm';
 export * from './RadioButton';
 export * from './Table';
 export * from './Sidebar';
+export * from './CurrencyInput';

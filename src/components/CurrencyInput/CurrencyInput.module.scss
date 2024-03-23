@@ -1,0 +1,22 @@
+.number-input {
+  padding: 8px 6px;
+  border: none;
+  outline: none;
+
+  &-wrap {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid $light-gray;
+  }
+}
+
+.count-text {
+  font-size: 12px;
+  line-height: 1.2;
+  display: block;
+  padding: 8px 8px;
+  border-left: 1px solid $light-gray;
+  color: $gray;
+}
