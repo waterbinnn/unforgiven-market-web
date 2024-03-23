@@ -2,7 +2,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { ShoppingMethod } from './sellerTypes';
 
 interface PostProduct {
-  image?: File; //이미지 파일(*.jpg, *.gif, *.png),
+  image?: File | string; //이미지 파일(*.jpg, *.gif, *.png),
   product_name: string;
   price: number;
   shipping_method: ShoppingMethod | string;
