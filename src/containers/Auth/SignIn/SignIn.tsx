@@ -10,6 +10,7 @@ import { SignInReq } from '@/types';
 import { signIn } from 'next-auth/react';
 import CommonStyle from '../../../styles/authStyle.module.scss';
 import { message } from 'antd';
+import { useCookies } from 'next-client-cookies';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -20,6 +21,7 @@ interface Props {
 export const SignIn = ({ type }: Props) => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState<string>('');
+  const cookies = useCookies();
 
   const {
     register,
@@ -47,7 +49,9 @@ export const SignIn = ({ type }: Props) => {
 
       if (res?.ok) {
         router.push('/');
+        cookies.set('user_type', type);
       }
+
       if (res?.error === 'CredentialsSignin') {
         setErrorMsg('아이디 혹은 비밀번호가 일치하지 않습니다.');
         setValue('username', '');
