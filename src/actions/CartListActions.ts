@@ -13,7 +13,6 @@ const getCartList = async () => {
       data: res.data,
     };
   } catch (err) {
-    console.log(err);
     return {
       data: null,
     };
@@ -27,9 +26,7 @@ const postCart = async (data: PostCart) => {
     return {
       data: res.data,
     };
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 const removeItem = async (id: string) => {
