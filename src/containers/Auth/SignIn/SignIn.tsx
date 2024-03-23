@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { SignInReq } from '@/types';
 import { signIn } from 'next-auth/react';
 import CommonStyle from '../../../styles/authStyle.module.scss';
+import { message } from 'antd';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -43,8 +44,10 @@ export const SignIn = ({ type }: Props) => {
         ...formData,
         redirect: false,
       });
-      router.push('/');
 
+      if (res?.ok) {
+        router.push('/');
+      }
       if (res?.error === 'CredentialsSignin') {
         setErrorMsg('아이디 혹은 비밀번호가 일치하지 않습니다.');
         setValue('username', '');
@@ -53,7 +56,7 @@ export const SignIn = ({ type }: Props) => {
         setError('password', { type: 'custom' });
       }
     } catch (error) {
-      console.log(error);
+      message.error('문제가 발생했습니다. 다시 시도해 주세요.');
     }
   };
 
