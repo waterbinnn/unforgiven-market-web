@@ -1,6 +1,6 @@
-import { BuyerSignupReq, BuyerSignupRes, SellerSignupRes, SignInReq } from '@/types';
-import { AxiosPromise } from 'axios';
-import { axiosAuth } from './axiosInstance';
+import { BuyerSignupReq, SignInReq } from '@/types';
+import axios, { AxiosPromise } from 'axios';
+import { axiosAuth } from './axiosServer';
 
 /**
  * @name authManage
@@ -15,7 +15,7 @@ interface AuthManage {
    * @param {BuyerSignupReq}
    * @return {AxiosPromise<BuyerSignupRes>}
    **/
-  readonly buyerSignup: (data: BuyerSignupReq) => AxiosPromise<BuyerSignupRes>;
+  readonly buyerSignup: (data: BuyerSignupReq) => AxiosPromise;
 
   /**
    * @description 구매자 회원가입
@@ -24,7 +24,7 @@ interface AuthManage {
    * @param {SellerSignupReq}
    * @return {AxiosPromise<SellerSignupRes>}
    **/
-  readonly sellerSignup: (data: BuyerSignupReq) => AxiosPromise<SellerSignupRes>;
+  readonly sellerSignup: (data: BuyerSignupReq) => AxiosPromise;
 
   /**
    * @description 구매자 회원가입 ID 중복 검사
@@ -56,25 +56,32 @@ interface AuthManage {
   readonly signIn: (data: any) => AxiosPromise;
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const header = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 const authManage: AuthManage = {
   buyerSignup: (data: BuyerSignupReq) => {
-    return axiosAuth.post(`accounts/signup/`, data);
+    return axios.post(`${baseUrl}accounts/signup/`, data, header);
   },
 
   sellerSignup: (data: BuyerSignupReq) => {
-    return axiosAuth.post(`accounts/signup_seller/`, data);
+    return axios.post(`${baseUrl}accounts/signup_seller/`, data, header);
   },
 
   checkIdValid: (username: string) => {
-    return axiosAuth.post(`accounts/signup/valid/username/`, {
-      username,
-    });
+    return axios.post(`${baseUrl}accounts/signup/valid/username/`, { username }, header);
   },
 
   checkCompanyNumberValid: (company_registration_number: string) => {
-    return axiosAuth.post(`accounts/signup/valid/company_registration_number/`, {
-      company_registration_number,
-    });
+    return axios.post(
+      `${baseUrl}accounts/signup/valid/company_registration_number/`,
+      { company_registration_number },
+      header,
+    );
   },
 
   signIn: (data: SignInReq) => {

@@ -6,7 +6,7 @@
 import { CartListType, CartResult, PostCart, UpdateCartQuantity } from '@/types';
 import { AxiosPromise } from 'axios';
 
-import { axiosAuth } from './axiosInstance';
+import { axiosAuth } from './axiosServer';
 
 interface CartManage {
   /**

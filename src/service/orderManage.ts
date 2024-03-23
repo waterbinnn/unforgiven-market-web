@@ -2,7 +2,7 @@ import { OrderListData, OneOrderRequest, CartOrderRequest, OrderResult } from '@
 
 import { AxiosPromise } from 'axios';
 
-import { axiosAuth } from './axiosInstance';
+import { axiosAuth } from './axiosServer';
 
 interface OrderManage {
   /**

@@ -5,7 +5,7 @@
 
 import { SellerListData } from '@/types/sellerTypes';
 import { AxiosPromise } from 'axios';
-import { axiosAuth } from './axiosInstance';
+import { axiosAuth } from './axiosServer';
 
 interface DashboardManage {
   /**

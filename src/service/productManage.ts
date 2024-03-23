@@ -1,6 +1,6 @@
 import { PostProduct, ProductDataListType, ProductListType, UpdateProduct } from '@/types';
 import axios, { AxiosPromise } from 'axios';
-import { axiosAuth } from './axiosInstance';
+import { axiosAuth } from './axiosServer';
 
 /**
  * @name productManage
