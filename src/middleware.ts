@@ -1,16 +1,13 @@
-import { getServerSession } from 'next-auth';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
-import { authOptions } from './lib';
 
 export async function middleware(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  const userType = session?.user_type;
+  let user = req.cookies.get('user_type');
 
   const token = await getToken({
     req: req,
     secret: process?.env?.NEXTAUTH_SECRET,
-    cookieName: 'next-auth.session-token',
+    raw: true,
   });
 
   const { pathname } = req.nextUrl;
@@ -29,14 +26,14 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  if (token && userType === 'BUYER') {
+  if (token && user?.value === 'BUYER') {
     if (pathname.startsWith('/seller')) {
       const url = new URL(`/`, req.url);
       return NextResponse.redirect(url);
     }
   }
 
-  if (token && userType === 'SELLER') {
+  if (token && user?.value === 'SELLER') {
     if (pathname.startsWith('/cart') || pathname.startsWith('/order')) {
       const url = new URL(`/`, req.url);
       return NextResponse.redirect(url);

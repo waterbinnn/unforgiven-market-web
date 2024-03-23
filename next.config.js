@@ -3,8 +3,16 @@ const path = require('path');
 
 module.exports = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
-    domains: ['openmarket.weniv.co.kr'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'openmarket.weniv.co.kr',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   typescript: {},
   serverRuntimeConfig: {
