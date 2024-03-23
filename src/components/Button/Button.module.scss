@@ -59,6 +59,11 @@
     &:hover {
       filter: drop-shadow(0 0 2px rgb(0 0 0 / 20%));
     }
+
+    &.active {
+      color: $white;
+      background-color: $black;
+    }
   }
 
   &.black {

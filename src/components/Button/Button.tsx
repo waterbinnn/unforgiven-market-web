@@ -11,6 +11,7 @@ export interface ButtonProps {
   width?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
+  active?: boolean;
   children: React.ReactNode;
   onClick?: React.MouseEventHandler;
 }
@@ -21,6 +22,7 @@ export const Button = ({
   children,
   width,
   disabled = false,
+  active = false,
   onClick,
   type = 'button',
   ...rest
@@ -28,7 +30,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      className={cx('button', size, color)}
+      className={cx('button', size, color, { active })}
       style={{ width: width }}
       disabled={disabled}
       onClick={onClick}
