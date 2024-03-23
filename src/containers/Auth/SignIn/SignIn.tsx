@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import styles from './signIn.module.scss';
+import styles from './SignIn.module.scss';
 import { Button, Input } from '@/components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
