@@ -54,11 +54,11 @@ export const Register = ({ type }: Props) => {
     const username = getValues('username');
 
     try {
-      const res = await authManage.checkIdValid(username);
+      const { data } = await authManage.checkIdValid(username);
 
-      if ('FAIL_Message' in res) {
+      if ('FAIL_Message' in data) {
         setCheckIdValid('error');
-        setCheckIdValidMsg(res.FAIL_Message);
+        setCheckIdValidMsg(data.FAIL_Message);
       } else {
         if (username.length > 1 && username.match(idRule)) {
           setCheckIdValid('valid');
@@ -77,13 +77,13 @@ export const Register = ({ type }: Props) => {
   const onCheckStoreNameValid = async () => {
     const company_registration_number = getValues('company_registration_number');
     try {
-      const res = await authManage.checkCompanyNumberValid(company_registration_number);
-      if ('FAIL_Message' in res) {
+      const { data } = await authManage.checkCompanyNumberValid(company_registration_number);
+      if ('FAIL_Message' in data) {
         setRegistrationNumberValid('error');
-        setRegistrationNumberMsg(res.FAIL_Message);
+        setRegistrationNumberMsg(data.FAIL_Message as string);
       } else {
         setRegistrationNumberValid('valid');
-        setRegistrationNumberMsg(res.Success);
+        setRegistrationNumberMsg(data.statusText);
       }
     } catch (err) {
       console.log(err);
@@ -112,20 +112,21 @@ export const Register = ({ type }: Props) => {
       try {
         if (type === 'BUYER') {
           //구매자 회원가입 로직
-          const res = await authManage.buyerSignup(formData);
-          if (Object.values(res)[0] === '해당 사용자 전화번호는 이미 존재합니다.') {
-            setPhoneError(res.phone_number);
+          const { data } = await authManage.buyerSignup(formData);
+
+          if (Object.values(data)[0] === '해당 사용자 전화번호는 이미 존재합니다.') {
+            setPhoneError(data.phone_number);
             setValue('middleNum', '');
             setValue('lastNum', '');
-          } else if (Object.values(res).length === 4) {
+          } else if (Object.values(data).length === 4) {
             signIn(undefined, { callbackUrl: '/' });
           }
         } else {
           //판매자 회원가입 로직
           const res = await authManage.sellerSignup(sellerFormData);
-          if (res.store_name) {
+          if (data.store_name) {
             setValue('store_name', '');
-            setError('store_name', { type: 'custom', message: res.store_name });
+            setError('store_name', { type: 'custom', message: data.store_name });
           } else {
             handleRouter('/signin/seller');
           }

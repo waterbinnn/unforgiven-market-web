@@ -26,9 +26,9 @@ export const LoadMore = () => {
       if (!res) {
         return;
       }
-      if (res.results) {
+      if (res.data?.results) {
         setIsLoading(true);
-        setProduct([...product, ...res.results]);
+        setProduct([...product, ...res.data.results]);
         setPage(next);
         setIsLoading(false);
       }

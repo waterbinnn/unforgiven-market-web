@@ -92,7 +92,7 @@ export const Order = () => {
           product_id: orderDetail[0].product_id,
           quantity: orderDetail[0].quantity,
         };
-        const { success, res } = await postOrder({ ...formData, ...oneReq });
+        const { success } = await postOrder({ ...formData, ...oneReq });
         if (success) {
           message.success('주문이 완료되었습니다.');
 
