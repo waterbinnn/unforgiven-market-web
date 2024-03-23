@@ -1,7 +1,6 @@
 import { authManage } from '@/service';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { cookies } from 'next/headers';
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -23,18 +22,16 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const res = await authManage.signIn(credentials);
+          const { data } = await authManage.signIn(credentials);
 
-          if (!res || res.FAIL_Message) {
+          if (!data) {
             return null;
           }
 
-          cookies().set('USER_TYPE', res['user_type'], { path: '/' });
-
           return {
-            id: res.id,
-            token: res.token,
-            user_type: res.user_type,
+            id: data.id,
+            token: data.token,
+            user_type: data.user_type,
           };
         } catch (err) {
           console.log(err);
@@ -44,18 +41,19 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    jwt: ({ token, user }) => {
-      user && (token.user = user);
 
-      return Promise.resolve(token);
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
     },
     session: async ({ session, token }) => {
       /*@ts-ignore */
       session = token.user;
-      return Promise.resolve(session);
+      return session;
     },
   },
+
   secret: process.env.NEXTAUTH_SECRET,
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
