@@ -1,21 +1,20 @@
+'use client';
+
 import { Button } from '@/components';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import classNames from 'classnames/bind';
 
 import styles from './SignInButton.module.scss';
-import { useUserType } from '@/hooks';
-const cx = classNames.bind(styles);
 
+const cx = classNames.bind(styles);
 export const SignInButton = () => {
   const { data: session } = useSession();
-  const { removeUserType } = useUserType();
 
   const router = useRouter();
 
   const onLogout = () => {
     signOut();
-    removeUserType;
     router.push('/');
   };
 

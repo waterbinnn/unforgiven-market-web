@@ -10,7 +10,7 @@ import { PostCart, ProductListType } from '@/types';
 import { useOrderStore } from '@/store';
 import { useRouter } from 'next/navigation';
 import Loading from '@/app/loading';
-import { useUserType } from '@/hooks';
+import { getUserType } from '@/utils';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +20,7 @@ interface Props {
 
 export const ProductDetail = ({ detail }: Props) => {
   const { setOrderKind, setOrderDetail } = useOrderStore();
-  const { userType } = useUserType();
+  const { userType } = getUserType();
 
   const [count, setCount] = useState<number>(1);
   const router = useRouter();
@@ -50,7 +50,7 @@ export const ProductDetail = ({ detail }: Props) => {
         <Suspense fallback={<Loading />}>
           <div className={cx('image-wrap', { soldout: detail.stock === 0 })}>
             <Image
-              src={detail.image}
+              src={detail.image as string}
               alt={detail.product_name}
               width={500}
               height={500}

@@ -11,17 +11,15 @@ import { useState } from 'react';
 import { MobileGnb } from '../MobileGnb';
 import { usePathname, useRouter } from 'next/navigation';
 import { SignInButton } from '@/components/SignInButton';
-import { useSession } from 'next-auth/react';
+import { getUserType } from '@/utils';
 
 const cx = classNames.bind(styles);
 
 export const Header = () => {
-  const { data: session } = useSession();
-  const userType = session?.user_type;
-
   const browserSize = useResize({ throttleMs: 200 });
   const router = useRouter();
   const pathName = usePathname();
+  const { userType } = getUserType();
 
   const [showGnb, setShowGnb] = useState<Boolean>(false);
 
