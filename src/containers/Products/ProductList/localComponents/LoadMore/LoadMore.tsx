@@ -9,7 +9,6 @@ import { ProductListType } from '@/types';
 import { useCallback, useEffect, useState } from 'react';
 import { getProductList } from '@/actions';
 import { ProductItem } from '@/containers';
-import Loading from '@/app/loading';
 
 const cx = classNames.bind({ ...styles, ...ProductStyle });
 
@@ -47,9 +46,17 @@ export const LoadMore = ({ initialProducts }: { initialProducts: ProductListType
         <ProductItem product={item} key={item.product_id} />
       ))}
 
-      <div className={cx('wrapper')} ref={ref}>
-        {inView && isLoading && <Loading />}
-      </div>
+      {inView && isLoading && (
+        <div className={cx('wrapper')} ref={ref}>
+          <img
+            className={cx('image')}
+            src={'/assets/spinner.svg'}
+            width={50}
+            height={50}
+            alt="loading..."
+          />
+        </div>
+      )}
     </>
   );
 };
