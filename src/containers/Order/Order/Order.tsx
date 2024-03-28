@@ -5,13 +5,12 @@ import classNames from 'classnames/bind';
 import styles from './Order.module.scss';
 
 import { OrderDetail } from '../OrderDetail';
-import { Button, Checkbox, RadioButton, Input, Table } from '@/components';
+import { Button, Checkbox, RadioButton, Input, Table, LoadingSpinner } from '@/components';
 import { paymentsOptions } from '../contents';
 
 import { CartOrderRequest, PaymentType } from '@/types';
 import { useOrderStore } from '@/store';
 import { useRouter } from 'next/navigation';
-import Loading from '@/app/loading';
 import { FieldValues, useForm } from 'react-hook-form';
 import { postOrder } from '@/actions';
 import { message } from 'antd';
@@ -122,7 +121,7 @@ export const Order = () => {
               orderDetail.map((item) => <OrderDetail detail={item} key={item.product_id} />)}
           </Table>
         ) : (
-          <Loading />
+          <LoadingSpinner />
         )}
 
         <div className={cx('total-price')}>total : {total.toLocaleString()}</div>
@@ -281,7 +280,7 @@ export const Order = () => {
       </div>
     </div>
   ) : (
-    <Loading />
+    <LoadingSpinner />
   );
 };
 

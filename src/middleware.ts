@@ -42,3 +42,7 @@ export async function middleware(req: NextRequest) {
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ['/cart', '/order', '/seller/:path*', '/signin/:path*', '/signup/:path*'],
+};

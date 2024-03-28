@@ -9,11 +9,17 @@ import { useRouter } from 'next/navigation';
 import { SellerListData, SellerListResult } from '@/types/sellerTypes';
 import { deleteProduct } from '@/actions';
 import { message } from 'antd';
+import { useState } from 'react';
+import Loading from '/public/assets/spinner.svg';
 
 const cx = classNames.bind(styles);
 
 export const Dashboard = ({ data, list }: { data: SellerListData; list: SellerListResult[] }) => {
   const router = useRouter();
+
+  const goUploadPage = () => {
+    router.push('/seller/upload');
+  };
 
   return (
     <div className={cx('dashboard-container', 'container')}>
@@ -21,7 +27,7 @@ export const Dashboard = ({ data, list }: { data: SellerListData; list: SellerLi
         <div className={cx('title-wrap')}>
           <h2 className={cx('h2')}>DASHBOARD</h2>
         </div>
-        <Button size="m" color="green" onClick={() => router.push('/seller/upload')}>
+        <Button size="m" color="green" onClick={goUploadPage}>
           상품업로드
         </Button>
       </div>
@@ -66,11 +72,20 @@ const ProductInfoLayout = ({
   id: number;
 }) => {
   const router = useRouter();
+  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isDeletePending, setIsDeletePending] = useState<boolean>(false);
+
+  const goUploadPage = () => {
+    setIsPending(true);
+    router.push(`/seller/upload/${id}`);
+  };
 
   const handleDelete = async (id: number) => {
+    setIsDeletePending(true);
     const { success } = await deleteProduct(id);
     if (success) {
       message.success('삭제에 성공했습니다.');
+      setIsDeletePending(false);
     } else {
       message.success('문제가 생겼습니다. 다시 시도해 주세요.');
     }
@@ -89,18 +104,13 @@ const ProductInfoLayout = ({
         <span className={cx('info-price')}>￦ {price.toLocaleString()}</span>
       </td>
       <td className={cx('table-data')}>
-        <Button
-          color="outline"
-          size="s"
-          width="60px"
-          onClick={() => router.push(`/seller/upload/${id}`)}
-        >
-          수정
+        <Button color="outline" size="m" width="100px" onClick={goUploadPage}>
+          {isPending ? <Loading className={cx('spinner')} /> : '수정'}
         </Button>
       </td>
       <td className={cx('table-data')}>
-        <Button color="black" size="s" width="60px" onClick={() => handleDelete(id)}>
-          삭제
+        <Button color="black" size="m" width="100px" onClick={() => handleDelete(id)}>
+          {isDeletePending ? <Loading className={cx('spinner')} /> : '삭제'}
         </Button>
       </td>
     </tr>

@@ -1,4 +1,5 @@
 'use client';
+
 import classNames from 'classnames/bind';
 import styles from '../ProductList.module.scss';
 import { ProductListType } from '@/types';
@@ -14,7 +15,7 @@ export const ProductItem = ({ product }: Props) => {
   const router = useRouter();
 
   const handleGoToDetail = () => {
-    router.push(`products/${product.product_id}`);
+    router.push(`/${product.product_id}`);
   };
 
   return (

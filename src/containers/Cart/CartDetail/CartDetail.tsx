@@ -26,6 +26,7 @@ export const CartDetail = ({ product, detail }: Props) => {
   const [count, _setCount] = useState<number>(product.quantity);
   const [newCount, setNewCount] = useState<number>(count);
   const [countMsg, setCountMsg] = useState<string>('');
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   //수량 수정 모달 close 시 동작하는 함수
   const handleCloseModal = () => {
@@ -40,14 +41,19 @@ export const CartDetail = ({ product, detail }: Props) => {
       quantity: newCount,
       is_active: true,
     };
-
+    setIsPending(true);
     await updateCount(product.cart_item_id, updateCountReq);
-    await setIsUpdateCount(false);
+    setTimeout(() => {
+      setIsPending(false);
+      setIsUpdateCount(false);
+    }, 500);
   };
 
   // 삭제 버튼 클릭시 동작하는 함수
   const deleteItem = async () => {
+    setIsPending(true);
     await removeItem(product.cart_item_id.toString());
+    setIsPending(false);
   };
 
   const handleOrder = () => {
@@ -99,7 +105,7 @@ export const CartDetail = ({ product, detail }: Props) => {
         <ContentsModal
           onClose={handleCloseModal}
           onOk={handleUpdateCount}
-          okText={'SAVE'}
+          okText={isPending ? 'SAVING..' : 'SAVE'}
           isInfo={false}
           contents={
             <div className={cx('modal-wrap')}>
@@ -125,7 +131,7 @@ export const CartDetail = ({ product, detail }: Props) => {
 
       <button
         type="button"
-        className={cx('btn-del-item')}
+        className={cx('btn-del-item', { pending: isPending })}
         id={product.product_id.toString()}
         onClick={deleteItem}
       >

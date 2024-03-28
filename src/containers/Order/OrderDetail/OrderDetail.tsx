@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './OrderDetail.module.scss';
 
 import { OrderDetailType } from '@/store';
+import { LoadingSpinner } from '@/components';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +43,6 @@ export const OrderDetail = ({ detail }: { detail: OrderDetailType | null }) => {
       </tr>
     </>
   ) : (
-    <div>Loading</div>
+    <LoadingSpinner />
   );
 };

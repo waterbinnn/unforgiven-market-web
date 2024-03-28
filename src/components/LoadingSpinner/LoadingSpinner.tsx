@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Loading() {
+export const LoadingSpinner = () => {
   return (
     <div className="container">
       <div className="loading-container">
@@ -8,4 +8,4 @@ export default function Loading() {
       </div>
     </div>
   );
-}
+};

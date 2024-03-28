@@ -27,8 +27,19 @@ export const CartList = ({
   totalShippingFee: number;
 }) => {
   const router = useRouter();
+
   const { setOrderKind, setOrderDetail } = useOrderStore();
+
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [productDetail, _setProductDetail] = useState(detail ? detail.map((v) => v.data) : []);
+
+  if (!carts || !detail) {
+    return (
+      <div className={cx('no-items-wrap')}>
+        <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
+      </div>
+    );
+  }
 
   const handleOrder = () => {
     const orderList: OrderDetailType[] = [];
@@ -44,13 +55,11 @@ export const CartList = ({
     router.push('/order');
   };
 
-  if (!carts || !detail) {
-    return (
-      <div className={cx('no-items-wrap')}>
-        <p className={cx('text')}>장바구니에 담은 물건이 없습니다.</p>
-      </div>
-    );
-  }
+  const handleDeleteAllProducts = () => {
+    setIsPending(true);
+    removeCart();
+    setIsPending(false);
+  };
 
   return (
     <>
@@ -61,11 +70,9 @@ export const CartList = ({
 
           <button
             type="button"
-            onClick={() => {
-              removeCart();
-            }}
-            disabled={carts?.count === 0}
-            className={cx('del-btn')}
+            onClick={handleDeleteAllProducts}
+            disabled={carts?.count === 0 || isPending}
+            className={cx('del-btn', { pending: isPending })}
           >
             전체 삭제
           </button>
