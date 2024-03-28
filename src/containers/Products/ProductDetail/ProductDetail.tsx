@@ -39,14 +39,11 @@ export const ProductDetail = ({ detail }: Props) => {
     router.push('/order');
   };
 
-  if (!detail) {
-    return <Loading />;
-  }
-
   return (
     <main className={cx('container')}>
       <section className={cx('detail-container')}>
         <h2 className={cx('visually-hidden')}>상품상세페이지</h2>
+
         <Suspense fallback={<Loading />}>
           <div className={cx('image-wrap', { soldout: detail.stock === 0 })}>
             <Image

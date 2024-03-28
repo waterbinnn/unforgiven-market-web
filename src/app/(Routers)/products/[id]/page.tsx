@@ -1,5 +1,6 @@
 import { getProductDetail } from '@/actions';
 import { ProductDetail } from '@/containers';
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: { id: string };
@@ -8,13 +9,13 @@ interface Props {
 const ProductDetailPage = async ({ params }: Props) => {
   const productId = params.id.toString();
 
-  const { data: detail } = await getProductDetail(productId);
+  const { data: detail, success } = await getProductDetail(productId);
 
-  if (!detail) {
-    return <div>no data</div>;
+  if (!success) {
+    return notFound;
   }
 
-  return <ProductDetail detail={detail} />;
+  return <ProductDetail detail={detail!} />;
 };
 
 export default ProductDetailPage;
