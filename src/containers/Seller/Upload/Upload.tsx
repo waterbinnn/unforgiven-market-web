@@ -12,6 +12,7 @@ import { PostProduct, ProductListType } from '@/types';
 import { message } from 'antd';
 import { useSession } from 'next-auth/react';
 import { productManage } from '@/service';
+import Loading from '/public/assets/spinner.svg';
 
 const cx = classNames.bind(styles);
 
@@ -45,6 +46,7 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
   const [imageSrc, setImageSrc] = useState<string>('');
   const [imageFile, setImageFile] = useState<File>();
   const [delivery, setDelivery] = useState(isEdit ? detail?.shipping_method : 'PARCEL');
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const imageRef = useRef<HTMLInputElement>(null);
   const { data: session } = useSession();
@@ -225,7 +227,7 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
               disabled={isEdit ? !isValid : !isValid || imageSrc.length === 0}
               type="submit"
             >
-              {isEdit ? '수정' : '저장'}
+              {!isPending ? isEdit ? '수정' : '저장' : <Loading className={cx('spinner')} />}
             </Button>
           </div>
         </form>

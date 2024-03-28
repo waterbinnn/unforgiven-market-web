@@ -89,6 +89,10 @@
   top: 10px;
   right: 0;
   padding-bottom: 4px;
+
+  &.pending {
+    cursor: progress;
+  }
 }
 
 .modal-wrap {
