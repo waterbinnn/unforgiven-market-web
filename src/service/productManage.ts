@@ -61,7 +61,6 @@ interface ProductManage {
 }
 
 const productManage: ProductManage = {
-  //only buyer
   getProductList: (page?: number) => {
     return axiosAuth.get(`products/${page ? `?page=${page}` : ''}`);
   },
