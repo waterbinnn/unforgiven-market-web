@@ -1,0 +1,54 @@
+%base-style {
+  width: 100%;
+  height: 20px;
+  background-color: $light-gray;
+  border-radius: 50px;
+}
+
+.detail-container {
+  display: flex;
+  gap: 90px;
+  margin: 200px 0;
+}
+.image-wrap {
+  border-radius: 2px;
+  width: 500px;
+  height: 500px;
+  background-color: $light-gray;
+}
+
+.store {
+  @extend %base-style;
+  width: 30%;
+}
+
+.detail-info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 340px;
+}
+
+.info-detail {
+  @extend %base-style;
+}
+
+.shimmer {
+  &.store,
+  &.image-wrap,
+  &.info-detail {
+    animation: skeleton-loading 3s infinite linear;
+    background: linear-gradient(90deg, $light-gray 25%, $skeleton-gray 50%, $light-gray 75%);
+    background-size: 400% 100%;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200%;
+  }
+
+  100% {
+    background-position: 200%;
+  }
+}

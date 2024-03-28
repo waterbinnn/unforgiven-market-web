@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
-import styles from './Loading.module.scss';
+import styles from './Skeleton.module.scss';
 const cx = classNames.bind(styles);
 
-export const ProductListLoading = () => {
-  const skeletonList = [...new Array(30)].map((_, i) => i + 1);
+export default function Loading() {
+  const skeletonList = [...new Array(15)].map((_, i) => i + 1);
 
   return (
     <div className={cx('container', 'list-container')}>
@@ -20,4 +20,4 @@ export const ProductListLoading = () => {
       </ul>
     </div>
   );
-};
+}

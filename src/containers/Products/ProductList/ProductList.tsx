@@ -5,8 +5,6 @@ import styles from './ProductList.module.scss';
 
 import { ProductListType } from '@/types';
 import { LoadMore } from './localComponents';
-import { Suspense } from 'react';
-import { ProductListLoading } from './Loading';
 
 const cx = classNames.bind(styles);
 
@@ -16,9 +14,7 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
       <section className={cx('container')}>
         <h2 className={cx('visually-hidden')}>전체상품목록</h2>
         <ul className={cx('list-container')} role="list">
-          <Suspense fallback={<ProductListLoading />}>
-            <LoadMore initialProducts={initialProducts!} />
-          </Suspense>
+          <LoadMore initialProducts={initialProducts!} />
         </ul>
       </section>
     </>
