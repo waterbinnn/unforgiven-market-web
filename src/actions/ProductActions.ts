@@ -8,12 +8,13 @@ const getProductList = async (page: number) => {
   try {
     const res = await productManage.getProductList(page);
     return {
+      success: true,
       data: res.data,
     };
   } catch (err) {
     console.log(err);
     return {
-      data: null,
+      success: false,
     };
   }
 };
@@ -22,11 +23,13 @@ const getProductDetail = async (id: string) => {
   try {
     const res = await productManage.getProductDetail(id);
     return {
+      success: true,
       data: res.data,
     };
   } catch (err) {
     console.log(err);
     return {
+      success: false,
       data: null,
     };
   }
