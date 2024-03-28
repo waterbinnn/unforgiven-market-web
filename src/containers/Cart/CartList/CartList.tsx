@@ -91,7 +91,7 @@ export const CartList = ({
         <PaymentForm totalPrice={totalPrice} shipping={totalShippingFee} />
 
         <div className={cx('btn-order-wrap')}>
-          <Button size={'m'} color={'yellow'} onClick={handleOrder}>
+          <Button size={'m'} color={'yellow'} onClick={handleOrder} disabled={carts.count === 0}>
             ORDER
           </Button>
         </div>
