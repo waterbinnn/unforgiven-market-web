@@ -2,12 +2,11 @@
 
 import classNames from 'classnames/bind';
 import styles from './OrderList.module.scss';
-import { Table } from '@/components';
+import { LoadingSpinner, Table } from '@/components';
 import { OrderListData } from '@/types';
 import dayjs from 'dayjs';
 import { OrderDetailType } from '@/store';
 import { OrderDetail } from '../OrderDetail';
-import Loading from '@/app/loading';
 import { paymentsOptions } from '../contents';
 
 const cx = classNames.bind(styles);
@@ -26,7 +25,7 @@ interface Props {
 
 export const OrderList = ({ orderDetails }: Props) => {
   if (!orderDetails) {
-    return <Loading />;
+    return <LoadingSpinner />;
   }
 
   return (
