@@ -13,94 +13,22 @@
   border-bottom: 1px solid $gray;
   z-index: 10;
   transition: all 0.3s ease-in-out;
-
-  &-title {
-    position: relative;
-  }
-}
-
-.search-wrap {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: all 0.3s ease-in-out;
-
-  @media screen and (max-width: $mobile-size) {
-    justify-content: center;
-  }
-}
-
-.input-wrap {
-  position: relative;
-
-  .search {
-    width: 330px;
-    font-family: $font-basic;
-    font-size: 16px;
-    letter-spacing: 0.02em;
-    border-radius: 2px;
-    border: 1px solid $gray;
-    transition: all 2s ease-in-out;
-
-    &:focus {
-      outline: none;
-    }
-
-    &::placeholder {
-      font-family: $font-primary;
-      color: $gray;
-    }
-
-    @media screen and (max-width: $tablet-size) {
-      .search {
-        width: 150px;
-      }
-    }
-
-    @media screen and (max-width: $mobile-size) {
-      .search {
-        font-size: 12px;
-      }
-    }
-  }
-}
-
-.btn-search {
-  position: absolute;
-  right: -8px;
-  top: 3px;
-  background-color: $blue;
-  width: 20px;
-  height: 20px;
-  padding: 2px 2px 2px 3px;
-  border-radius: 50%;
-  margin-left: -10px;
-  background-color: $pink;
-  transition: all 2s ease-in-out;
+  min-width: 360px;
 }
 
 .header-title {
-  font-size: 40px;
-  font-weight: bold;
-  padding-top: 12px;
-
-  @media screen and (max-width: $mobile-size) {
-    font-size: 40px;
-    margin-top: 10px;
-    padding: 0;
-  }
+  font-size: 30px;
+  font-weight: 900;
+  margin-top: 10px;
+  display: block;
+  color: $green;
 }
 
 .btn-wrap {
   display: flex;
   flex-wrap: nowrap;
   gap: 8px;
-
-  button {
-    transition: all 0.2s ease-in;
-    width: 80px;
-    padding: 2px 8px;
-  }
+  transition: all 0.2s ease-in;
 
   @media screen and (max-width: $mobile-size) {
     margin-top: 10px;

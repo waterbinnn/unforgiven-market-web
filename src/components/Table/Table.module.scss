@@ -1,6 +1,7 @@
 .table-container {
   max-height: 900px;
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
   margin: 0 auto 20px;
   display: flex;
