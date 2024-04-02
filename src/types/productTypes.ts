@@ -21,7 +21,7 @@ interface ProductListType extends PostProduct {
 
 interface ProductDataListType {
   count: number;
-  next: string;
+  next: string | null;
   previous: null;
   results: ProductListType[];
 }
