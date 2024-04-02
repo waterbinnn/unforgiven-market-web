@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   padding: 20px;
+  min-width: 350px;
   font-size: 30px;
   color: $black;
 
@@ -13,6 +14,7 @@
 .cart-container {
   width: 100%;
   max-width: 800px;
+  min-width: 350px;
   margin: 0 auto 50px;
   display: flex;
   flex-direction: column;

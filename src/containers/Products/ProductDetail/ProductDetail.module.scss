@@ -92,18 +92,18 @@
       .data-title {
         width: 100%;
         font-size: 12px;
+        font-weight: 300;
         line-height: 16px;
       }
 
-      .data-num {
+      .detail-num {
         font-size: 15px;
+        font-weight: 500;
         line-height: 18px;
       }
     }
-
-    .data-fee {
-      font-size: 18px;
-      line-height: 22px;
+    .detail-fee {
+      font-weight: 500;
     }
   }
 

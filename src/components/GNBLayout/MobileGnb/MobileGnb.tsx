@@ -43,7 +43,7 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
             <button
               className={cx('gnb-korean')}
               type="button"
-              onClick={() => handleRouter('/seller-center')}
+              onClick={() => handleRouter('/seller/dashboard')}
             >
               판매자센터
             </button>

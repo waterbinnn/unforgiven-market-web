@@ -41,13 +41,13 @@ export const Header = () => {
               {userType === 'SELLER' ? (
                 <Button
                   color="outline"
-                  width="120px"
+                  width="100px"
                   onClick={() => router.push('/seller/dashboard')}
                 >
                   👨‍🌾 판매자센터
                 </Button>
               ) : (
-                <Button onClick={() => router.push('/cart')} color="outline">
+                <Button onClick={() => router.push('/cart')} color="outline" width="100px">
                   CART
                 </Button>
               )}

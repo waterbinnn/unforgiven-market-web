@@ -4,7 +4,7 @@ import { productManage } from '@/service';
 import { dashboardManage } from '@/service/dashboardManage';
 import { revalidatePath } from 'next/cache';
 
-const getProductList = async (page: number) => {
+const getProductList = async (page?: number) => {
   try {
     const res = await productManage.getProductList(page);
     return {

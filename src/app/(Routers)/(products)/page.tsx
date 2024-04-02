@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import Loading from './loading';
 
 const ProductPage = async () => {
-  const { data, success } = await getProductList(1);
+  const { data, success } = await getProductList();
 
   if (!success) {
     return notFound;
@@ -13,7 +13,7 @@ const ProductPage = async () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ProductList initialProducts={data?.results!} />
+      {data && <ProductList initialProducts={data.results} />}
     </Suspense>
   );
 };

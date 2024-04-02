@@ -1,20 +1,24 @@
 .button {
-  // transition: all 0.2s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &.s {
     border-radius: 20px;
     font-size: 14px;
+    line-height: 1.4;
     font-weight: 300;
     color: $black;
     text-align: center;
-    padding-top: 4px;
+    padding: 4px 0;
   }
 
   &.m {
-    padding: 12px 36px 10px;
+    padding: 12px 36px;
     text-align: center;
     border-radius: 20px;
     font-size: 14px;
+    line-height: 1.4;
     font-weight: 400;
     color: $black;
 
@@ -27,8 +31,8 @@
     padding: 8px 36px;
     text-align: center;
     border-radius: 5px;
-    font-size: 16px;
-    font-family: $font-basic;
+    font-size: 14px;
+    font-weight: 500;
     color: $black;
   }
 
@@ -64,6 +68,12 @@
       color: $white;
       background-color: $black;
     }
+
+    &:disabled {
+      &:hover {
+        filter: none;
+      }
+    }
   }
 
   &.black {
@@ -73,7 +83,12 @@
 
   &:disabled {
     background-color: $gray;
+    color: $white;
     cursor: not-allowed;
+
+    &:hover {
+      opacity: 100%;
+    }
   }
 
   &:hover {

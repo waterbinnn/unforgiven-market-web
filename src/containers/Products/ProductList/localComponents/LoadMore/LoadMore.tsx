@@ -13,11 +13,15 @@ import { ProductItem } from '@/containers';
 const cx = classNames.bind({ ...styles, ...ProductStyle });
 
 export const LoadMore = ({ initialProducts }: { initialProducts: ProductListType[] }) => {
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    root: null,
+    threshold: 0.3,
+  });
 
-  const [product, setProduct] = useState<ProductListType[]>(initialProducts);
+  const [products, setProducts] = useState<ProductListType[]>(initialProducts);
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLastPage, setIsLastPage] = useState<boolean>(false);
 
   const loadMore = useCallback(async () => {
     const { data, success } = await getProductList(page + 1);
@@ -25,29 +29,34 @@ export const LoadMore = ({ initialProducts }: { initialProducts: ProductListType
     if (!success) {
       return;
     }
-
-    if (success) {
+    if (success && data) {
       setIsLoading(true);
-      setProduct((prev) => [...prev, ...data?.results!]);
+      setProducts((prev) => [...prev, ...data.results]);
       setPage(page + 1);
       setIsLoading(false);
+
+      if (!data.next) {
+        setIsLastPage(true);
+      }
     }
   }, [page]);
 
   useEffect(() => {
     if (inView) {
-      loadMore();
+      if (!isLastPage) {
+        loadMore();
+      }
     }
   }, [inView]);
 
   return (
     <>
-      {product?.map((item) => (
+      {products?.map((item) => (
         <ProductItem product={item} key={item.product_id} />
       ))}
 
-      {inView && isLoading && (
-        <div className={cx('wrapper')} ref={ref}>
+      <div className={cx('wrapper')} ref={ref}>
+        {inView && isLoading && (
           <img
             className={cx('image')}
             src={'/assets/spinner.svg'}
@@ -55,8 +64,8 @@ export const LoadMore = ({ initialProducts }: { initialProducts: ProductListType
             height={50}
             alt="loading..."
           />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

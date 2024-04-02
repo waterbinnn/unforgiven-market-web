@@ -2,8 +2,12 @@
   margin: 30px auto;
   display: grid;
   grid-template-columns: repeat(15, 1fr);
-  grid-gap: 40px 20px;
+  grid-gap: 20px 10px;
   overflow: hidden;
+
+  @media screen and (max-width: $mobile-size) {
+    grid-gap: 20px 0px;
+  }
 }
 
 .product {
@@ -84,5 +88,10 @@
 }
 
 .data-info {
+  font-size: 13px;
   margin-left: 10px;
+
+  @media screen and (max-width: $mobile-size) {
+    font-size: 10px;
+  }
 }

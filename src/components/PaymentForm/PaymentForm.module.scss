@@ -1,66 +1,67 @@
 .payment-container {
-    max-width: 800px;
-    margin: 0 auto 50px;
-    border: 1px solid $light-gray;
-    border-radius: 4px;
-    padding: 20px 50px;
+  max-width: 800px;
+  min-width: 350px;
+  margin: 0 auto 50px;
+  border: 1px solid $light-gray;
+  border-radius: 4px;
+  padding: 20px 50px;
 
-    @media screen and (max-width: $mobile-size) {
-        width: 100%;
-        min-width: none;
-        padding: 40px 20px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    width: 100%;
+    min-width: none;
+    padding: 40px 20px;
+  }
 }
 
 .payment-wrap {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    @media screen and (max-width: $mobile-size) {
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 26px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 26px;
+  }
 }
 
 .left-wrap {
-    display: flex;
-    gap: 30px;
-    align-items: center;
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
 .item-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 
-    .title {
-        font-size: 14px;
-        color: $gray;
-        text-align: center;
+  .title {
+    font-size: 14px;
+    color: $gray;
+    text-align: center;
+  }
+
+  .num {
+    font-size: 16px;
+
+    @media screen and (max-width: $mobile-size) {
+      font-size: 14px;
     }
 
-    .num {
-        font-size: 16px;
-
-        @media screen and (max-width: $mobile-size) {
-            font-size: 14px;
-        }
-
-        &.payment {
-            color: $pink;
-        }
+    &.payment {
+      color: $pink;
     }
+  }
 }
 
 .count-icon {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 
-    @media screen and (max-width: $mobile-size) {
-        width: 15px;
-        height: 15px;
-    }
+  @media screen and (max-width: $mobile-size) {
+    width: 15px;
+    height: 15px;
+  }
 }

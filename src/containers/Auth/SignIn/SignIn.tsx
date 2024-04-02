@@ -99,7 +99,7 @@ export const SignIn = ({ type }: Props) => {
             </div>
             <div className={cx('btn-wrap')}>
               <Button color="green" size="m" type="submit">
-                Login
+                LOGIN
               </Button>
             </div>
           </form>

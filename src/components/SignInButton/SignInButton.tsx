@@ -21,11 +21,11 @@ export const SignInButton = () => {
   return (
     <>
       {session ? (
-        <Button color="black" type="button" onClick={onLogout} width="fit-content">
+        <Button color="black" type="button" onClick={onLogout} width="50px">
           <img className={cx('logout-image')} src={'/assets/icon-logout.svg'} alt="logout" />
         </Button>
       ) : (
-        <Button color="green" type="button" onClick={() => router.push('/signin')}>
+        <Button color="green" type="button" onClick={() => router.push('/signin')} width="100px">
           <div className={cx('btn-wrap')}>LOGIN</div>
         </Button>
       )}

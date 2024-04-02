@@ -14,7 +14,7 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
       <section className={cx('container')}>
         <h2 className={cx('visually-hidden')}>전체상품목록</h2>
         <ul className={cx('list-container')} role="list">
-          <LoadMore initialProducts={initialProducts!} />
+          {initialProducts && <LoadMore initialProducts={initialProducts} />}
         </ul>
       </section>
     </>
