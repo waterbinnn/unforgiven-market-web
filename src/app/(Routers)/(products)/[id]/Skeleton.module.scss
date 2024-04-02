@@ -9,12 +9,37 @@
   display: flex;
   gap: 90px;
   margin: 200px 0;
+
+  @media screen and (max-width: $mobile-size) {
+    padding: 30px 0 50px;
+    min-width: 360px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    margin: 50px 0;
+  }
 }
+
+.detail-data-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 .image-wrap {
   border-radius: 2px;
   width: 500px;
   height: 500px;
   background-color: $light-gray;
+  min-width: 500px;
+
+  @media screen and (max-width: $mobile-size) {
+    min-width: 360px;
+    width: 360px;
+    height: 360px;
+    margin: 0 auto;
+  }
 }
 
 .store {
@@ -27,6 +52,10 @@
   flex-direction: column;
   gap: 10px;
   width: 340px;
+
+  @media screen and (max-width: $mobile-size) {
+    width: 100%;
+  }
 }
 
 .info-detail {
