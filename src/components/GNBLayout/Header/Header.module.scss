@@ -10,7 +10,7 @@
   right: 0;
   color: $black;
   background-color: $white;
-  border-bottom: 1px solid $gray;
+  border-bottom: 0.5px solid $light-gray;
   z-index: 10;
   transition: all 0.3s ease-in-out;
   min-width: 360px;
@@ -19,9 +19,9 @@
 .header-title {
   font-size: 30px;
   font-weight: 900;
-  margin-top: 10px;
   display: block;
-  color: $green;
+  color: $black;
+  margin-top: 2px;
 }
 
 .btn-wrap {
@@ -31,7 +31,6 @@
   transition: all 0.2s ease-in;
 
   @media screen and (max-width: $mobile-size) {
-    margin-top: 10px;
     flex-direction: row;
     justify-content: center;
     align-items: center;

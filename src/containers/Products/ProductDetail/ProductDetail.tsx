@@ -88,7 +88,7 @@ export const ProductDetail = ({ detail }: Props) => {
             <div className={cx('count')}>
               <Count count={count} setCount={setCount} stock={detail.stock} />
               <div className={cx('total-wrap')}>
-                <h3 className={cx('title')}>total</h3>
+                <h3 className={cx('title')}>Total Price</h3>
                 <div className={cx('total-num-wrap')}>
                   <span className={cx('detail-title')}>Total Item</span>
                   <strong className={cx('detail-num')}>{count}</strong>

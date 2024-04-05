@@ -36,7 +36,7 @@ export const MobileGnb = ({ setShowGnb }: Props) => {
       <section className={cx('mobile-gnb-container')}>
         <h2 className={cx('visually-hidden')}>Menu</h2>
         <button className={cx('close-btn')} onClick={() => setShowGnb(false)}>
-          <Image src={'/assets/icon-plus.svg'} alt="menu" width={50} height={50} />
+          <Image src={'/assets/icon-plus.svg'} alt="menu" width={30} height={30} />
         </button>
         <nav className={cx('gnb-wrap')}>
           {userType === 'SELLER' ? (

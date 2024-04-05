@@ -63,13 +63,13 @@ export const Header = () => {
                 onClick={() => router.back()}
                 style={{ display: pathName === '/' ? 'none' : 'block' }}
               >
-                <Image src={'/assets/icon-back.svg'} alt="back button" width={50} height={50} />
+                <Image src={'/assets/icon-back.svg'} alt="back button" width={30} height={30} />
               </button>
               <Link className={cx('header-title')} href={'/'} as={'/'}>
                 UNFORGIVEN
               </Link>
               <button className={cx('mobile-menu-btn')} onClick={handleGnb}>
-                <Image src={'/assets/icon-plus.svg'} alt="menu" width={50} height={50} />
+                <Image src={'/assets/icon-plus.svg'} alt="menu" width={30} height={30} />
               </button>
             </div>
           </>
