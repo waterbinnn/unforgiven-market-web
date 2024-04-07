@@ -29,7 +29,7 @@ module.exports = {
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/styles')],
-    prependData: `@import "./common/_mixins.scss"; @import "./common/_variables.scss";`,
+    prependData: `@import "./common/_variables.scss";`,
   },
   trailingSlash: false,
   swcMinify: true,

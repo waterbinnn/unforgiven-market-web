@@ -117,7 +117,7 @@ export const CartDetail = ({ product, detail }: Props) => {
       )}
 
       <div className={cx('price-wrap')}>
-        <span>total</span>
+        <span>Total</span>
         <strong className={cx('item-total-price')}>
           ￦ {(product.quantity * detail.price).toLocaleString()}
         </strong>

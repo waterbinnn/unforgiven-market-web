@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { Button, Count, AddCartButton } from '@/components';
+import { Count, CheckSessionButton } from '@/components';
 
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
@@ -11,6 +11,7 @@ import { useOrderStore } from '@/store';
 import { useRouter } from 'next/navigation';
 
 import { getUserType } from '@/utils';
+import { postCart } from '@/actions';
 
 const cx = classNames.bind(styles);
 
@@ -23,14 +24,8 @@ export const ProductDetail = ({ detail }: Props) => {
   const { userType } = getUserType();
 
   const [count, setCount] = useState<number>(1);
-  const router = useRouter();
 
-  //장바구니 추가 버튼에 들어가는 객체
-  const cartReq: PostCart = {
-    check: false,
-    product_id: detail.product_id,
-    quantity: count,
-  };
+  const router = useRouter();
 
   const handleOrder = () => {
     const data = { ...detail, quantity: count };
@@ -38,6 +33,18 @@ export const ProductDetail = ({ detail }: Props) => {
     setOrderKind('direct_order');
     router.push('/order');
   };
+
+  const handleCart = async () => {
+    const cartReq: PostCart = {
+      check: false,
+      product_id: detail.product_id,
+      quantity: count,
+    };
+
+    await postCart(cartReq);
+  };
+
+  const disableSELLER = (userType === 'SELLER' ? true : false) || (detail.stock ? false : true);
 
   return (
     <main className={cx('container')}>
@@ -88,7 +95,7 @@ export const ProductDetail = ({ detail }: Props) => {
             <div className={cx('count')}>
               <Count count={count} setCount={setCount} stock={detail.stock} />
               <div className={cx('total-wrap')}>
-                <h3 className={cx('title')}>total</h3>
+                <h3 className={cx('title')}>Total Price</h3>
                 <div className={cx('total-num-wrap')}>
                   <span className={cx('detail-title')}>Total Item</span>
                   <strong className={cx('detail-num')}>{count}</strong>
@@ -100,21 +107,18 @@ export const ProductDetail = ({ detail }: Props) => {
             </div>
 
             <div className={cx('button-wrap')}>
-              <AddCartButton
-                disabled={(userType === 'SELLER' ? true : false) || (detail.stock ? false : true)}
-                width={'40%'}
+              <CheckSessionButton
+                type={'cart'}
+                disabled={disableSELLER}
                 color={'black'}
-                req={cartReq}
+                onClick={handleCart}
               />
-              <Button
-                onClick={handleOrder}
+              <CheckSessionButton
+                type={'order'}
+                disabled={disableSELLER}
                 color={'outline'}
-                size="l"
-                width="60%"
-                disabled={(userType === 'SELLER' ? true : false) || (detail.stock ? false : true)}
-              >
-                ORDER
-              </Button>
+                onClick={handleOrder}
+              />
             </div>
           </div>
         </div>

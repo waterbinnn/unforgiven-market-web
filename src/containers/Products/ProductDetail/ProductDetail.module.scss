@@ -53,7 +53,7 @@
       display: flex;
       border-top: 1px solid $yellow;
       padding: 17px 0 6px;
-      font-size: 20px;
+      font-size: 14px;
 
       &:last-child {
         border-bottom: 1px solid $yellow;
@@ -64,7 +64,7 @@
   .shipping-fee {
     font-size: 12px;
     line-height: 14px;
-    color: #8b8b8b;
+    color: $gray;
     margin-bottom: 124px;
   }
 
@@ -79,7 +79,7 @@
     margin-top: 30px;
 
     .title {
-      font-size: 18px;
+      font-size: 14px;
       line-height: 22px;
       font-weight: normal;
     }
@@ -88,18 +88,17 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      font-size: 14px;
+      line-height: 1.4;
 
       .data-title {
         width: 100%;
-        font-size: 12px;
         font-weight: 300;
-        line-height: 16px;
       }
 
       .detail-num {
-        font-size: 15px;
-        font-weight: 500;
-        line-height: 18px;
+        font-size: 13px;
+        font-weight: 400;
       }
     }
     .detail-fee {
