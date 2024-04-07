@@ -2,21 +2,18 @@
 
 import { useState } from 'react';
 import { Button, ButtonProps } from '../Button';
-import { PostCart } from '@/types';
 import { ContentsModal } from '../Modal';
 import { useRouter } from 'next/navigation';
-import { postCart } from '@/actions';
 import { useSession } from 'next-auth/react';
 
 interface Props {
-  width: string;
+  type: 'cart' | 'order';
   color: ButtonProps['color'];
-  req: PostCart;
   disabled: boolean;
   onClick?: () => void;
 }
 
-export const AddCartButton = ({ width, req, color, disabled, onClick }: Props) => {
+export const CheckSessionButton = ({ type, disabled, color, onClick }: Props) => {
   const router = useRouter();
 
   const { data: session } = useSession();
@@ -24,12 +21,13 @@ export const AddCartButton = ({ width, req, color, disabled, onClick }: Props) =
   const [isLoginModal, setIsLoginModal] = useState<boolean>(false);
   const [isSuccessModal, setIsSuccessModal] = useState<boolean>(false);
 
-  const handleAddCart = async () => {
+  const handleClick = async () => {
     if (!session) {
       setIsLoginModal(true);
     } else {
-      await postCart(req);
-      await setIsSuccessModal(true);
+      if (type === 'cart') {
+        await setIsSuccessModal(true);
+      }
       onClick && onClick();
     }
   };
@@ -38,13 +36,13 @@ export const AddCartButton = ({ width, req, color, disabled, onClick }: Props) =
     <>
       <Button
         type={'button'}
-        width={width}
-        onClick={handleAddCart}
+        width={'100%'}
+        onClick={handleClick}
         color={color}
         size={'l'}
         disabled={disabled}
       >
-        CART
+        {type === 'cart' ? 'CART' : 'ORDER'}
       </Button>
       {isLoginModal && (
         <ContentsModal
@@ -60,7 +58,7 @@ export const AddCartButton = ({ width, req, color, disabled, onClick }: Props) =
           onClose={() => setIsLoginModal(false)}
         />
       )}
-      {isSuccessModal && (
+      {type === 'cart' && isSuccessModal && (
         <ContentsModal
           contents={
             <>

@@ -7,7 +7,7 @@ export * from './Overlay';
 export * from './Input';
 export * from './SignInButton';
 export * from './Checkbox';
-export * from './AddCartButton';
+export * from './CheckSessionButton';
 export * from './PaymentForm';
 export * from './RadioButton';
 export * from './Table';
