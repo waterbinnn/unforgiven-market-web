@@ -15,9 +15,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Head />
       <body>
         <div id={'portal-wrap'} />
-        <Providers session={session}>
-          <GNBLayout>{children}</GNBLayout>
-        </Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );
