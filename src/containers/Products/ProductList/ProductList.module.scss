@@ -1,7 +1,7 @@
 .list-container {
   margin: 30px auto;
   display: grid;
-  grid-template-columns: repeat(15, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   grid-gap: 20px 10px;
   overflow: hidden;
 
@@ -13,7 +13,7 @@
 .product {
   &-item {
     position: relative;
-    grid-column: auto / span 3;
+    grid-column: auto / span 4;
     cursor: pointer;
 
     &.soldOut {
@@ -35,7 +35,7 @@
     }
 
     @media screen and (max-width: $mobile-size) {
-      grid-column: auto / span 5;
+      grid-column: auto / span 6;
     }
   }
 
