@@ -1,8 +1,8 @@
 # unforgiven market place
 
-구매와 판매가 가능한 오픈 마켓 웹 페이지
-<br/>
-_토이 프로젝트로 실제 구매, 판매는 이뤄지지 않습니다._
+### - 구매와 판매가 가능한 오픈 마켓 웹 페이지
+
+<span>_🙌 토이 프로젝트로 실제 구매, 판매는 이뤄지지 않습니다._</span>
 
 ```
 Default
@@ -146,8 +146,56 @@ Promise based HTTP client for the browser
 
 ## 개발 기록
 
-1. next12, 리액트 쿼리에서 next app router로 업데이트
+1. next12 + 리액트 쿼리
+   -> next app router로 마이그레이션
 
 2. 무한스크롤 제거, 더보기 버튼 추가
    -> vercel 배포 환경에서 무한스크롤 로딩이 너무 느린 문제 발생
    -> 유저 대기 시간 줄이기 위해 더보기 버튼으로 대체
+
+3. 상품목록, 디테일 페이지 스캘래톤 UI 적용
+
+## 트러블 슈팅
+
+1. `폴더트리`
+
+   - 상품 목록 params
+
+2. `회원가입 시 Axios Instance가 동작을 안함.`
+
+   [문제파악]
+   회원가입 form 내 요청함수들이 CSR로만 동작함.
+
+   원인을 찾아보니 회원가입 폼에서 사용하고 있는 `React Hook Form` 이 CSR 에서 폼을 관리하기 위한 라이브여서 주로 CSR 환경에서 사용이 된다고 함
+
+   [해결방법]
+   CSR 에서 사용할 axios instance를 생성해서 client side 에서 동작하도록 함.
+
+   ```tsx
+   //(기존) 이렇게 작성했을때 함수가 동작하지 않음.
+   checkIdValid: (username: string) => {
+   return axiosAuth.post(`signup/valid/username/`, { username });
+   };
+
+   //(수정후) client side의 axios instance가 동작.
+   checkIdValid: (username: string) => {
+   return axiosClient.post(`accounts/signup/valid/username/`, { username });
+   },
+   ```
+
+3. `next auth session 에 token 저장`
+
+   session에 res 데이터를 넣고 싶은데 user 이 빈 객체가 되는 문제 발생
+
+4. `Error: An error occurred in the Server Components render`
+
+   [문제파악]
+   오랜시간 접속하지 않았을 경우 해당 에러 발생.
+   쿠키의 next-auth 관련 변수들 제거하니 오류 안남.
+   즉 로그아웃이 되면 해당 에러가 발생하지 않음.
+   만료된 토큰을 RootLayout에서 가져오고 있어서 페이지 접근이 안된것으로 보임
+
+   [해결방법]
+   **페이지 진입시 유저 토큰이 유효한지 판단 후 로그아웃 시키기.**
+   유효한 토큰인지 확인하는 verify token 함수 작성,
+   미들웨어에서 verify token 후 유효하지 않으면 로그아웃 시키는 방식으로 문제를 해결
