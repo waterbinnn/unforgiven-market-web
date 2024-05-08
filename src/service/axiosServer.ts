@@ -12,11 +12,7 @@ export const axiosAuth = axios.create({
 
 axiosAuth.interceptors.request.use(
   async (request) => {
-    const auth_header = request.headers['x-auth-not-required'];
-
     const session = await getServerSession(authOptions);
-
-    if (auth_header) return request;
 
     if (session) {
       request.headers['Authorization'] = `JWT ${session.token}`;
