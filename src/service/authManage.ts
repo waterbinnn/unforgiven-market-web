@@ -1,6 +1,7 @@
 import { BuyerSignupReq, SignInReq } from '@/types';
-import axios, { AxiosPromise } from 'axios';
+import { AxiosPromise } from 'axios';
 import { axiosAuth } from './axiosServer';
+import { axiosClient } from './axiosClient';
 
 /**
  * @name authManage
@@ -56,32 +57,23 @@ interface AuthManage {
   readonly signIn: (data: any) => AxiosPromise;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-const header = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
-
 const authManage: AuthManage = {
   buyerSignup: (data: BuyerSignupReq) => {
-    return axios.post(`${baseUrl}accounts/signup/`, data, header);
+    return axiosClient.post(`accounts/signup/`, data);
   },
 
   sellerSignup: (data: BuyerSignupReq) => {
-    return axios.post(`${baseUrl}accounts/signup_seller/`, data, header);
+    return axiosClient.post(`accounts/signup_seller/`, data);
   },
 
   checkIdValid: (username: string) => {
-    return axios.post(`${baseUrl}accounts/signup/valid/username/`, { username }, header);
+    return axiosClient.post(`accounts/signup/valid/username/`, { username });
   },
 
   checkCompanyNumberValid: (company_registration_number: string) => {
-    return axios.post(
-      `${baseUrl}accounts/signup/valid/company_registration_number/`,
-      { company_registration_number },
-      header,
-    );
+    return axiosClient.post(`accounts/signup/valid/company_registration_number/`, {
+      company_registration_number,
+    });
   },
 
   signIn: (data: SignInReq) => {
