@@ -4,12 +4,7 @@ import { Button } from '@/components';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-interface Props {
-  errorMsg: string;
-  url: string;
-}
-
-export default function Error({ errorMsg, url }: Props) {
+export default function Error() {
   const router = useRouter();
 
   return (
