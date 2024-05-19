@@ -47,14 +47,12 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
           ))}
         </ul>
         <div className={cx('btn-more-wrap')}>
-          {!isLastPage && (
+          {!isLastPage && !isLoading ? (
             <Button size="s" color={'outline'} width={'50%'} onClick={loadMore}>
-              {!isLoading ? (
-                `more`
-              ) : (
-                <img src={'/assets/spinner.svg'} width={18} height={18} alt="loading..." />
-              )}
+              + more
             </Button>
+          ) : (
+            <img src={'/assets/spinner.svg'} width={18} height={18} alt="loading..." />
           )}
         </div>
       </section>

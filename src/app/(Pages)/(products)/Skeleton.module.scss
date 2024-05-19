@@ -1,16 +1,16 @@
 .items-wrap {
   margin: 30px auto;
   display: grid;
-  grid-template-columns: repeat(15, 1fr);
-  grid-gap: 40px 20px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 20px 10px;
   overflow: hidden;
 }
 
 .item-wrap {
-  grid-column: auto / span 3;
+  grid-column: auto / span 4;
 
   @media screen and (max-width: $mobile-size) {
-    grid-column: auto / span 5;
+    grid-column: auto / span 6;
   }
 }
 
