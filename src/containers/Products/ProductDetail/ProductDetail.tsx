@@ -93,7 +93,12 @@ export const ProductDetail = ({ detail }: Props) => {
           <div>
             {/* 수량 */}
             <div className={cx('count')}>
-              <Count count={count} setCount={setCount} stock={detail.stock} />
+              <Count
+                count={count}
+                setCount={setCount}
+                stock={detail.stock}
+                isDisabled={disableSELLER}
+              />
               <div className={cx('total-wrap')}>
                 <h3 className={cx('title')}>Total Price</h3>
                 <div className={cx('total-num-wrap')}>
