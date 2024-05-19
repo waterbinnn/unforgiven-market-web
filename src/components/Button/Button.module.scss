@@ -7,7 +7,7 @@
     border-radius: 20px;
     font-size: 14px;
     line-height: 1.4;
-    font-weight: 300;
+    font-weight: 400;
     color: $black;
     text-align: center;
     padding: 4px 0;
@@ -82,7 +82,8 @@
   }
 
   &:disabled {
-    background-color: $gray;
+    background-color: $light-gray;
+    border: none;
     color: $white;
     cursor: not-allowed;
 

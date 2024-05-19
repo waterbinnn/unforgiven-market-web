@@ -10,11 +10,19 @@ interface Props {
   count: number;
   setCount: Dispatch<SetStateAction<number>>;
   stock: number;
+  isDisabled?: boolean;
 }
 
-export const Count = ({ count, setCount, stock }: Props) => {
+export const Count = ({ count, setCount, stock, isDisabled = false }: Props) => {
   const [isMinusDisable, setMinusDisable] = useState<boolean>(false);
   const [isPlusDisable, setPlusDisable] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isDisabled) {
+      setMinusDisable(true);
+      setPlusDisable(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (count === 1 || count === 0 || stock === 0) {
@@ -51,7 +59,7 @@ export const Count = ({ count, setCount, stock }: Props) => {
   };
 
   return (
-    <div className={cx('count-wrap')}>
+    <div className={cx('count-wrap', { disable: isDisabled })}>
       <button type="button" onClick={handleMinus} disabled={isMinusDisable}>
         <img src="/assets/icon-minus.svg" alt="minus" className={cx('count-icon')} />
       </button>

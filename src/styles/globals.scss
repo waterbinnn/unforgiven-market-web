@@ -40,6 +40,12 @@ body {
     padding: 0 12px;
     min-width: 360px;
   }
+
+  &.products {
+    @media screen and (max-width: $mobile-size) {
+      padding: 0;
+    }
+  }
 }
 
 .loading-container,

@@ -17,7 +17,7 @@
   display: block;
   font-size: 24px;
   margin-bottom: 50px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .upload-wrap {
@@ -39,7 +39,7 @@
     .image {
       width: 380px;
       height: 380px;
-      background-color: #f6f6f6;
+      background-color: $light-gray;
       border-radius: 4px;
       background-size: cover;
       background-repeat: no-repeat;

@@ -1,18 +1,19 @@
-import { authOptions } from '@/lib';
-import axios from 'axios';
-import { getServerSession } from 'next-auth';
+'use client';
 
-export const axiosAuth = axios.create({
+import axios from 'axios';
+import { getSession } from 'next-auth/react';
+
+export const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
-    withCredentials: true,
   },
+  withCredentials: true,
 });
 
-axiosAuth.interceptors.request.use(
+axiosClient.interceptors.request.use(
   async (request) => {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
 
     if (session) {
       request.headers['Authorization'] = `JWT ${session.token}`;
@@ -25,7 +26,7 @@ axiosAuth.interceptors.request.use(
   },
 );
 
-axiosAuth.interceptors.response.use(
+axiosClient.interceptors.response.use(
   (response) => {
     return response;
   },

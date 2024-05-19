@@ -39,7 +39,7 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
 
   return (
     <>
-      <section className={cx('container')}>
+      <section className={cx('container', 'products')}>
         <h2 className={cx('visually-hidden')}>전체상품목록</h2>
         <ul className={cx('list-container')} role="list">
           {products?.map((item) => (
@@ -47,14 +47,12 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
           ))}
         </ul>
         <div className={cx('btn-more-wrap')}>
-          {!isLastPage && (
+          {!isLastPage && !isLoading ? (
             <Button size="s" color={'outline'} width={'50%'} onClick={loadMore}>
-              {!isLoading ? (
-                '상품 더보기'
-              ) : (
-                <img src={'/assets/spinner.svg'} width={18} height={18} alt="loading..." />
-              )}
+              + more
             </Button>
+          ) : (
+            <img src={'/assets/spinner.svg'} width={18} height={18} alt="loading..." />
           )}
         </div>
       </section>
