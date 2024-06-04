@@ -184,7 +184,21 @@ Promise based HTTP client for the browser
 
 3. `next auth session 에 token 저장`
 
-   session에 res 데이터를 넣고 싶은데 user 이 빈 객체가 되는 문제 발생
+   session에 res 데이터를 넣고 싶은데 user 이 빈 객체가 되는 문제 발생. 리서치 후 아래와 같이 작성하니 동작
+
+   ```ts
+   callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
+    },
+    session: async ({ session, token }) => {
+      /*@ts-ignore */
+      session = token.user;
+      return session;
+    },
+   },
+   ```
 
 4. `Error: An error occurred in the Server Components render`
 
@@ -192,9 +206,36 @@ Promise based HTTP client for the browser
    오랜시간 접속하지 않았을 경우 해당 에러 발생.
    쿠키의 next-auth 관련 변수들 제거하니 오류 안남.
    즉 로그아웃이 되면 해당 에러가 발생하지 않음.
-   만료된 토큰을 RootLayout에서 가져오고 있어서 페이지 접근이 안된것으로 보임
+   만료된 토큰을 RootLayout에서 가져오고 있어서 페이지 접근이 안된것으로 보임. 만료된 토큰임을 확인하는 로직이 필요
 
    [해결방법]
    **페이지 진입시 유저 토큰이 유효한지 판단 후 로그아웃 시키기.**
-   유효한 토큰인지 확인하는 verify token 함수 작성,
-   미들웨어에서 verify token 후 유효하지 않으면 로그아웃 시키는 방식으로 문제를 해결
+   유효한 토큰인지 확인이 필요함.
+   백엔드에서 refresh token, verify token api 를 제공하지 않음. axios 에러가 났을 때 axiosInterceptor에서 로그아웃 처리함으로써 해결
+
+```ts
+//axios interceptor 에서 response.status === 401 일때 세션 제거를 통해 로그아웃 처리
+
+axiosAuth.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const { response } = error;
+
+    if (response.status === 401) {
+      originRes.cookies.delete('next-auth.session-token');
+      return originRes;
+    } else {
+      // 기타 에러 처리
+      return Promise.reject(error);
+    }
+  },
+);
+
+//토큰은 있는데 user_type 이 쿠키에 저장되어 있지 않은 경우
+if (token && !user) {
+  originRes.cookies.delete('next-auth.session-token');
+  return originRes;
+}
+```
