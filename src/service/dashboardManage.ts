@@ -20,7 +20,7 @@ interface DashboardManage {
 
 const dashboardManage: DashboardManage = {
   getList: (page?: string) => {
-    return axiosAuth.get(`seller/`);
+    return axiosAuth.get(`seller/${page ? page : ''}`);
   },
 };
 

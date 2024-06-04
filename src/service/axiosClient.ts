@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, signOut } from 'next-auth/react';
 
 export const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -32,8 +32,12 @@ axiosClient.interceptors.response.use(
   },
 
   async (error) => {
-    const { config } = error;
+    const { response } = error;
 
-    return axios(config);
+    if (response.status === 401) {
+      // 토큰 만료로 인한 401 오류인 경우 로그아웃
+      signOut();
+    }
+    return Promise.reject(error);
   },
 );

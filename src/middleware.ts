@@ -1,8 +1,9 @@
 import { getToken } from 'next-auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest, res: NextResponse) {
   let user = req.cookies.get('user_type');
+  const originRes = NextResponse.next();
 
   const token = await getToken({
     req: req,
@@ -24,6 +25,11 @@ export async function middleware(req: NextRequest) {
       const url = new URL(`/`, req.url);
       return NextResponse.redirect(url);
     }
+  }
+
+  if (token && !user) {
+    originRes.cookies.delete('next-auth.session-token');
+    return originRes;
   }
 
   if (token && user?.value === 'BUYER') {

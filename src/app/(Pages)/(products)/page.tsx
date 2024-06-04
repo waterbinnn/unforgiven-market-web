@@ -13,7 +13,7 @@ const ProductPage = async () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      {data && <ProductList initialProducts={data.results} />}
+      {<ProductList initialProducts={data ? data.results : []} />}
     </Suspense>
   );
 };
