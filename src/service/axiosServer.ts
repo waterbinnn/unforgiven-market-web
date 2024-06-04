@@ -1,6 +1,10 @@
 import { authOptions } from '@/lib';
+
 import axios from 'axios';
 import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
+
+const originRes = NextResponse.next();
 
 export const axiosAuth = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -29,10 +33,15 @@ axiosAuth.interceptors.response.use(
   (response) => {
     return response;
   },
-
   async (error) => {
-    const { config } = error;
+    const { response } = error;
 
-    return axios(config);
+    if (response.status === 401) {
+      originRes.cookies.delete('next-auth.session-token');
+      return originRes;
+    } else {
+      // 기타 에러 처리
+      return Promise.reject(error);
+    }
   },
 );
