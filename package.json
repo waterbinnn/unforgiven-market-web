@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.3",
     "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.14.195",
     "@types/node": "20.2.5",
