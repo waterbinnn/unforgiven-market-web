@@ -19,7 +19,7 @@ const ProductDetailPage = async ({ params }: Props) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ProductDetail detail={detail!} />
+      <ProductDetail detail={detail ? detail : ([] as any)} />
     </Suspense>
   );
 };
