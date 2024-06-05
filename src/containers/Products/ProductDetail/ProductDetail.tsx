@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Count, CheckSessionButton } from '@/components';
 
 import classNames from 'classnames/bind';
@@ -12,6 +12,9 @@ import { useRouter } from 'next/navigation';
 
 import { getUserType } from '@/utils';
 import { postCart } from '@/actions';
+
+import { sendGTMEvent } from '@next/third-parties/google';
+import { gtmPageView } from '@/lib';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +30,15 @@ export const ProductDetail = ({ detail }: Props) => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (detail) {
+      const props = {
+        page_product_id: detail.product_id,
+      };
+      gtmPageView(props);
+    }
+  }, [detail.product_id]);
+
   const handleOrder = () => {
     const data = { ...detail, quantity: count };
     setOrderDetail([data]);
@@ -40,7 +52,8 @@ export const ProductDetail = ({ detail }: Props) => {
       product_id: detail.product_id,
       quantity: count,
     };
-
+    //ga cart
+    sendGTMEvent({ event: 'postCart', value: cartReq });
     await postCart(cartReq);
   };
 
