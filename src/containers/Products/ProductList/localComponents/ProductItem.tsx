@@ -15,7 +15,7 @@ export const ProductItem = ({ product }: Props) => {
   const router = useRouter();
 
   const handleGoToDetail = () => {
-    router.push(`/${product.product_id}`);
+    router.push(`/product/${product.product_id}`);
   };
 
   return (
@@ -30,6 +30,7 @@ export const ProductItem = ({ product }: Props) => {
           className={cx('product-image')}
           src={product.image as string}
           alt={product.product_name}
+          placeholder={'/assets/default_img.png'}
         />
       </div>
       <dl className={cx('info-wrap')}>
