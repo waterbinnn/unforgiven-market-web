@@ -13,8 +13,7 @@ import { useRouter } from 'next/navigation';
 import { getUserType } from '@/utils';
 import { postCart } from '@/actions';
 
-import { sendGTMEvent } from '@next/third-parties/google';
-import { gtmPageView } from '@/lib';
+import { useGoogleEvent } from '@/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +24,7 @@ interface Props {
 export const ProductDetail = ({ detail }: Props) => {
   const { setOrderKind, setOrderDetail } = useOrderStore();
   const { userType } = getUserType();
+  const { event } = useGoogleEvent();
 
   const [count, setCount] = useState<number>(1);
 
@@ -35,7 +35,6 @@ export const ProductDetail = ({ detail }: Props) => {
       const props = {
         page_product_id: detail.product_id,
       };
-      gtmPageView(props);
     }
   }, [detail.product_id]);
 
@@ -52,8 +51,14 @@ export const ProductDetail = ({ detail }: Props) => {
       product_id: detail.product_id,
       quantity: count,
     };
-    //ga cart
-    sendGTMEvent({ event: 'postCart', value: cartReq });
+
+    //ga event : add_to_cart
+    event({
+      action: 'add_to_cart',
+      category: 'ecommerce',
+      label: 'Item added to cart',
+      value: cartReq,
+    });
     await postCart(cartReq);
   };
 
