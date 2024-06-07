@@ -26,7 +26,9 @@ const postCart = async (data: PostCart) => {
     return {
       data: res.data,
     };
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const removeItem = async (id: string) => {
