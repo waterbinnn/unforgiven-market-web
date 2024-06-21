@@ -29,6 +29,7 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 
   if (token && !user) {
     originRes.cookies.delete('next-auth.session-token');
+    originRes.cookies.delete('__Secure-next-auth.session-token');
     return originRes;
   }
 
