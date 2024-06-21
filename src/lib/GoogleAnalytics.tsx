@@ -1,6 +1,13 @@
+'use client';
+
+import { useCookies } from 'next-client-cookies';
 import Script from 'next/script';
 
-const GoogleAnalytics = () => {
+export const GoogleAnalytics = () => {
+  const cookies = useCookies();
+
+  const userType = cookies.get('user_type');
+
   return (
     <>
       <Script
@@ -8,11 +15,13 @@ const GoogleAnalytics = () => {
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
       />
 
-      <Script id="" strategy="lazyOnload">
+      <Script strategy="lazyOnload">
         {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              gtag('set', 'user_properties', {
+              "user_type" : {${userType}} })
               gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
               page_path: window.location.pathname,
               });
@@ -21,5 +30,3 @@ const GoogleAnalytics = () => {
     </>
   );
 };
-
-export default GoogleAnalytics;
