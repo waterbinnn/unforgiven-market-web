@@ -19,6 +19,8 @@ export async function middleware(req: NextRequest, res: NextResponse) {
       const url = new URL(`/signin`, req.url);
       return NextResponse.redirect(url);
     }
+    originRes.cookies.delete('user_type');
+    return originRes;
   } else {
     if (pathname.startsWith('/sign')) {
       //이미 로그인 상태일 때 로그인, 회원가입 진입 차단
