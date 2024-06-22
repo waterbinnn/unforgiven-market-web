@@ -15,6 +15,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Head />
       <GoogleAnalytics />
       <body>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TNDWLK34"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
+
         <div id={'portal-wrap'} />
         <Providers session={session}>{children}</Providers>
       </body>
