@@ -21,7 +21,7 @@ export const GoogleAnalytics = () => {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('set', 'user_properties', {
-              "user_type" : ${userType} })
+              "user_type" : '${userType}' });
               gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
               page_path: window.location.pathname,
               });
