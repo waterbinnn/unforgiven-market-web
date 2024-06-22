@@ -5,7 +5,7 @@ import '@/styles/globals.scss';
 import Providers from '@/utils/provider';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { GoogleAnalytics } from '@/lib';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -13,20 +13,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html>
       <Head />
-      <GoogleAnalytics />
       <body>
-        <noscript>
+        {/* <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-TNDWLK34"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+          src={`https://www.googletagmanager.com/ns.html?id=$${process.env.NEXT_PUBLIC_GA_TAG}`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
-        </noscript>
+          </noscript> */}
 
         <div id={'portal-wrap'} />
         <Providers session={session}>{children}</Providers>
       </body>
+      <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GA_TAG}`} />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
     </html>
   );
 }
