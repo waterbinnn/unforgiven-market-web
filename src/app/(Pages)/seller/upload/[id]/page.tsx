@@ -1,6 +1,12 @@
 import { getProductDetail } from '@/actions';
 import { Upload } from '@/containers';
+import { Metadata } from 'next';
 
+export const generateMetadata = (): Metadata => {
+  return {
+    title: `상품 수정 | 판메자센터`,
+  };
+};
 interface Props {
   params: { id: string };
 }

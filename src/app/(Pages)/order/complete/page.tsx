@@ -2,6 +2,11 @@ import { getOrderList, getProductDetail } from '@/actions';
 import { OrderList } from '@/containers';
 import { OrderDetailType } from '@/store';
 import { OrderListData } from '@/types';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '주문 리스트',
+};
 
 interface NewItem {
   productDetail: OrderDetailType | unknown;

@@ -1,6 +1,11 @@
 import { CartList } from '@/containers';
 
 import { getCartList, getProductDetail } from '@/actions';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '장바구니',
+};
 
 const Cart = async () => {
   const { data: carts } = await getCartList();
