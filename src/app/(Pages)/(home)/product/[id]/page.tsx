@@ -3,10 +3,17 @@ import { ProductDetail } from '@/containers';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Loading from './loading';
+import { Metadata } from 'next';
 
 interface Props {
   params: { id: string };
 }
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: `상품 상세`,
+  };
+};
 
 const ProductDetailPage = async ({ params }: Props) => {
   const productId = params.id.toString();
