@@ -28,14 +28,6 @@ export const ProductDetail = ({ detail }: Props) => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (detail) {
-      const props = {
-        page_product_id: detail.product_id,
-      };
-    }
-  }, [detail.product_id]);
-
   const handleOrder = () => {
     const data = { ...detail, quantity: count };
     setOrderDetail([data]);
