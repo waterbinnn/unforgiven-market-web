@@ -7,7 +7,7 @@
 }
 
 .item-wrap {
-  grid-column: auto / span 4;
+  grid-column: auto / span 3;
 
   @media screen and (max-width: $mobile-size) {
     grid-column: auto / span 6;

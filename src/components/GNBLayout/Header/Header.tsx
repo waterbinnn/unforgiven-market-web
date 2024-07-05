@@ -5,13 +5,14 @@ import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { Button } from '../../Button';
 import Link from 'next/link';
-import { useResize } from '@/utils/useResize';
+import { useResize } from '@/utils';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MobileGnb } from '../MobileGnb';
 import { usePathname, useRouter } from 'next/navigation';
-import { SignInButton } from '@/components/SignInButton';
+import { SignInButton } from '@/components';
 import { getUserType } from '@/utils';
+import { useCookies } from 'next-client-cookies';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,8 @@ export const Header = () => {
   const browserSize = useResize({ throttleMs: 200 });
   const router = useRouter();
   const pathName = usePathname();
+  const cookies = useCookies();
+
   const { userType } = getUserType();
 
   const [showGnb, setShowGnb] = useState<Boolean>(false);
@@ -26,6 +29,12 @@ export const Header = () => {
   const handleGnb = () => {
     setShowGnb((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (userType) {
+      cookies.set('user_type', userType);
+    }
+  }, [userType]);
 
   return (
     <>

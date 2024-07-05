@@ -13,7 +13,7 @@
 .product {
   &-item {
     position: relative;
-    grid-column: auto / span 4;
+    grid-column: auto / span 3;
     cursor: pointer;
 
     &.soldOut {
@@ -49,11 +49,7 @@
 
   &-image {
     width: 100%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: contain;
+    object-fit: cover;
     margin-bottom: 6px;
     background-color: $light-gray;
   }

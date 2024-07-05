@@ -29,12 +29,6 @@ export async function middleware(req: NextRequest, res: NextResponse) {
     }
   }
 
-  if (token && !user) {
-    originRes.cookies.delete('next-auth.session-token');
-    originRes.cookies.delete('__Secure-next-auth.session-token');
-    return originRes;
-  }
-
   if (token && user?.value === 'BUYER') {
     if (pathname.startsWith('/seller')) {
       const url = new URL(`/`, req.url);
@@ -53,5 +47,12 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-  matcher: ['/', '/cart', '/order', '/seller/:path*', '/signin/:path*', '/signup/:path*'],
+  matcher: [
+    '/',
+    '/cart/:path*',
+    '/order/:path*',
+    '/seller/:path*',
+    '/signin/:path*',
+    '/signup/:path*',
+  ],
 };
