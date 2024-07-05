@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from '../ProductList.module.scss';
 import { ProductListType } from '@/types';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -26,11 +27,14 @@ export const ProductItem = ({ product }: Props) => {
       onClick={handleGoToDetail}
     >
       <div className={cx('product-image-wrap')}>
-        <img
+        <Image
           className={cx('product-image')}
           src={product.image as string}
           alt={product.product_name}
-          placeholder={'/assets/default_img.png'}
+          placeholder={'blur'}
+          blurDataURL={'/assets/default_img.png'}
+          loading="lazy"
+          fill
         />
       </div>
       <dl className={cx('info-wrap')}>
