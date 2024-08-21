@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const dashboardPage = async () => {
   const { data, list } = await getSellerProducts();
 
-  return <Dashboard data={data!} list={list ? list : []} />;
+  return <Dashboard data={data ? data : ([] as any)} list={list ? list : []} />;
 };
 
 export default dashboardPage;
