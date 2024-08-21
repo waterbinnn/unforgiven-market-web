@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import styles from './SignIn.module.scss';
-import { Button, Input } from '@/components';
+import { Input } from '@/components';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { signIn } from 'next-auth/react';
 import CommonStyle from '../../../styles/authStyle.module.scss';
 import { message } from 'antd';
 import { useCookies } from 'next-client-cookies';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -98,25 +99,23 @@ export const SignIn = ({ type }: Props) => {
               <span className={cx('error-msg')}>{errorMsg}</span>
             </div>
             <div className={cx('btn-wrap')}>
-              <Button color="green" size="m" type="submit">
+              <Button block color={'white'} rounded type="submit">
                 LOGIN
               </Button>
             </div>
           </form>
-          <button
-            type="button"
-            className={cx('router-btn')}
-            onClick={() => handleRouter(type === 'BUYER' ? '/signin/seller' : '/signin')}
-          >
-            {type === 'BUYER' ? 'SELLER' : 'BUYER'} LOGIN
-          </button>
-          <button
-            className={cx('router-btn')}
-            type="button"
-            onClick={() => handleRouter('/signup')}
-          >
-            SIGN UP
-          </button>
+          <div className={cx('router-btn-wrap')}>
+            <Button
+              kind={'link'}
+              color={'yellow'}
+              onClick={() => handleRouter(type === 'BUYER' ? '/signin/seller' : '/signin')}
+            >
+              {type === 'BUYER' ? 'SELLER' : 'BUYER'} LOGIN
+            </Button>
+            <Button kind={'link'} color={'pink'} onClick={() => handleRouter('/signup')}>
+              SIGN UP
+            </Button>
+          </div>
         </main>
       </div>
     </div>

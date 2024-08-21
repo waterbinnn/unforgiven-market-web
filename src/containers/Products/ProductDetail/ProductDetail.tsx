@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Count, CheckSessionButton } from '@/components';
 
 import classNames from 'classnames/bind';
@@ -123,13 +123,13 @@ export const ProductDetail = ({ detail }: Props) => {
               <CheckSessionButton
                 type={'cart'}
                 disabled={disableSELLER}
-                color={'black'}
+                color={'blue'}
                 onClick={handleCart}
               />
               <CheckSessionButton
                 type={'order'}
                 disabled={disableSELLER}
-                color={'outline'}
+                color={'green'}
                 onClick={handleOrder}
               />
             </div>

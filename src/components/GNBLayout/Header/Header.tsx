@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind';
 
 import styles from './Header.module.scss';
-import { Button } from '../../Button';
+
 import Link from 'next/link';
 import { useResize } from '@/utils';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { SignInButton } from '@/components';
 import { getUserType } from '@/utils';
 import { useCookies } from 'next-client-cookies';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind(styles);
 
@@ -49,14 +50,15 @@ export const Header = () => {
             <div className={cx('btn-wrap')}>
               {userType === 'SELLER' ? (
                 <Button
-                  color="outline"
-                  width="100px"
+                  color={'black'}
+                  kind={'outlined'}
+                  rounded
                   onClick={() => router.push('/seller/dashboard')}
                 >
-                  👨‍🌾 판매자센터
+                  판매자센터
                 </Button>
               ) : (
-                <Button onClick={() => router.push('/cart')} color="outline" width="100px">
+                <Button kind={'filled'} rounded onClick={() => router.push('/cart')}>
                   CART
                 </Button>
               )}

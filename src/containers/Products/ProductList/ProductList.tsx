@@ -7,7 +7,7 @@ import { ProductListType } from '@/types';
 import { ProductItem } from './localComponents';
 import { useCallback, useState } from 'react';
 import { getProductList } from '@/actions';
-import { Button } from '@/components';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind(styles);
 
@@ -47,12 +47,16 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
           ))}
         </ul>
         <div className={cx('btn-more-wrap')}>
-          {!isLastPage && !isLoading ? (
-            <Button size="s" color={'outline'} width={'50%'} onClick={loadMore}>
+          {!isLastPage && (
+            <Button
+              kind={'outlined'}
+              onClick={loadMore}
+              rounded
+              color={'green'}
+              loading={isLoading}
+            >
               + more
             </Button>
-          ) : (
-            <img src={'/assets/spinner.svg'} width={18} height={18} alt="loading..." />
           )}
         </div>
       </section>

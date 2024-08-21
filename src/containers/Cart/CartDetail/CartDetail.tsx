@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ContentsModal, Count } from '@/components';
+import { ContentsModal, Count } from '@/components';
 import classNames from 'classnames/bind';
 import styles from './CartDetail.module.scss';
 import ListStyles from '../CartList/CartList.module.scss';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { removeItem, updateCount } from '@/actions';
 import { ProductListType, CartItemType } from '@/types';
 import { useOrderStore } from '@/store';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -124,19 +125,19 @@ export const CartDetail = ({ product, detail }: Props) => {
       </div>
 
       <div className={cx('btn-order')}>
-        <Button color={'yellow'} width={'80px'} onClick={handleOrder}>
+        <Button color={'yellow'} rounded onClick={handleOrder}>
           ORDER
         </Button>
       </div>
 
-      <button
-        type="button"
+      <Button
         className={cx('btn-del-item', { pending: isPending })}
         id={product.product_id.toString()}
         onClick={deleteItem}
-      >
-        X
-      </button>
+        color={'transparent'}
+        kind={'icon'}
+        icon={<span>X</span>}
+      />
     </li>
   );
 };

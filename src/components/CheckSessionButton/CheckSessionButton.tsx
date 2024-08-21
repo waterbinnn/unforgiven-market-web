@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, ButtonProps } from '../Button';
+import { Button } from '@waterbin/design-system';
 import { ContentsModal } from '../Modal';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 interface Props {
   type: 'cart' | 'order';
-  color: ButtonProps['color'];
+  color: string;
   disabled: boolean;
   onClick?: () => void;
 }
@@ -34,14 +34,7 @@ export const CheckSessionButton = ({ type, disabled, color, onClick }: Props) =>
 
   return (
     <>
-      <Button
-        type={'button'}
-        width={'100%'}
-        onClick={handleClick}
-        color={color}
-        size={'l'}
-        disabled={disabled}
-      >
+      <Button type={'button'} block onClick={handleClick} color={color} disabled={disabled}>
         {type === 'cart' ? 'CART' : 'ORDER'}
       </Button>
       {isLoginModal && (
