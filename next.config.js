@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: true,
+});
+
+const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   images: {
@@ -36,4 +41,19 @@ module.exports = {
   compiler: {
     reactRemoveProperties: { properties: ['^data-cy$'] },
   },
+  experimental: {
+    optimizePackageImports: [
+      'components',
+      'containers',
+      'actions',
+      'hooks',
+      'lib',
+      'services',
+      'store',
+      'types',
+      'utils',
+    ],
+  },
 };
+
+module.exports = withBundleAnalyzer(nextConfig);

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@next/third-parties": "^14.2.4",
@@ -40,6 +41,7 @@
     "@types/react": "18.2.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.5",
     "@types/next-auth": "^3.15.0"
   }
 }
