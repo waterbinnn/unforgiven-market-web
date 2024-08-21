@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import styles from './Upload.module.scss';
-import { Button, CurrencyInput } from '@/components';
+import { CurrencyInput } from '@/components';
 import Image from 'next/image';
 import { ChangeEvent, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ import { PostProduct, ProductListType } from '@/types';
 import { message } from 'antd';
 import { useSession } from 'next-auth/react';
 import { productManage } from '@/service';
-import Loading from '/public/assets/spinner.svg';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind(styles);
 
@@ -169,17 +169,17 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
               <ContentLayout label={'배송방법'}>
                 <div className={cx('btn-wrap')}>
                   <Button
-                    color="outline"
-                    width="120px"
-                    active={delivery === 'PARCEL'}
+                    type="button"
+                    kind={'tag'}
+                    color={delivery === 'PARCEL' ? 'black' : 'transparent'}
                     onClick={() => setDelivery('PARCEL')}
                   >
                     택배, 소포, 등기
                   </Button>
                   <Button
-                    color="outline"
-                    width="140px"
-                    active={delivery === 'DELIVERY'}
+                    type="button"
+                    kind={'tag'}
+                    color={delivery === 'DELIVERY' ? 'black' : 'transparent'}
                     onClick={() => setDelivery('DELIVERY')}
                   >
                     직접배송(화물배달)
@@ -218,16 +218,16 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
           </div>
 
           <div className={cx('btn-wrap', 'save')}>
-            <Button size="m" color="pink" onClick={() => router.push('/seller/dashboard')}>
+            <Button block color={'gray-900'} onClick={() => router.push('/seller/dashboard')}>
               취소
             </Button>
             <Button
-              size="m"
-              color="green"
+              block
               disabled={isEdit ? !isValid : !isValid || imageSrc.length === 0}
               type="submit"
+              loading={isPending}
             >
-              {!isPending ? isEdit ? '수정' : '저장' : <Loading className={cx('spinner')} />}
+              {isEdit ? '수정' : '저장'}
             </Button>
           </div>
         </form>

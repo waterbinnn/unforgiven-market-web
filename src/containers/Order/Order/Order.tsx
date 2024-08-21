@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './Order.module.scss';
 
 import { OrderDetail } from '../OrderDetail';
-import { Button, Checkbox, RadioButton, Input, Table, LoadingSpinner } from '@/components';
+import { Checkbox, RadioButton, Input, Table, LoadingSpinner } from '@/components';
 import { paymentsOptions } from '../contents';
 
 import { CartOrderRequest, PaymentType } from '@/types';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import { postOrder } from '@/actions';
 import { message } from 'antd';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind(styles);
 
@@ -169,7 +170,7 @@ export const Order = () => {
 
               <div className={cx('form-header-wrap')}>
                 <h3 className={cx('title')}>{'배송지'} 정보</h3>
-                <Button width="150px" color={'green'} onClick={handleFormCoincide}>
+                <Button kind={'tag'} color={'black'} onClick={handleFormCoincide}>
                   주문자 정보 불러오기
                 </Button>
               </div>
@@ -273,7 +274,7 @@ export const Order = () => {
               </div>
             </dl>
           </section>
-          <Button width="100%" size="l" color="yellow" type="submit">
+          <Button block color="yellow" type="submit">
             ORDER
           </Button>
         </form>

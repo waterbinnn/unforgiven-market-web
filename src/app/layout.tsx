@@ -2,7 +2,7 @@
 
 import Head from './head';
 import '@/styles/globals.scss';
-import Providers from '@/utils/provider';
+import { Providers } from '@/utils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { GoogleTagManager } from '@next/third-parties/google';
@@ -15,8 +15,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html>
       <Head />
       <body>
-        <div id={'portal-wrap'} />
-        <Providers session={session}>{children}</Providers>
+        <Providers session={session}>
+          <div id={'portal-wrap'} />
+          {children}
+        </Providers>
       </body>
       <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GA_TAG}`} />
       <GoogleAnalytics />

@@ -7,11 +7,12 @@ import styles from './CartList.module.scss';
 
 import { CartItemType, CartListType, ProductListType } from '@/types';
 import { CartDetail } from '../CartDetail';
-import { Button, PaymentForm } from '@/components';
+import { PaymentForm } from '@/components';
 import { useRouter } from 'next/navigation';
 import { removeCart } from '@/actions';
 
 import { OrderDetailType, useOrderStore } from '@/store';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind(styles);
 
@@ -68,14 +69,15 @@ export const CartList = ({
         <section className={cx('cart-container')}>
           <h2 className={cx('visually-hidden')}>cart list</h2>
 
-          <button
-            type="button"
+          <Button
             onClick={handleDeleteAllProducts}
             disabled={carts?.count === 0 || isPending}
             className={cx('del-btn', { pending: isPending })}
+            kind={'outlined'}
+            color={'gray-800'}
           >
             전체 삭제
-          </button>
+          </Button>
 
           <ol className={cx('item-list-wrap')}>
             {carts.count > 0 ? (
@@ -98,8 +100,8 @@ export const CartList = ({
         <PaymentForm totalPrice={totalPrice} shipping={totalShippingFee} />
 
         <div className={cx('btn-order-wrap')}>
-          <Button size={'m'} color={'yellow'} onClick={handleOrder} disabled={carts.count === 0}>
-            ORDER
+          <Button color={'black'} rounded onClick={handleOrder} disabled={carts.count === 0}>
+            전체 상품 주문
           </Button>
         </div>
       </main>

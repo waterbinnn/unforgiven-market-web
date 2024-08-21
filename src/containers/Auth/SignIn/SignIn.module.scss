@@ -72,24 +72,17 @@
 
 .btn-wrap {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 18px;
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
 }
 
-.router-btn {
+.router-btn-wrap {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 60px auto 0;
-  color: $gray;
-  cursor: pointer;
-  background-color: transparent;
-
-  &:hover {
-    color: $yellow;
-  }
+  align-items: center;
+  gap: 10px;
 }
 
 .error-msg {

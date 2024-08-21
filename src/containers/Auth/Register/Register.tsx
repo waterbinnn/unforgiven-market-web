@@ -5,11 +5,12 @@ import styles from './Register.module.scss';
 import CommonStyle from '../../../styles/authStyle.module.scss';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { Button, Input } from '@/components';
+import { Input } from '@/components';
 import { useState } from 'react';
 import { BuyerSignupReq, SellerSignupReq } from '@/types';
 import { checkCompanyNumber, checkIdValidation, buyerSignup, sellerSignup } from '@/actions';
 import { message } from 'antd';
+import { Button } from '@waterbin/design-system';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -322,19 +323,20 @@ export const Register = ({ type }: Props) => {
             </div>
 
             <div className={cx('btn-wrap')}>
-              <Button color="green" size="m" type="submit">
+              <Button color="white" block type="submit" rounded>
                 SIGN UP
               </Button>
             </div>
           </form>
-
-          <button
-            className={cx('router-btn')}
-            type="button"
-            onClick={() => handleRouter(type === 'BUYER' ? '/signup/seller' : '/signup')}
-          >
-            {type === 'BUYER' ? 'SELLER' : 'BUYER'} SIGNUP
-          </button>
+          <div className={cx('signup-btn')}>
+            <Button
+              kind={'link'}
+              color={'yellow'}
+              onClick={() => handleRouter(type === 'BUYER' ? '/signup/seller' : '/signup')}
+            >
+              {type === 'BUYER' ? 'SELLER' : 'BUYER'} SIGNUP
+            </Button>
+          </div>
         </main>
       </div>
     </div>

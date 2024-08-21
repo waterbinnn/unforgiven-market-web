@@ -70,25 +70,8 @@
 }
 
 .btn-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 18px;
   width: 50%;
   margin: 0 auto;
-}
-
-.router-btn {
-  display: flex;
-  justify-content: center;
-  margin: 10px auto 0;
-  color: $gray;
-  cursor: pointer;
-  background-color: transparent;
-
-  &:hover {
-    color: $yellow;
-  }
 }
 
 .valid-message {

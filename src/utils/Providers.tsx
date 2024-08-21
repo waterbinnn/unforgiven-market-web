@@ -1,7 +1,8 @@
 'use client';
 
+import React from 'react';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth/core/types';
 
 export const Providers = ({
   children,
@@ -12,5 +13,3 @@ export const Providers = ({
 }) => {
   return <SessionProvider session={session}>{children}</SessionProvider>;
 };
-
-export default Providers;

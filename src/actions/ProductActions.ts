@@ -59,8 +59,8 @@ const getSellerProducts = async (page?: string) => {
     };
   } catch (err) {
     return {
-      data: null,
-      list: null,
+      data: [],
+      list: [],
       success: false,
     };
   }
