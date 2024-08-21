@@ -2,6 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth/core/types';
+import { CookiesProvider } from 'react-cookie';
 
 export const Providers = ({
   children,
@@ -10,7 +11,11 @@ export const Providers = ({
   children: React.ReactNode;
   session: Session | null;
 }) => {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <SessionProvider session={session}>
+      <CookiesProvider defaultSetOptions={{ path: '/' }}>{children}</CookiesProvider>
+    </SessionProvider>
+  );
 };
 
 export default Providers;
