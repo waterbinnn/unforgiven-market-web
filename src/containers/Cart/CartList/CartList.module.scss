@@ -40,22 +40,7 @@
 }
 
 .del-btn {
-  font-size: 12px;
-  background-color: $black;
-  padding: 8px 12px;
-  border-radius: 2px;
-  color: $white;
   align-self: flex-end;
-  border-radius: 2px;
-
-  &:disabled {
-    background-color: $light-gray;
-    cursor: not-allowed;
-  }
-
-  &.isPending {
-    cursor: progress;
-  }
 }
 
 .btn-order-wrap {

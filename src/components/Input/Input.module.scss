@@ -71,21 +71,10 @@
 .input-btn {
   position: absolute;
   right: 0;
-  border-radius: 20px;
-  font-size: 14px;
-  color: $black;
-  text-align: center;
-  background-color: $yellow;
-  padding: 4px 10px 0;
-
-  &:hover {
-    opacity: 0.8;
-  }
 
   @media screen and (max-width: $mobile-size) {
     position: relative;
     justify-content: flex-end;
     margin-top: 8px;
-    font-size: 12px;
   }
 }

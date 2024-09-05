@@ -11,7 +11,7 @@ import { signIn } from 'next-auth/react';
 import CommonStyle from '../../../styles/authStyle.module.scss';
 import { message } from 'antd';
 import { useCookies } from 'next-client-cookies';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -99,20 +99,20 @@ export const SignIn = ({ type }: Props) => {
               <span className={cx('error-msg')}>{errorMsg}</span>
             </div>
             <div className={cx('btn-wrap')}>
-              <Button block color={'white'} rounded type="submit">
+              <Button fullWidth color={'green'} size="lg" rounded type="submit">
                 LOGIN
               </Button>
             </div>
           </form>
           <div className={cx('router-btn-wrap')}>
             <Button
-              kind={'link'}
-              color={'yellow'}
+              variant={'link'}
+              outlineColor="yellow"
               onClick={() => handleRouter(type === 'BUYER' ? '/signin/seller' : '/signin')}
             >
               {type === 'BUYER' ? 'SELLER' : 'BUYER'} LOGIN
             </Button>
-            <Button kind={'link'} color={'pink'} onClick={() => handleRouter('/signup')}>
+            <Button variant={'link'} outlineColor={'pink'} onClick={() => handleRouter('/signup')}>
               SIGN UP
             </Button>
           </div>

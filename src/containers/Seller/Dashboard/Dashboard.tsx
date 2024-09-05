@@ -10,7 +10,7 @@ import { SellerListData, SellerListResult } from '@/types/sellerTypes';
 import { deleteProduct } from '@/actions';
 import { message } from 'antd';
 import { useState } from 'react';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -104,17 +104,12 @@ const ProductInfoLayout = ({
         <span className={cx('info-price')}>￦ {price.toLocaleString()}</span>
       </td>
       <td className={cx('table-data')}>
-        <Button kind={'filled'} color={'black'} onClick={goUploadPage} loading={isPending}>
+        <Button color={'black'} onClick={goUploadPage} loading={isPending}>
           수정
         </Button>
       </td>
       <td className={cx('table-data')}>
-        <Button
-          kind={'outlined'}
-          color={'gray-700'}
-          onClick={() => handleDelete(id)}
-          loading={isDeletePending}
-        >
+        <Button variant={'outline'} onClick={() => handleDelete(id)} loading={isDeletePending}>
           삭제
         </Button>
       </td>

@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import { removeCart } from '@/actions';
 
 import { OrderDetailType, useOrderStore } from '@/store';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -71,10 +71,10 @@ export const CartList = ({
 
           <Button
             onClick={handleDeleteAllProducts}
-            disabled={carts?.count === 0 || isPending}
-            className={cx('del-btn', { pending: isPending })}
-            kind={'outlined'}
-            color={'gray-800'}
+            disabled={carts?.count === 0}
+            className={cx('del-btn')}
+            loading={isPending}
+            variant={'outline'}
           >
             전체 삭제
           </Button>
@@ -100,7 +100,7 @@ export const CartList = ({
         <PaymentForm totalPrice={totalPrice} shipping={totalShippingFee} />
 
         <div className={cx('btn-order-wrap')}>
-          <Button color={'black'} rounded onClick={handleOrder} disabled={carts.count === 0}>
+          <Button onClick={handleOrder} disabled={carts.count === 0}>
             전체 상품 주문
           </Button>
         </div>
