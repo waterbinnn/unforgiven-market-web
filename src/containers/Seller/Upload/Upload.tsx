@@ -12,7 +12,7 @@ import { PostProduct, ProductListType } from '@/types';
 import { message } from 'antd';
 import { useSession } from 'next-auth/react';
 import { productManage } from '@/service';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -170,16 +170,16 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
                 <div className={cx('btn-wrap')}>
                   <Button
                     type="button"
-                    kind={'tag'}
-                    color={delivery === 'PARCEL' ? 'black' : 'transparent'}
+                    size="sm"
+                    color={delivery === 'PARCEL' ? 'black' : 'white'}
                     onClick={() => setDelivery('PARCEL')}
                   >
                     택배, 소포, 등기
                   </Button>
                   <Button
                     type="button"
-                    kind={'tag'}
-                    color={delivery === 'DELIVERY' ? 'black' : 'transparent'}
+                    size="sm"
+                    color={delivery === 'DELIVERY' ? 'black' : 'white'}
                     onClick={() => setDelivery('DELIVERY')}
                   >
                     직접배송(화물배달)
@@ -218,11 +218,11 @@ export const Upload = ({ detail, productId, isEdit }: Props) => {
           </div>
 
           <div className={cx('btn-wrap', 'save')}>
-            <Button block color={'gray-900'} onClick={() => router.push('/seller/dashboard')}>
+            <Button fullWidth variant="outline" onClick={() => router.push('/seller/dashboard')}>
               취소
             </Button>
             <Button
-              block
+              fullWidth
               disabled={isEdit ? !isValid : !isValid || imageSrc.length === 0}
               type="submit"
               loading={isPending}

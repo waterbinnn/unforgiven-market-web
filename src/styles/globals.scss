@@ -1,11 +1,10 @@
-@import 'common/_reset';
-@import 'common/_fonts';
+@import './common/reset';
+@import './common/fonts';
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #__next,

@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import { postOrder } from '@/actions';
 import { message } from 'antd';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -170,7 +170,7 @@ export const Order = () => {
 
               <div className={cx('form-header-wrap')}>
                 <h3 className={cx('title')}>{'배송지'} 정보</h3>
-                <Button kind={'tag'} color={'black'} onClick={handleFormCoincide}>
+                <Button size="sm" color={'black'} onClick={handleFormCoincide}>
                   주문자 정보 불러오기
                 </Button>
               </div>
@@ -274,7 +274,7 @@ export const Order = () => {
               </div>
             </dl>
           </section>
-          <Button block color="yellow" type="submit">
+          <Button fullWidth color="yellow" type="submit">
             ORDER
           </Button>
         </form>

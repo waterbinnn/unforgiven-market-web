@@ -143,19 +143,11 @@ strong {
   font-weight: bold;
 }
 
-button {
-  padding: 0;
-  overflow: visible;
-  border: none;
-  border-radius: 0;
-  background: inherit;
-  box-shadow: none;
-  cursor: pointer;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
 }
 
 input[data-autocompleted] {

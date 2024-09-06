@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { removeItem, updateCount } from '@/actions';
 import { ProductListType, CartItemType } from '@/types';
 import { useOrderStore } from '@/store';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind({ ...styles, ...ListStyles });
 
@@ -125,7 +125,7 @@ export const CartDetail = ({ product, detail }: Props) => {
       </div>
 
       <div className={cx('btn-order')}>
-        <Button color={'yellow'} rounded onClick={handleOrder}>
+        <Button size="sm" color={'yellow'} rounded onClick={handleOrder}>
           ORDER
         </Button>
       </div>
@@ -134,8 +134,8 @@ export const CartDetail = ({ product, detail }: Props) => {
         className={cx('btn-del-item', { pending: isPending })}
         id={product.product_id.toString()}
         onClick={deleteItem}
-        color={'transparent'}
-        kind={'icon'}
+        color={'white'}
+        variant={'icon'}
         icon={<span>X</span>}
       />
     </li>

@@ -7,7 +7,7 @@ import { ProductListType } from '@/types';
 import { ProductItem } from './localComponents';
 import { useCallback, useState } from 'react';
 import { getProductList } from '@/actions';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -42,17 +42,15 @@ export const ProductList = ({ initialProducts }: { initialProducts: ProductListT
       <section className={cx('container', 'products')}>
         <h2 className={cx('visually-hidden')}>전체상품목록</h2>
         <ul className={cx('list-container')} role="list">
-          {products?.map((item) => (
-            <ProductItem product={item} key={item.product_id} />
-          ))}
+          {products?.map((item) => <ProductItem product={item} key={item.product_id} />)}
         </ul>
         <div className={cx('btn-more-wrap')}>
           {!isLastPage && (
             <Button
-              kind={'outlined'}
+              variant={'outline'}
               onClick={loadMore}
               rounded
-              color={'green'}
+              outlineColor={'green'}
               loading={isLoading}
             >
               + more

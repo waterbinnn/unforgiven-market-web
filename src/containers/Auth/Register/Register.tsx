@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { BuyerSignupReq, SellerSignupReq } from '@/types';
 import { checkCompanyNumber, checkIdValidation, buyerSignup, sellerSignup } from '@/actions';
 import { message } from 'antd';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind({ ...styles, ...CommonStyle });
 
@@ -323,15 +323,15 @@ export const Register = ({ type }: Props) => {
             </div>
 
             <div className={cx('btn-wrap')}>
-              <Button color="white" block type="submit" rounded>
+              <Button color="green" fullWidth type="submit" rounded>
                 SIGN UP
               </Button>
             </div>
           </form>
           <div className={cx('signup-btn')}>
             <Button
-              kind={'link'}
-              color={'yellow'}
+              variant={'link'}
+              outlineColor={'yellow'}
               onClick={() => handleRouter(type === 'BUYER' ? '/signup/seller' : '/signup')}
             >
               {type === 'BUYER' ? 'SELLER' : 'BUYER'} SIGNUP

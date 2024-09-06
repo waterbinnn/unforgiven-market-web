@@ -13,7 +13,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { SignInButton } from '@/components';
 import { getUserType } from '@/utils';
 import { useCookies } from 'next-client-cookies';
-import { Button } from '@waterbin/design-system';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -44,21 +44,16 @@ export const Header = () => {
           <>
             <div className={cx('search-wrap')}>
               <Link className={cx('header-title')} href={'/'} as={'/'}>
-                UNFORGIVEN
+                U.U
               </Link>
             </div>
             <div className={cx('btn-wrap')}>
               {userType === 'SELLER' ? (
-                <Button
-                  color={'black'}
-                  kind={'outlined'}
-                  rounded
-                  onClick={() => router.push('/seller/dashboard')}
-                >
-                  판매자센터
+                <Button onClick={() => router.push('/seller/dashboard')} color="blue">
+                  👨‍🌾 판매자센터
                 </Button>
               ) : (
-                <Button kind={'filled'} rounded onClick={() => router.push('/cart')}>
+                <Button color="green" rounded onClick={() => router.push('/cart')}>
                   CART
                 </Button>
               )}

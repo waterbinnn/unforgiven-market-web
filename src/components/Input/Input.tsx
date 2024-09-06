@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Input.module.scss';
 import { ChangeEvent, FocusEvent, InputHTMLAttributes, forwardRef, useCallback } from 'react';
 import { FieldError } from 'react-hook-form';
+import { Button } from '@waterbin/ui-kit';
 
 const cx = classNames.bind(styles);
 
@@ -78,14 +79,16 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           {...rest}
         />
         {needBtn && (
-          <button
+          <Button
+            color="yellow"
+            size="sm"
             className={cx('input-btn')}
             style={{ width: btnWidth }}
             type="button"
             onClick={handleButton}
           >
             {btnText}
-          </button>
+          </Button>
         )}
         {needMessage && (
           <span className={cx('message', error ? 'negative' : 'positive')}>{messageText}</span>
