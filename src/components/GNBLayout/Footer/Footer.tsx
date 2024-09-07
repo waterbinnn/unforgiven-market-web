@@ -10,7 +10,7 @@ export const Footer = () => {
   return (
     <footer className={cx('footer')}>
       <div className={cx('content-wrap')}>
-        <h1 className={cx('title')}>UNFORGIVEN</h1>
+        <h1 className={cx('title')}>U.U Market</h1>
 
         <dl className={cx('info-wrap')}>
           <dt className={cx('info-title')}>Github.</dt>

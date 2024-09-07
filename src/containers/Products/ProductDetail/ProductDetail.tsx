@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation';
 
 import { getUserType } from '@/utils';
 import { postCart } from '@/actions';
-import { googleEvent } from '@/utils/googleEvent';
 
 const cx = classNames.bind(styles);
 
@@ -43,13 +42,6 @@ export const ProductDetail = ({ detail }: Props) => {
     };
 
     await postCart(cartReq);
-
-    googleEvent('add_cart', {
-      category: 'ecommerce',
-      label: 'cart',
-      storeName: detail.store_name,
-      quantity: cartReq.quantity,
-    });
   };
 
   const disableSELLER = (userType === 'SELLER' ? true : false) || (detail.stock ? false : true);

@@ -1,5 +1,5 @@
 {
-  "name": "unforgiven",
+  "name": "uu-market",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@next/third-parties": "^14.2.4",
     "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.14.195",
     "@types/node": "20.2.5",
